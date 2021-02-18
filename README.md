@@ -6,7 +6,7 @@ to be used in conjunction with: https://github.com/interkosmos/fortran-sdl2
 STILL UNDER HEAVY CONSTRUCTION!!!
 
 To test - build and compile using meson. Note: I've the fortran-sdl2 library in my local drive. Set your PKG_CONFIG_PATH accordingly:
-i```bash
+```bash
 [grassy@manjaro fortran-sdl2_gfx]$ PKG_CONFIG_PATH=/home/grassy/.local/lib/pkgconfig meson debug
 Using 'PKG_CONFIG_PATH' from environment with value: '/home/grassy/.local/lib/pkgconfig'
 Using 'PKG_CONFIG_PATH' from environment with value: '/home/grassy/.local/lib/pkgconfig'
