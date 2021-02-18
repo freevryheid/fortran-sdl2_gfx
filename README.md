@@ -1,7 +1,5 @@
 # fortran-sdl2_gfx
-Fortran bindings for SDL2_gfx
-
-to be used in conjunction with: https://github.com/interkosmos/fortran-sdl2
+Fortran bindings for SDL2_gfx (https://www.ferzkopp.net/Software/SDL2_gfx/Docs/html/index.html) to be used in conjunction with: https://github.com/interkosmos/fortran-sdl2
 
 STILL UNDER HEAVY CONSTRUCTION!!!
 
@@ -13,10 +11,11 @@ STILL UNDER HEAVY CONSTRUCTION!!!
 * MMX image filters
 * Build-in 8x8 Font
 * Documentation
+* Example and test
 
 ## Build
 
-I build and compile using meson. Note that I've the fortran-sdl2 library under my .local folder. Set your PKG_CONFIG_PATH accordingly when calling meson.
+I build and compile using meson. My fortran-sdl2 library is installed in my ~/.local folder. Set your PKG_CONFIG_PATH accordingly when calling meson.
 
 ```bash
 [grassy@manjaro fortran-sdl2_gfx]$ rm -rf debug/
@@ -66,5 +65,5 @@ Full log written to /home/grassy/fortran/fortran-sdl2_gfx/debug/meson-logs/testl
 
 ## Example
 
-See example.f90 in tst folder.
+See prelim. example.f90 in tst folder.
 
