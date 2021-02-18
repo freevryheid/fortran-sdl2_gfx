@@ -8,6 +8,8 @@ STILL UNDER HEAVY CONSTRUCTION!!!
 I build and compile using meson. Note that I've the fortran-sdl2 library under my .local folder. Set your PKG_CONFIG_PATH accordingly when calling meson.
 
 ```bash
+
+[grassy@manjaro fortran-sdl2_gfx]$ rm -rf debug/
 [grassy@manjaro fortran-sdl2_gfx]$ PKG_CONFIG_PATH=/home/grassy/.local/lib/pkgconfig meson debug
 Using 'PKG_CONFIG_PATH' from environment with value: '/home/grassy/.local/lib/pkgconfig'
 Using 'PKG_CONFIG_PATH' from environment with value: '/home/grassy/.local/lib/pkgconfig'
@@ -25,12 +27,31 @@ Host machine cpu: x86_64
 Found pkg-config: /usr/bin/pkg-config (1.7.3)
 Using 'PKG_CONFIG_PATH' from environment with value: '/home/grassy/.local/lib/pkgconfig'
 Run-time dependency fortran_sdl2 found: YES 1.0.0
-Build targets in project: 1
+Using 'PKG_CONFIG_PATH' from environment with value: '/home/grassy/.local/lib/pkgconfig'
+Run-time dependency sdl2 found: YES 2.0.14
+Using 'PKG_CONFIG_PATH' from environment with value: '/home/grassy/.local/lib/pkgconfig'
+Run-time dependency sdl2_gfx found: YES 1.0.2
+Build targets in project: 2
 
 Found ninja-1.10.2 at /usr/bin/ninja
 [grassy@manjaro fortran-sdl2_gfx]$ PKG_CONFIG_PATH=/home/grassy/.local/lib/pkgconfig meson compile -C debug
 Found runner: ['/usr/bin/ninja']
 ninja: Entering directory `debug'
-[2/2] Linking static target src/libfortran-sdl2_gfx.a
+[4/4] Linking target tst/example
+[grassy@manjaro fortran-sdl2_gfx]$ meson test -C debug
+ninja: Entering directory `/home/grassy/fortran/fortran-sdl2_gfx/debug'
+ninja: no work to do.
+1/1 example OK             8.80s
+
+
+Ok:                 1
+Expected Fail:      0
+Fail:               0
+Unexpected Pass:    0
+Skipped:            0
+Timeout:            0
+
+Full log written to /home/grassy/fortran/fortran-sdl2_gfx/debug/meson-logs/testlog.txt
+
 ```
 
