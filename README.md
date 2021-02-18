@@ -7,20 +7,18 @@ STILL UNDER HEAVY CONSTRUCTION!!!
 
 ## Progress
 
-Graphic Primitives ✓
-Surface Rotozoomer
-Framerate control
-MMX image filters
-Build-in 8x8 Font
-Documentation
-
+* Graphic Primitives ✓
+* Surface Rotozoomer
+* Framerate control
+* MMX image filters
+* Build-in 8x8 Font
+* Documentation
 
 ## Build
 
 I build and compile using meson. Note that I've the fortran-sdl2 library under my .local folder. Set your PKG_CONFIG_PATH accordingly when calling meson.
 
 ```bash
-
 [grassy@manjaro fortran-sdl2_gfx]$ rm -rf debug/
 [grassy@manjaro fortran-sdl2_gfx]$ PKG_CONFIG_PATH=/home/grassy/.local/lib/pkgconfig meson debug
 Using 'PKG_CONFIG_PATH' from environment with value: '/home/grassy/.local/lib/pkgconfig'
@@ -64,7 +62,6 @@ Skipped:            0
 Timeout:            0
 
 Full log written to /home/grassy/fortran/fortran-sdl2_gfx/debug/meson-logs/testlog.txt
-
 ```
 
 ## Example
