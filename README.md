@@ -5,6 +5,18 @@ to be used in conjunction with: https://github.com/interkosmos/fortran-sdl2
 
 STILL UNDER HEAVY CONSTRUCTION!!!
 
+## Progress
+
+Graphic Primitives ✓
+Surface Rotozoomer
+Framerate control
+MMX image filters
+Build-in 8x8 Font
+Documentation
+
+
+## Build
+
 I build and compile using meson. Note that I've the fortran-sdl2 library under my .local folder. Set your PKG_CONFIG_PATH accordingly when calling meson.
 
 ```bash
@@ -54,4 +66,8 @@ Timeout:            0
 Full log written to /home/grassy/fortran/fortran-sdl2_gfx/debug/meson-logs/testlog.txt
 
 ```
+
+## Example
+
+See example.f90 in tst folder.
 
