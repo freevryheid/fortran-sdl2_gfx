@@ -31,6 +31,7 @@ module sdl2_gfx
 
   use, intrinsic                                  :: iso_c_binding
   use                                             :: c_util
+  use                                             :: sdl2_surface
 
   implicit none
 
@@ -79,11 +80,23 @@ module sdl2_gfx
   public                                          :: aatrigon_rgba
   public                                          :: filled_trigon_color
   public                                          :: filled_trigon_rgba
+  public                                          :: polygon_color
+  public                                          :: polygon_rgba
+  public                                          :: aapolygon_color
+  public                                          :: aapolygon_rgba
+  public                                          :: filled_polygon_color
+  public                                          :: filled_polygon_rgba
+  public                                          :: textured_polygon
+  public                                          :: bezier_color
+  public                                          :: bezier_rgba
+  public                                          :: gfx_primitives_set_font
+  public                                          :: gfx_primitives_set_font_rotation
+  public                                          :: character_color
+  public                                          :: character_rgba
+  public                                          :: string_color
+  public                                          :: string_rgba
 
 ! */
-
-! #ifndef _SDL2_gfxPrimitives_h
-! #define _SDL2_gfxPrimitives_h
 
 ! #include <math.h>
 ! #ifndef M_PI
@@ -92,32 +105,11 @@ module sdl2_gfx
 
 ! #include "SDL.h"
 
-! /* Set up for C function definitions, even when using C++ */
-! #ifdef __cplusplus
-! extern "C" {
-! #endif
-
 ! 	/* ----- Versioning */
 
 ! #define SDL2_GFXPRIMITIVES_MAJOR	1
 ! #define SDL2_GFXPRIMITIVES_MINOR	0
 ! #define SDL2_GFXPRIMITIVES_MICRO	4
-
-
-! 	/* ---- Function Prototypes */
-
-! #ifdef _MSC_VER
-! #  if defined(DLL_EXPORT) && !defined(LIBSDL2_GFX_DLL_IMPORT)
-! #    define SDL2_GFXPRIMITIVES_SCOPE __declspec(dllexport)
-! #  else
-! #    ifdef LIBSDL2_GFX_DLL_IMPORT
-! #      define SDL2_GFXPRIMITIVES_SCOPE __declspec(dllimport)
-! #    endif
-! #  endif
-! #endif
-! #ifndef SDL2_GFXPRIMITIVES_SCOPE
-! #  define SDL2_GFXPRIMITIVES_SCOPE extern
-! #endif
 
 ! 	/* Note: all ___Color routines expect the color to be in format 0xRRGGBBAA */
 
@@ -633,6 +625,14 @@ module sdl2_gfx
 ! 	/* Textured Polygon */
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int texturedPolygon(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, SDL_Surface * texture,int texture_dx,int texture_dy);
+    function textured_polygon(renderer, vx, vy, n, texture, texture_dx, texture_dy) bind(c, name='texturedPolygon')
+      import                                      :: c_ptr, c_short, sdl_surface, c_int
+      type(c_ptr),              intent(in), value :: renderer
+      integer(kind=c_short),    intent(in)        :: vx, vy
+      integer(kind=c_int),      intent(in), value :: n, texture_dx, texture_dy
+      type(sdl_surface),        intent(in)        :: texture
+      integer(kind=c_int)                         :: textured_polygon
+    end function textured_polygon
 
 ! 	/* Bezier */
 
@@ -659,23 +659,57 @@ module sdl2_gfx
 ! 	/* Characters/Strings */
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFont(const void *fontdata, Uint32 cw, Uint32 ch);
+    subroutine gfx_primitives_set_font(fontdata, cw, ch) bind(c, name='gfxPrimitivesSetFont')
+      import                                      :: c_ptr, c_uint32_t
+      type(c_ptr),              intent(in)        :: fontdata
+      integer(kind=c_uint32_t), intent(in), value :: cw, ch
+    end subroutine gfx_primitives_set_font
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFontRotation(Uint32 rotation);
+    subroutine gfx_primitives_set_font_rotation(rotation) bind(c, name='gfxPrimitivesSetFontRotation')
+      import                                      :: c_uint32_t
+      integer(kind=c_uint32_t), intent(in), value :: rotation
+    end subroutine gfx_primitives_set_font_rotation
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int characterColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, char c, Uint32 color);
+    function character_color(renderer, x, y, c, color) bind(c, name='characterColor')
+      import                                      :: c_ptr, c_short, c_uint32_t, c_int, c_char
+      type(c_ptr),              intent(in), value :: renderer
+      integer(kind=c_short),    intent(in), value :: x, y
+      character(kind=c_char),   intent(in), value :: c
+      integer(kind=c_uint32_t), intent(in), value :: color
+      integer(kind=c_int)                         :: character_color
+    end function character_color
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int characterRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, char c, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+    function character_rgba(renderer, x, y, c, r, g, b, a) bind(c, name='characterRGBA')
+      import                                      :: c_ptr, c_short, c_uint8_t, c_int, c_char
+      type(c_ptr),              intent(in), value :: renderer
+      integer(kind=c_short),    intent(in), value :: x, y
+      character(kind=c_char),   intent(in), value :: c
+      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
+      integer(kind=c_int)                         :: character_rgba
+    end function character_rgba
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int stringColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint32 color);
+    function string_color(renderer, x, y, s, color) bind(c, name='stringColor')
+      import                                      :: c_ptr, c_short, c_uint32_t, c_int, c_char
+      type(c_ptr),              intent(in), value :: renderer
+      integer(kind=c_short),    intent(in), value :: x, y
+      character(kind=c_char),   intent(in)        :: s
+      integer(kind=c_uint32_t), intent(in), value :: color
+      integer(kind=c_int)                         :: string_color
+    end function string_color
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int stringRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-
-! 	/* Ends C function definitions when using C++ */
-! #ifdef __cplusplus
-! }
-! #endif
-
-! #endif				/* _SDL2_gfxPrimitives_h */
+    function string_rgba(renderer, x, y, s, r, g, b, a) bind(c, name='stringRGBA')
+      import                                      :: c_ptr, c_short, c_uint8_t, c_int, c_char
+      type(c_ptr),              intent(in), value :: renderer
+      integer(kind=c_short),    intent(in), value :: x, y
+      character(kind=c_char),   intent(in)        :: s
+      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
+      integer(kind=c_int)                         :: string_rgba
+    end function string_rgba
 
   end interface
 
