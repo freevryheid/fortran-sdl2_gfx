@@ -158,19 +158,19 @@ module sdl2_gfx
 ! 	/* Vertical line */
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int vlineColor(SDL_Renderer * renderer, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color);
-    function vline_color(renderer, x1, x2, y, color) bind(c, name='vlineColor')
+    function vline_color(renderer, x, y1, y2, color) bind(c, name='vlineColor')
       import                                      :: c_ptr, c_short, c_uint32_t, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, x2, y
+      integer(kind=c_short),    intent(in), value :: x, y1, y2
       integer(kind=c_uint32_t), intent(in), value :: color
       integer(kind=c_int)                         :: vline_color
     end function vline_color
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int vlineRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y1, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function vline_rgba(renderer, x1, x2, y, r, g, b, a) bind(c, name='vlineRGBA')
+    function vline_rgba(renderer, x, y1, y2, r, g, b, a) bind(c, name='vlineRGBA')
       import                                      :: c_ptr, c_short, c_uint8_t, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, x2, y
+      integer(kind=c_short),    intent(in), value :: x, y1, y2
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
       integer(kind=c_int)                         :: vline_rgba
     end function vline_rgba

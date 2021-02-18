@@ -19,6 +19,7 @@ I build and compile using meson. My fortran-sdl2 library is installed in my ~/.l
 
 ```bash
 [grassy@manjaro fortran-sdl2_gfx]$ rm -rf debug/
+
 [grassy@manjaro fortran-sdl2_gfx]$ PKG_CONFIG_PATH=/home/grassy/.local/lib/pkgconfig meson debug
 Using 'PKG_CONFIG_PATH' from environment with value: '/home/grassy/.local/lib/pkgconfig'
 Using 'PKG_CONFIG_PATH' from environment with value: '/home/grassy/.local/lib/pkgconfig'
@@ -43,10 +44,12 @@ Run-time dependency sdl2_gfx found: YES 1.0.2
 Build targets in project: 2
 
 Found ninja-1.10.2 at /usr/bin/ninja
+
 [grassy@manjaro fortran-sdl2_gfx]$ PKG_CONFIG_PATH=/home/grassy/.local/lib/pkgconfig meson compile -C debug
 Found runner: ['/usr/bin/ninja']
 ninja: Entering directory `debug'
 [4/4] Linking target tst/example
+
 [grassy@manjaro fortran-sdl2_gfx]$ meson test -C debug
 ninja: Entering directory `/home/grassy/fortran/fortran-sdl2_gfx/debug'
 ninja: no work to do.
@@ -61,9 +64,24 @@ Skipped:            0
 Timeout:            0
 
 Full log written to /home/grassy/fortran/fortran-sdl2_gfx/debug/meson-logs/testlog.txt
+
+[grassy@manjaro fortran-sdl2_gfx]$ ldd debug/tst/example
+	linux-vdso.so.1 (0x00007ffc407de000)
+	libSDL2-2.0.so.0 => /usr/lib/libSDL2-2.0.so.0 (0x00007fb0aa403000)
+	libSDL2_gfx-1.0.so.0 => /usr/lib/libSDL2_gfx-1.0.so.0 (0x00007fb0aa3ef000)
+	libgfortran.so.5 => /usr/lib/libgfortran.so.5 (0x00007fb0aa126000)
+	libc.so.6 => /usr/lib/libc.so.6 (0x00007fb0a9f59000)
+	libm.so.6 => /usr/lib/libm.so.6 (0x00007fb0a9e14000)
+	libdl.so.2 => /usr/lib/libdl.so.2 (0x00007fb0a9e0d000)
+	libpthread.so.0 => /usr/lib/libpthread.so.0 (0x00007fb0a9dea000)
+	libquadmath.so.0 => /usr/lib/../lib/libquadmath.so.0 (0x00007fb0a9d9f000)
+	libgcc_s.so.1 => /usr/lib/../lib/libgcc_s.so.1 (0x00007fb0a9d85000)
+	/lib64/ld-linux-x86-64.so.2 => /usr/lib64/ld-linux-x86-64.so.2 (0x00007fb0aa5cd000)
+
 ```
 
 ## Example
 
-See prelim. example.f90 in tst folder.
+See prelim. example.f90 in tst folder. This generates the following window:
 
+<img src="png/example.png" alt="sdl2_gfx example" />
