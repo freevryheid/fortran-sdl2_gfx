@@ -1,0 +1,621 @@
+! Andre Smit - Feb 2021, MIT
+! WARNING - this produces strobe-like and flashing lights.
+
+program tst_primitives
+
+  use, intrinsic                 :: iso_c_binding,    only : c_associated, c_null_char, c_ptr
+  use, intrinsic                 :: iso_fortran_env,  only : stdout => output_unit, stderr => error_unit, &
+                                    r4 => real32, i2 => int16, i4 => int32
+  use                            :: sdl2
+  use                            :: sdl2_gfx
+
+  implicit none
+
+  integer(i4), parameter         :: SCREEN_WIDTH   = 640
+  integer(i4), parameter         :: SCREEN_HEIGHT  = 480
+  integer(i2), parameter         :: FONT_SIZE      = 8_i2
+  integer(i2), parameter         :: MARGIN         = 64_i2
+
+  type(c_ptr)                    :: window
+  type(c_ptr)                    :: renderer
+  type(sdl_event)                :: event
+
+  real(r4)                       :: w, x, y, r, g, b, rad
+  integer(i4)                    :: rc
+  integer(i4)                    :: func           = 1
+  integer(i4)                    :: maxfunc        = 26
+  integer(i2)                    :: wi2, xi2, yi2, x1i2, x2i2, y1i2, y2i2, ri2, gi2, bi2, radi2
+
+  logical                        :: done           = .false.
+  logical                        :: clear          = .true.
+  character(len=100)             :: title, functitle, string
+
+  integer(i4), parameter         :: red            = int(z'FF0000FF')  ! notice how the nibbles are reversed compared to c
+  integer(i4), parameter         :: green          = int(z'FF00FF00')
+  integer(i4), parameter         :: blue           = int(z'FFFF0000')
+  integer(i4), parameter         :: black          = int(z'FF000000')
+
+
+  integer(i4), parameter         :: yellow         = ior(red, green)
+  integer(i4), parameter         :: magenta        = ior(red, blue)
+  integer(i4), parameter         :: cyan           = ior(green, blue)
+  integer(i4), parameter         :: white          = ior(yellow, magenta)
+
+  call random_init(.false., .false.)
+
+  ! Initialise SDL.
+  if (sdl_init(SDL_INIT_VIDEO) < 0) then
+    write (stderr, *) 'SDL Error: ', sdl_get_error()
+    stop
+  end if
+
+  ! Create the SDL window.
+  window = sdl_create_window('tst_primitives' // c_null_char, &
+    SDL_WINDOWPOS_UNDEFINED,                                  &
+    SDL_WINDOWPOS_UNDEFINED,                                  &
+    SCREEN_WIDTH,                                             &
+    SCREEN_HEIGHT,                                            &
+    SDL_WINDOW_SHOWN)
+
+  if (.not. c_associated(window)) then
+    write (stderr, *) 'SDL Error: ', sdl_get_error()
+    stop
+  end if
+
+  ! Create the renderer.
+  renderer = sdl_create_renderer(window, -1, ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_PRESENTVSYNC))
+
+  ! Event loop.
+  do while (.not. done)
+    call do_events()
+    if (clear) call clear_screen()
+    call switchboard()
+    call sdl_render_present(renderer)  ! Render to screen
+  end do
+
+  ! Quit gracefully.
+  call sdl_destroy_renderer(renderer)
+  call sdl_destroy_window(window)
+  call sdl_quit()
+
+  contains
+
+    subroutine switchboard()
+      select case (func)
+        case (1)
+          clear = .true.
+          functitle = "string_color"
+          call func01()
+        case (2)
+          clear = .true.
+          functitle = "string_rgba"
+          call func02()
+        case (3)
+          clear = .false.
+          functitle = "pixel_color"
+          call func03()
+        case (4)
+          clear = .false.
+          functitle = "pixel_rgba"
+          call func04()
+        case (5)
+          clear = .false.
+          functitle = "hline_color"
+          call func05()
+        case (6)
+          clear = .false.
+          functitle = "hline_rgba"
+          call func06()
+        case (7)
+          clear = .false.
+          functitle = "vline_color"
+          call func07()
+        case (8)
+          clear = .false.
+          functitle = "vline_rgba"
+          call func08()
+        case (9)
+          clear = .false.
+          functitle = "rectangle_color"
+          call func09()
+        case (10)
+          clear = .false.
+          functitle = "rectangle_rgba"
+          call func10()
+        case (11)
+          clear = .false.
+          functitle = "rounded_rectangle_color"
+          call func11()
+        case (12)
+          clear = .false.
+          functitle = "rounded_rectangle_rgba"
+          call func12()
+        case (13)
+          clear = .true.
+          functitle = "box_color"
+          call func13()
+        case (14)
+          clear = .false.
+          functitle = "box_rgba"
+          call func14()
+        case (15)
+          clear = .true.
+          functitle = "rounded_box_color"
+          call func15()
+        case (16)
+          clear = .false.
+          functitle = "rounded_box_rgba"
+          call func16()
+        case (17)
+          clear = .false.
+          functitle = "line_color"
+          call func17()
+        case (18)
+          clear = .false.
+          functitle = "line_rgba"
+          call func18()
+        case (19)
+          clear = .false.
+          functitle = "aaline_color"
+          call func19()
+        case (20)
+          clear = .false.
+          functitle = "aaline_rgba"
+          call func20()
+        case (21)
+          clear = .false.
+          functitle = "thick_line_color"
+          call func21()
+        case (22)
+          clear = .false.
+          functitle = "thick_line_rgba"
+          call func22()
+        case (23)
+          clear = .false.
+          functitle = "circle_color"
+          call func23()
+        case (24)
+          clear = .false.
+          functitle = "circle_rgba"
+          call func24()
+        case (25)
+          clear = .false.
+          functitle = "aacircle_color"
+          call func25()
+        case (26)
+          clear = .false.
+          functitle = "aacircle_rgba"
+          call func26()
+        case default
+          error stop "here be dragons"
+      end select
+      title = "test primitives ( " // trim(adjustl(i2s(func))) // " / " // trim(adjustl(i2s(maxfunc))) // " )"
+      rc = string_color(renderer, (int2(SCREEN_WIDTH)-string_length(title))/2_i2, FONT_SIZE, nts(title) , white)
+      rc = string_color(renderer, (int2(SCREEN_WIDTH)-string_length(functitle))/2_i2, int2(SCREEN_HEIGHT) - FONT_SIZE*2_i2, &
+           nts(functitle) , white)
+    end subroutine switchboard
+
+    subroutine func26()
+      ! aacircle_rgba
+      xi2 = int2(SCREEN_WIDTH/2_i2)
+      yi2 = int2(SCREEN_HEIGHT/2_i2)
+      call random_number(rad)
+      radi2 = int2(rad*real((SCREEN_HEIGHT/2_i2 - MARGIN + 1), r4))
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = aacircle_rgba(renderer, xi2, yi2, radi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func26
+
+    subroutine func25()
+      ! aacircle_color
+      xi2 = int2(SCREEN_WIDTH/2_i2)
+      yi2 = int2(SCREEN_HEIGHT/2_i2)
+      call random_number(rad)
+      radi2 = int2(rad*real((SCREEN_HEIGHT/2_i2 - MARGIN + 1), r4))
+      rc = aacircle_color(renderer, xi2, yi2, radi2, magenta)
+    end subroutine func25
+
+    subroutine func24()
+      ! circle_rgba
+      xi2 = int2(SCREEN_WIDTH/2_i2)
+      yi2 = int2(SCREEN_HEIGHT/2_i2)
+      call random_number(rad)
+      radi2 = int2(rad*real((SCREEN_HEIGHT/2_i2 - MARGIN + 1), r4))
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = circle_rgba(renderer, xi2, yi2, radi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func24
+
+    subroutine func23()
+      ! circle_color
+      xi2 = int2(SCREEN_WIDTH/2_i2)
+      yi2 = int2(SCREEN_HEIGHT/2_i2)
+      call random_number(rad)
+      radi2 = int2(rad*real((SCREEN_HEIGHT/2_i2 - MARGIN + 1), r4))
+      rc = circle_color(renderer, xi2, yi2, radi2, magenta)
+    end subroutine func23
+
+    subroutine func22()
+      ! thick_line_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      call random_number(w)
+      wi2 = int2(floor(w*real(10, r4)))
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = thick_line_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(wi2), uint8(ri2), uint8(gi2), uint8(bi2), &
+                                  uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func22
+
+    subroutine func21()
+      ! thick_line_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      call random_number(w)
+      wi2 = int2(floor(w*real(10, r4)))
+      rc = thick_line_color(renderer, x1i2, y1i2, x2i2, y2i2, uint8(wi2), yellow)
+    end subroutine func21
+
+    subroutine func20()
+      ! aaline_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = aaline_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), &
+                                  uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func20
+
+    subroutine func19()
+      ! aaline_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      rc = aaline_color(renderer, x1i2, y1i2, x2i2, y2i2, blue)
+    end subroutine func19
+
+    subroutine func18()
+      ! line_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = line_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), &
+                                  uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func18
+
+    subroutine func17()
+      ! line_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      rc = line_color(renderer, x1i2, y1i2, x2i2, y2i2, green)
+    end subroutine func17
+
+    subroutine func16()
+      ! irounded_box_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      radi2 = MARGIN
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = rounded_box_rgba(renderer, x1i2, y1i2, x2i2, y2i2, radi2, uint8(ri2), uint8(gi2), uint8(bi2), &
+                                  uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func16
+
+    subroutine func15()
+      ! rounded_box_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      radi2 = MARGIN
+      rc = rounded_box_color(renderer, x1i2, y1i2, x2i2, y2i2, radi2, red)
+    end subroutine func15
+
+    subroutine func14()
+      ! box_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = box_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), &
+                                  uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func14
+
+    subroutine func13()
+      ! box_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      rc = box_color(renderer, x1i2, y1i2, x2i2, y2i2, cyan)
+    end subroutine func13
+
+    subroutine func12()
+      ! rounded_rectangle_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      radi2 = MARGIN
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = rounded_rectangle_rgba(renderer, x1i2, y1i2, x2i2, y2i2, radi2, uint8(ri2), uint8(gi2), uint8(bi2), &
+                                  uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func12
+
+    subroutine func11()
+      ! rounded_rectangle_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      radi2 = MARGIN
+      rc = rounded_rectangle_color(renderer, x1i2, y1i2, x2i2, y2i2, radi2, magenta)
+    end subroutine func11
+
+    subroutine func10()
+      ! rectangle_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = rectangle_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func10
+
+    subroutine func09()
+      ! rectangle_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
+      x1i2 = MARGIN + x1i2
+      x2i2 = int2(SCREEN_WIDTH)-x1i2
+      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
+      y1i2 = MARGIN + y1i2
+      y2i2 = int2(SCREEN_HEIGHT)-y1i2
+      rc = rectangle_color(renderer, x1i2, y1i2, x2i2, y2i2, yellow)
+    end subroutine func09
+
+    subroutine func08()
+      ! vline_rgba
+      y1i2 = MARGIN
+      y2i2 = int2(SCREEN_HEIGHT)-MARGIN
+      call random_number(x)
+      xi2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      xi2 = MARGIN + xi2
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = vline_rgba(renderer, xi2, y1i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func08
+
+    subroutine func07()
+      ! vline_color
+      y1i2 = MARGIN
+      y2i2 = int2(SCREEN_HEIGHT)-MARGIN
+      call random_number(x)
+      xi2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      xi2 = MARGIN + xi2
+      rc = vline_color(renderer, xi2, y1i2, y2i2, blue)
+    end subroutine func07
+
+    subroutine func06()
+      ! hline_rgba
+      x1i2 = MARGIN
+      x2i2 = int2(SCREEN_WIDTH)-MARGIN
+      call random_number(y)
+      yi2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      yi2 = MARGIN + yi2
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = hline_rgba(renderer, x1i2, x2i2, yi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func06
+
+    subroutine func05()
+      ! hline_color
+      x1i2 = MARGIN
+      x2i2 = int2(SCREEN_WIDTH)-MARGIN
+      call random_number(y)
+      yi2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      yi2 = MARGIN + yi2
+      rc = hline_color(renderer, x1i2, x2i2, yi2, green)
+    end subroutine func05
+
+    subroutine func04()
+      ! pixel_rgba
+      call random_number(x)
+      xi2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      xi2 = MARGIN + xi2
+      call random_number(y)
+      yi2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      yi2 = MARGIN + yi2
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = pixel_rgba(renderer, xi2, yi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func04
+
+    subroutine func03()
+      ! pixel_color
+      call random_number(x)
+      xi2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      xi2 = MARGIN + xi2
+      call random_number(y)
+      yi2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      yi2 = MARGIN + yi2
+      rc = pixel_color(renderer, xi2, yi2, red)
+    end subroutine func03
+
+    subroutine func02()
+      ! string_rgba
+      string = "WARNING - this produces strobe-like and flashing lights"
+      rc = string_rgba(renderer, (int2(SCREEN_WIDTH)-string_length(string))/2_i2, int2(SCREEN_HEIGHT)/2_i2, &
+           nts(string), uint8(255), uint8(255), uint8(0), uint8(255))
+    end subroutine func02
+
+    subroutine func01()
+      ! string_color
+      string = "use arrow keys to navigate, press ESC to quit"
+      rc = string_color(renderer, (int2(SCREEN_WIDTH)-string_length(string))/2_i2, int2(SCREEN_HEIGHT)/2_i2, &
+           nts(string), yellow)
+    end subroutine func01
+
+    function i2s(num) result(res)
+      integer(i4), intent(in) :: num
+      character(len = 100)    :: res
+      write(res,*) num
+    end function
+
+    subroutine do_events()
+      ! Catch events.
+      do while (sdl_poll_event(event) > 0)
+        select case (event%type)
+          case (SDL_QUITEVENT)
+            done = .true.
+          case (SDL_KEYDOWN)
+            select case (event%key%key_sym%scan_code)
+              case (SDL_SCANCODE_ESCAPE)
+                done = .true.
+              case (SDL_SCANCODE_UP, SDL_SCANCODE_RIGHT)
+                func = func + 1
+                clear = .true.
+                call clear_screen()
+                if (func > maxfunc) func = 1
+              case (SDL_SCANCODE_DOWN, SDL_SCANCODE_LEFT)
+                func = func - 1
+                clear = .true.
+                call clear_screen()
+                if (func < 1) func = maxfunc
+              case default
+            end select
+          case default
+        end select
+      end do
+    end subroutine do_events
+
+    function nts(s) result(r)
+      character(len = *), intent(in)   :: s
+      character(len = len_trim(s) + 1) :: r
+      r = trim(s) // c_null_char
+    end function nts
+
+    function string_length(s) result(r)
+      character(len = *), intent(in)   :: s
+      integer(i2)                      :: r
+      r = int2(len_trim(s))*FONT_SIZE
+    end function string_length
+
+    subroutine clear_screen()
+      rc = sdl_set_render_draw_color(renderer, uint8(0), uint8(0), uint8(0), uint8(SDL_ALPHA_OPAQUE))
+      rc = sdl_render_clear(renderer)
+      rc = rectangle_color(renderer, 0_i2, 0_i2, int2(SCREEN_WIDTH), int2(SCREEN_HEIGHT), white)
+    end subroutine clear_screen
+
+end program tst_primitives
