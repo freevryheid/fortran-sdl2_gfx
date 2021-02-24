@@ -113,6 +113,7 @@ module primitives
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int pixelColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Uint32 color);
     function pixel_color(renderer, x, y, color) bind(c, name='pixelColor')
+      ! Draw pixel with blending enabled if a<255.
       import                                      :: c_ptr, c_short, c_uint32_t, c_int
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y
@@ -122,6 +123,7 @@ module primitives
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int pixelRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
     function pixel_rgba(renderer, x, y, r, g, b, a) bind(c, name='pixelRGBA')
+      ! Draw pixel with blending enabled if a<255.
       import                                      :: c_ptr, c_short, c_uint8_t, c_int
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y
@@ -133,6 +135,7 @@ module primitives
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int hlineColor(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y, Uint32 color);
     function hline_color(renderer, x1, x2, y, color) bind(c, name='hlineColor')
+      ! Draw horizontal line with blending.
       import                                      :: c_ptr, c_short, c_uint32_t, c_int
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, x2, y
@@ -142,6 +145,7 @@ module primitives
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int hlineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
     function hline_rgba(renderer, x1, x2, y, r, g, b, a) bind(c, name='hlineRGBA')
+      ! Draw horizontal line with blending.
       import                                      :: c_ptr, c_short, c_uint8_t, c_int
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, x2, y
