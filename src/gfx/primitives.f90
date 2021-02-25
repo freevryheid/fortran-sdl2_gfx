@@ -560,7 +560,7 @@ module primitives
     function polygon_color(renderer, vx, vy, n, color) bind(c, name='polygonColor')
       import                                      :: c_ptr, c_short, c_uint32_t, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx, vy
+      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint32_t), intent(in), value :: color
       integer(kind=c_int)                         :: polygon_color
@@ -570,7 +570,7 @@ module primitives
     function polygon_rgba(renderer, vx, vy, n, r, g, b, a) bind(c, name='polygonRGBA')
       import                                      :: c_ptr, c_short, c_uint8_t, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx, vy
+      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
       integer(kind=c_int)                         :: polygon_rgba
@@ -582,7 +582,7 @@ module primitives
     function aapolygon_color(renderer, vx, vy, n, color) bind(c, name='aapolygonColor')
       import                                      :: c_ptr, c_short, c_uint32_t, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx, vy
+      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint32_t), intent(in), value :: color
       integer(kind=c_int)                         :: aapolygon_color
@@ -592,7 +592,7 @@ module primitives
     function aapolygon_rgba(renderer, vx, vy, n, r, g, b, a) bind(c, name='aapolygonRGBA')
       import                                      :: c_ptr, c_short, c_uint8_t, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx, vy
+      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
       integer(kind=c_int)                         :: aapolygon_rgba
@@ -604,7 +604,7 @@ module primitives
     function filled_polygon_color(renderer, vx, vy, n, color) bind(c, name='filledPolygonColor')
       import                                      :: c_ptr, c_short, c_uint32_t, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx, vy
+      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint32_t), intent(in), value :: color
       integer(kind=c_int)                         :: filled_polygon_color
@@ -614,7 +614,7 @@ module primitives
     function filled_polygon_rgba(renderer, vx, vy, n, r, g, b, a) bind(c, name='filledPolygonRGBA')
       import                                      :: c_ptr, c_short, c_uint8_t, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx, vy
+      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
       integer(kind=c_int)                         :: filled_polygon_rgba
@@ -626,7 +626,7 @@ module primitives
     function textured_polygon(renderer, vx, vy, n, texture, texture_dx, texture_dy) bind(c, name='texturedPolygon')
       import                                      :: c_ptr, c_short, sdl_surface, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx, vy
+      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n, texture_dx, texture_dy
       type(sdl_surface),        intent(in)        :: texture
       integer(kind=c_int)                         :: textured_polygon
@@ -638,7 +638,7 @@ module primitives
     function bezier_color(renderer, vx, vy, n, s, color) bind(c, name='bezierColor')
       import                                      :: c_ptr, c_short, c_uint32_t, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx, vy
+      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n, s
       integer(kind=c_uint32_t), intent(in), value :: color
       integer(kind=c_int)                         :: bezier_color
@@ -648,7 +648,7 @@ module primitives
     function bezier_rgba(renderer, vx, vy, n, s, r, g, b, a) bind(c, name='bezierRGBA')
       import                                      :: c_ptr, c_short, c_uint8_t, c_int
       type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx, vy
+      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n, s
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
       integer(kind=c_int)                         :: bezier_rgba

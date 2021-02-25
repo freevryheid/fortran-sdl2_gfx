@@ -21,10 +21,11 @@ program tst_primitives
   type(sdl_event)                :: event
 
   real(r4)                       :: w, x, y, r, g, b, rad, from, to
-  integer(i4)                    :: rc
+  integer(i4)                    :: rc, n, s
   integer(i4)                    :: func           = 1
-  integer(i4)                    :: maxfunc        = 46
+  integer(i4)                    :: maxfunc        = 54
   integer(i2)                    :: wi2, xi2, yi2, x1i2, x2i2, x3i2, y1i2, y2i2, y3i2, ri2, gi2, bi2, radi2, fromi2, toi2
+  integer(i2), dimension(0:2)    :: vx, vy
 
   logical                        :: done           = .false.
   logical                        :: clear          = .true.
@@ -266,6 +267,38 @@ program tst_primitives
           clear = .false.
           functitle = "filled_trigon_rgba"
           call func46()
+        case (47)
+          clear = .true.
+          functitle = "polygon_color"
+          call func47()
+        case (48)
+          clear = .false.
+          functitle = "polygon_rgba"
+          call func48()
+        case (49)
+          clear = .true.
+          functitle = "aapolygon_color"
+          call func49()
+        case (50)
+          clear = .false.
+          functitle = "aapolygon_rgba"
+          call func50()
+        case (51)
+          clear = .true.
+          functitle = "filled_polygon_color"
+          call func51()
+        case (52)
+          clear = .false.
+          functitle = "filled_polygon_rgba"
+          call func52()
+        case (53)
+          clear = .true.
+          functitle = "bezier_color"
+          call func53()
+        case (54)
+          clear = .false.
+          functitle = "bezier_rgba"
+          call func54()
         case default
           error stop "here be dragons"
       end select
@@ -276,6 +309,276 @@ program tst_primitives
       yi2 = int2(SCREEN_HEIGHT - 2*FONT_SIZE)
       rc = string_color(renderer, xi2, yi2, nts(functitle), white)
     end subroutine switchboard
+
+    subroutine func54()
+      ! bezier_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = int2(MARGIN) + x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = int2(MARGIN) + y1i2
+      call random_number(x)
+      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x2i2 = int2(MARGIN) + x2i2
+      call random_number(y)
+      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y2i2 = int2(MARGIN) + y2i2
+      call random_number(x)
+      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x3i2 = int2(MARGIN) + x3i2
+      call random_number(y)
+      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y3i2 = int2(MARGIN) + y3i2
+      vx(0) = x1i2
+      vx(1) = x2i2
+      vx(2) = x3i2
+      vy(0) = y1i2
+      vy(1) = y2i2
+      vy(2) = y3i2
+      n = 3
+      s = 3
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = bezier_rgba(renderer, vx(0), vy(0), n, s, uint8(ri2), uint8(gi2), uint8(bi2), &
+                                  uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func54
+
+    subroutine func53()
+      ! bezier_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = int2(MARGIN) + x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = int2(MARGIN) + y1i2
+      call random_number(x)
+      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x2i2 = int2(MARGIN) + x2i2
+      call random_number(y)
+      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y2i2 = int2(MARGIN) + y2i2
+      call random_number(x)
+      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x3i2 = int2(MARGIN) + x3i2
+      call random_number(y)
+      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y3i2 = int2(MARGIN) + y3i2
+      vx(0) = x1i2
+      vx(1) = x2i2
+      vx(2) = x3i2
+      vy(0) = y1i2
+      vy(1) = y2i2
+      vy(2) = y3i2
+      n = 3
+      s = 3
+      rc = bezier_color(renderer, vx(0), vy(0), n, s, red)
+    end subroutine func53
+
+    subroutine func52()
+      ! filled_polygon_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = int2(MARGIN) + x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = int2(MARGIN) + y1i2
+      call random_number(x)
+      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x2i2 = int2(MARGIN) + x2i2
+      call random_number(y)
+      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y2i2 = int2(MARGIN) + y2i2
+      call random_number(x)
+      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x3i2 = int2(MARGIN) + x3i2
+      call random_number(y)
+      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y3i2 = int2(MARGIN) + y3i2
+      vx(0) = x1i2
+      vx(1) = x2i2
+      vx(2) = x3i2
+      vy(0) = y1i2
+      vy(1) = y2i2
+      vy(2) = y3i2
+      n = 3
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = filled_polygon_rgba(renderer, vx(0), vy(0), n, uint8(ri2), uint8(gi2), uint8(bi2), &
+                                  uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func52
+
+    subroutine func51()
+      ! filled_polygon_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = int2(MARGIN) + x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = int2(MARGIN) + y1i2
+      call random_number(x)
+      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x2i2 = int2(MARGIN) + x2i2
+      call random_number(y)
+      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y2i2 = int2(MARGIN) + y2i2
+      call random_number(x)
+      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x3i2 = int2(MARGIN) + x3i2
+      call random_number(y)
+      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y3i2 = int2(MARGIN) + y3i2
+      vx(0) = x1i2
+      vx(1) = x2i2
+      vx(2) = x3i2
+      vy(0) = y1i2
+      vy(1) = y2i2
+      vy(2) = y3i2
+      n = 3
+      rc = filled_polygon_color(renderer, vx(0), vy(0), n, cyan)
+    end subroutine func51
+
+    subroutine func50()
+      ! aapolygon_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = int2(MARGIN) + x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = int2(MARGIN) + y1i2
+      call random_number(x)
+      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x2i2 = int2(MARGIN) + x2i2
+      call random_number(y)
+      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y2i2 = int2(MARGIN) + y2i2
+      call random_number(x)
+      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x3i2 = int2(MARGIN) + x3i2
+      call random_number(y)
+      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y3i2 = int2(MARGIN) + y3i2
+      vx(0) = x1i2
+      vx(1) = x2i2
+      vx(2) = x3i2
+      vy(0) = y1i2
+      vy(1) = y2i2
+      vy(2) = y3i2
+      n = 3
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = aapolygon_rgba(renderer, vx(0), vy(0), n, uint8(ri2), uint8(gi2), uint8(bi2), &
+                                  uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func50
+
+    subroutine func49()
+      ! aapolygon_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = int2(MARGIN) + x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = int2(MARGIN) + y1i2
+      call random_number(x)
+      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x2i2 = int2(MARGIN) + x2i2
+      call random_number(y)
+      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y2i2 = int2(MARGIN) + y2i2
+      call random_number(x)
+      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x3i2 = int2(MARGIN) + x3i2
+      call random_number(y)
+      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y3i2 = int2(MARGIN) + y3i2
+      vx(0) = x1i2
+      vx(1) = x2i2
+      vx(2) = x3i2
+      vy(0) = y1i2
+      vy(1) = y2i2
+      vy(2) = y3i2
+      n = 3
+      rc = aapolygon_color(renderer, vx(0), vy(0), n, magenta)
+    end subroutine func49
+
+    subroutine func48()
+      ! polygon_rgba
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = int2(MARGIN) + x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = int2(MARGIN) + y1i2
+      call random_number(x)
+      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x2i2 = int2(MARGIN) + x2i2
+      call random_number(y)
+      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y2i2 = int2(MARGIN) + y2i2
+      call random_number(x)
+      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x3i2 = int2(MARGIN) + x3i2
+      call random_number(y)
+      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y3i2 = int2(MARGIN) + y3i2
+      vx(0) = x1i2
+      vx(1) = x2i2
+      vx(2) = x3i2
+      vy(0) = y1i2
+      vy(1) = y2i2
+      vy(2) = y3i2
+      n = 3
+      call random_number(r)
+      ri2 = int2(floor(r*256_r4))
+      call random_number(g)
+      gi2 = int2(floor(g*256_r4))
+      call random_number(b)
+      bi2 = int2(floor(b*256_r4))
+      rc = polygon_rgba(renderer, vx(0), vy(0), n, uint8(ri2), uint8(gi2), uint8(bi2), &
+                                  uint8(SDL_ALPHA_OPAQUE))
+    end subroutine func48
+
+    subroutine func47()
+      ! polygon_color
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = int2(MARGIN) + x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = int2(MARGIN) + y1i2
+      call random_number(x)
+      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x2i2 = int2(MARGIN) + x2i2
+      call random_number(y)
+      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y2i2 = int2(MARGIN) + y2i2
+      call random_number(x)
+      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x3i2 = int2(MARGIN) + x3i2
+      call random_number(y)
+      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y3i2 = int2(MARGIN) + y3i2
+      vx(0) = x1i2
+      vx(1) = x2i2
+      vx(2) = x3i2
+      vy(0) = y1i2
+      vy(1) = y2i2
+      vy(2) = y3i2
+      n = 3
+      rc = polygon_color(renderer, vx(0), vy(0), n, yellow)
+    end subroutine func47
 
     subroutine func46()
       ! filled_trigon_rgba
