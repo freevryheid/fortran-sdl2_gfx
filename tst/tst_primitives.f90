@@ -19,17 +19,19 @@ program tst_primitives
   type(c_ptr)                    :: window
   type(c_ptr)                    :: renderer
   type(sdl_event)                :: event
+  type(sdl_surface), pointer     :: image
 
   real(r4)                       :: w, x, y, r, g, b, rad, from, to
-  integer(i4)                    :: rc, n, s
+  integer(i4)                    :: rc, n, s, narg
   integer(i4)                    :: func           = 1
-  integer(i4)                    :: maxfunc        = 54
+  integer(i4)                    :: maxfunc        = 58
   integer(i2)                    :: wi2, xi2, yi2, x1i2, x2i2, x3i2, y1i2, y2i2, y3i2, ri2, gi2, bi2, radi2, fromi2, toi2
   integer(i2), dimension(0:2)    :: vx, vy
 
   logical                        :: done           = .false.
   logical                        :: clear          = .true.
-  character(len=100)             :: title, functitle, string
+  character(len=100)             :: title, functitle, string, resarg
+  character(len=1)               :: schar
 
   integer(i4), parameter         :: red            = int(z'FF0000FF')  ! notice how the nibbles are reversed compared to c
   integer(i4), parameter         :: green          = int(z'FF00FF00')
@@ -41,6 +43,17 @@ program tst_primitives
   integer(i4), parameter         :: magenta        = ior(red, blue)
   integer(i4), parameter         :: cyan           = ior(green, blue)
   integer(i4), parameter         :: white          = ior(yellow, magenta)
+
+  narg = command_argument_count()
+
+  if (narg /= 1) then
+    error stop "usage: ./tst /path/to/resources/folder/"
+  end if
+
+  call get_command_argument(1, resarg)
+  if (len_trim(resarg) == 0) then
+    error stop "Invalid path"
+  end if
 
   call random_init(.false., .false.)
 
@@ -63,6 +76,9 @@ program tst_primitives
     stop
   end if
 
+  image => sdl_load_bmp(trim(resarg) // 'texture.bmp' // c_null_char)
+  rc = image%w  ! this will fail with invalid memory reference if the image was .not. loaded
+
   ! Create the renderer.
   renderer = sdl_create_renderer(window, -1, ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_PRESENTVSYNC))
 
@@ -75,6 +91,7 @@ program tst_primitives
   end do
 
   ! Quit gracefully.
+  call sdl_free_surface(image)
   call sdl_destroy_renderer(renderer)
   call sdl_destroy_window(window)
   call sdl_quit()
@@ -269,36 +286,52 @@ program tst_primitives
           call func46()
         case (47)
           clear = .true.
-          functitle = "polygon_color"
+          functitle = "polygon_color (n=3)"
           call func47()
         case (48)
           clear = .false.
-          functitle = "polygon_rgba"
+          functitle = "polygon_rgba (n=3)"
           call func48()
         case (49)
           clear = .true.
-          functitle = "aapolygon_color"
+          functitle = "aapolygon_color (n=3)"
           call func49()
         case (50)
           clear = .false.
-          functitle = "aapolygon_rgba"
+          functitle = "aapolygon_rgba (n=3)"
           call func50()
         case (51)
           clear = .true.
-          functitle = "filled_polygon_color"
+          functitle = "filled_polygon_color (n=3)"
           call func51()
         case (52)
           clear = .false.
-          functitle = "filled_polygon_rgba"
+          functitle = "filled_polygon_rgba (n=3)"
           call func52()
         case (53)
           clear = .true.
-          functitle = "bezier_color"
+          functitle = "textured_polygon (n=3)"
           call func53()
         case (54)
-          clear = .false.
-          functitle = "bezier_rgba"
+          clear = .true.
+          functitle = "bezier_color (s=3)"
           call func54()
+        case (55)
+          clear = .false.
+          functitle = "bezier_rgba (s=3)"
+          call func55()
+        case (56)
+          clear = .false.
+          functitle = "font rotation (2 steps)"
+          call func56()
+        case (57)
+          clear = .false.
+          functitle = "character_color"
+          call func57()
+        case (58)
+          clear = .false.
+          functitle = "character_rgba"
+          call func58()
         case default
           error stop "here be dragons"
       end select
@@ -310,7 +343,33 @@ program tst_primitives
       rc = string_color(renderer, xi2, yi2, nts(functitle), white)
     end subroutine switchboard
 
-    subroutine func54()
+    subroutine func58()
+      ! string_rgba
+      schar = "B"
+      xi2 = SCREEN_WIDTH/2_i2
+      yi2 = SCREEN_HEIGHT/2_i2
+      rc = character_rgba(renderer, xi2, yi2, schar, uint8(255), uint8(0), uint8(0), uint8(255))
+    end subroutine func58
+
+    subroutine func57()
+      ! string_color
+      schar = "A"
+      xi2 = SCREEN_WIDTH/2_i2
+      yi2 = SCREEN_HEIGHT/2_i2
+      rc = character_color(renderer, xi2, yi2, schar, green)
+    end subroutine func57
+
+    subroutine func56()
+      ! font rotation
+      string = "font rotation"
+      xi2 = int2((SCREEN_WIDTH+string_length(string))/2)
+      yi2 = SCREEN_HEIGHT/2_i2
+      call gfx_primitives_set_font_rotation(2)
+      rc = string_color(renderer, xi2, yi2, nts(string), yellow)
+      call gfx_primitives_set_font_rotation(0)
+    end subroutine func56
+
+    subroutine func55()
       ! bezier_rgba
       call random_number(x)
       x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
@@ -346,9 +405,9 @@ program tst_primitives
       bi2 = int2(floor(b*256_r4))
       rc = bezier_rgba(renderer, vx(0), vy(0), n, s, uint8(ri2), uint8(gi2), uint8(bi2), &
                                   uint8(SDL_ALPHA_OPAQUE))
-    end subroutine func54
+    end subroutine func55
 
-    subroutine func53()
+    subroutine func54()
       ! bezier_color
       call random_number(x)
       x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
@@ -377,6 +436,36 @@ program tst_primitives
       n = 3
       s = 3
       rc = bezier_color(renderer, vx(0), vy(0), n, s, red)
+    end subroutine func54
+
+    subroutine func53()
+      ! textured_polygon
+      call random_number(x)
+      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x1i2 = int2(MARGIN) + x1i2
+      call random_number(y)
+      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y1i2 = int2(MARGIN) + y1i2
+      call random_number(x)
+      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x2i2 = int2(MARGIN) + x2i2
+      call random_number(y)
+      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y2i2 = int2(MARGIN) + y2i2
+      call random_number(x)
+      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
+      x3i2 = int2(MARGIN) + x3i2
+      call random_number(y)
+      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
+      y3i2 = int2(MARGIN) + y3i2
+      vx(0) = x1i2
+      vx(1) = x2i2
+      vx(2) = x3i2
+      vy(0) = y1i2
+      vy(1) = y2i2
+      vy(2) = y3i2
+      n = 3
+      rc = textured_polygon(renderer, vx(0), vy(0), n, image, 0, 0)
     end subroutine func53
 
     subroutine func52()

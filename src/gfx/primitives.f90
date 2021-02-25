@@ -628,7 +628,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n, texture_dx, texture_dy
-      type(sdl_surface),        intent(in)        :: texture
+      type(sdl_surface),        intent(in) :: texture
       integer(kind=c_int)                         :: textured_polygon
     end function textured_polygon
 
@@ -674,7 +674,7 @@ module primitives
       import                                      :: c_ptr, c_short, c_uint32_t, c_int, c_char
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y
-      character(kind=c_char),   intent(in), value :: c
+      character(kind=c_char),   intent(in)        :: c
       integer(kind=c_uint32_t), intent(in), value :: color
       integer(kind=c_int)                         :: character_color
     end function character_color
@@ -684,7 +684,7 @@ module primitives
       import                                      :: c_ptr, c_short, c_uint8_t, c_int, c_char
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y
-      character(kind=c_char),   intent(in), value :: c
+      character(kind=c_char),   intent(in)        :: c
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
       integer(kind=c_int)                         :: character_rgba
     end function character_rgba
