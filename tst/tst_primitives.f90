@@ -30,59 +30,97 @@ program tst_primitives
 
   logical                        :: done           = .false.
   logical                        :: clear          = .true.
+  logical                        :: vsync          = .false.
+  logical                        :: fullscreen     = .false.
+
   character(len=100)             :: title, functitle, string, resarg
   character(len=1)               :: schar
 
-  integer(i4), parameter         :: red            = int(z'FF0000FF')  ! notice how the nibbles are reversed compared to c
+  integer(i4), parameter         :: red            = int(z'FF0000FF')
   integer(i4), parameter         :: green          = int(z'FF00FF00')
   integer(i4), parameter         :: blue           = int(z'FFFF0000')
   integer(i4), parameter         :: black          = int(z'FF000000')
-
 
   integer(i4), parameter         :: yellow         = ior(red, green)
   integer(i4), parameter         :: magenta        = ior(red, blue)
   integer(i4), parameter         :: cyan           = ior(green, blue)
   integer(i4), parameter         :: white          = ior(yellow, magenta)
 
+  ! get resources path for image and font locations
   narg = command_argument_count()
-
-  if (narg /= 1) then
-    error stop "usage: ./tst /path/to/resources/folder/"
+  if (narg < 1) then
+    error stop "missing resources path" // new_line('A') // "usage: ./tst -[options] /path/to/resources/folder/" &
+               // new_line('A') // "  options:" // new_line('A') // "f fullscreen" // new_line('A') // "v vsync"
+  elseif (narg == 1) then
+    call get_command_argument(1, resarg)
+    resarg = trim(adjustl(resarg))
+    if (len_trim(resarg) == 0) error stop "invalid resource path"
+  elseif (narg == 2) then
+    call get_command_argument(1, resarg)
+    resarg = trim(adjustl(resarg))
+    if (resarg(1:1) == '-') then
+      if (scan(resarg, 'fv') > 0) then
+        if (scan(resarg, 'f') > 0) fullscreen = .true.
+        if (scan(resarg, 'v') > 0) vsync = .true.
+      else
+        error stop "invalid option" // new_line('A') // "usage: ./tst -[options] /path/to/resources/folder/" &
+               // new_line('A') // "  options:" // new_line('A') // "f fullscreen" // new_line('A') // "v vsync"
+      end if
+    else
+      error stop "invalid option" // new_line('A') // "usage: ./tst -[options] /path/to/resources/folder/" &
+               // new_line('A') // "  options:" // new_line('A') // "f fullscreen" // new_line('A') // "v vsync"
+    end if
+    call get_command_argument(2, resarg)
+    resarg = trim(adjustl(resarg))
+    if (len_trim(resarg) == 0) error stop "invalid resource path"
+  else
+    error stop "wtf?" // new_line('A') // "usage: ./tst -[options] /path/to/resources/folder/" &
+               // new_line('A') // "  options:" // new_line('A') // "f fullscreen" // new_line('A') // "v vsync"
   end if
 
-  call get_command_argument(1, resarg)
-  if (len_trim(resarg) == 0) then
-    error stop "Invalid path"
-  end if
-
+  ! initialize the rnd generator
   call random_init(.false., .false.)
 
-  ! Initialise SDL.
+  ! initialise SDL
   if (sdl_init(SDL_INIT_VIDEO) < 0) then
     write (stderr, *) 'SDL Error: ', sdl_get_error()
     stop
   end if
 
-  ! Create the SDL window.
+  if (fullscreen) then
+    rc = SDL_WINDOW_FULLSCREEN
+  else
+    rc = SDL_WINDOW_SHOWN
+  end if
+
+  ! create the SDL window
   window = sdl_create_window('tst_primitives' // c_null_char, &
     SDL_WINDOWPOS_UNDEFINED,                                  &
     SDL_WINDOWPOS_UNDEFINED,                                  &
     SCREEN_WIDTH,                                             &
     SCREEN_HEIGHT,                                            &
-    SDL_WINDOW_SHOWN)
+    rc)
 
   if (.not. c_associated(window)) then
     write (stderr, *) 'SDL Error: ', sdl_get_error()
     stop
   end if
 
+  ! create the renderer
+  if (vsync) then
+    renderer = sdl_create_renderer(window, -1, ior(ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_PRESENTVSYNC), &
+                                   SDL_RENDERER_TARGETTEXTURE))
+  else
+    renderer = sdl_create_renderer(window, -1, ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_TARGETTEXTURE))
+  end if
+
+  image => null()
   image => sdl_load_bmp(trim(resarg) // 'texture.bmp' // c_null_char)
-  rc = image%w  ! this will fail with invalid memory reference if the image was .not. loaded
+  if (.not. associated(image)) then
+    error stop "cannot load texture, check the resources folder path"
+  end if
 
-  ! Create the renderer.
-  renderer = sdl_create_renderer(window, -1, ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_PRESENTVSYNC))
-
-  ! Event loop.
+  ! event loop
   do while (.not. done)
     call do_events()
     if (clear) call clear_screen()
@@ -90,7 +128,7 @@ program tst_primitives
     call sdl_render_present(renderer)  ! Render to screen
   end do
 
-  ! Quit gracefully.
+  ! cleanup and  quit
   call sdl_free_surface(image)
   call sdl_destroy_renderer(renderer)
   call sdl_destroy_window(window)
@@ -344,7 +382,7 @@ program tst_primitives
     end subroutine switchboard
 
     subroutine func58()
-      ! string_rgba
+      ! character_rgba
       schar = "B"
       xi2 = SCREEN_WIDTH/2_i2
       yi2 = SCREEN_HEIGHT/2_i2
@@ -352,7 +390,7 @@ program tst_primitives
     end subroutine func58
 
     subroutine func57()
-      ! string_color
+      ! character_color
       schar = "A"
       xi2 = SCREEN_WIDTH/2_i2
       yi2 = SCREEN_HEIGHT/2_i2
@@ -1442,16 +1480,16 @@ program tst_primitives
       end do
     end subroutine do_events
 
-    function nts(s) result(res)
-      character(len = *), intent(in)   :: s
-      character(len = len_trim(s) + 1) :: res
-      res = trim(s) // c_null_char
+    function nts(s1) result(res)
+      character(len = *), intent(in)   :: s1
+      character(len = len_trim(s1) + 1) :: res
+      res = trim(s1) // c_null_char
     end function nts
 
-    function string_length(s) result(res)
-      character(len = *), intent(in)   :: s
+    function string_length(s1) result(res)
+      character(len = *), intent(in)   :: s1
       integer(i4)                      :: res
-      res = len_trim(s)*FONT_SIZE
+      res = len_trim(s1)*FONT_SIZE
     end function string_length
 
     subroutine clear_screen()
