@@ -22,7 +22,7 @@ program tst_primitives
   type(sdl_surface), pointer     :: image
 
   real(r4)                       :: w, x, y, r, g, b, rad, from, to
-  integer(i4)                    :: rc, n, s, narg
+  integer(i4)                    :: rc, n, s
   integer(i4)                    :: func           = 1
   integer(i4)                    :: maxfunc        = 58
   integer(i2)                    :: wi2, xi2, yi2, x1i2, x2i2, x3i2, y1i2, y2i2, y3i2, ri2, gi2, bi2, radi2, fromi2, toi2
@@ -30,10 +30,8 @@ program tst_primitives
 
   logical                        :: done           = .false.
   logical                        :: clear          = .true.
-  logical                        :: vsync          = .false.
-  logical                        :: fullscreen     = .false.
 
-  character(len=100)             :: title, functitle, string, resarg
+  character(len=100)             :: title, functitle, string
   character(len=1)               :: schar
 
   integer(i4), parameter         :: red            = int(z'FF0000FF')
@@ -46,38 +44,6 @@ program tst_primitives
   integer(i4), parameter         :: cyan           = ior(green, blue)
   integer(i4), parameter         :: white          = ior(yellow, magenta)
 
-  ! get resources path for image and font locations
-  narg = command_argument_count()
-  if (narg < 1) then
-    error stop "missing resources path" // new_line('A') // "usage: ./tst -[options] /path/to/resources/folder/" &
-               // new_line('A') // "  options:" // new_line('A') // "f fullscreen" // new_line('A') // "v vsync"
-  elseif (narg == 1) then
-    call get_command_argument(1, resarg)
-    resarg = trim(adjustl(resarg))
-    if (len_trim(resarg) == 0) error stop "invalid resource path"
-  elseif (narg == 2) then
-    call get_command_argument(1, resarg)
-    resarg = trim(adjustl(resarg))
-    if (resarg(1:1) == '-') then
-      if (scan(resarg, 'fv') > 0) then
-        if (scan(resarg, 'f') > 0) fullscreen = .true.
-        if (scan(resarg, 'v') > 0) vsync = .true.
-      else
-        error stop "invalid option" // new_line('A') // "usage: ./tst -[options] /path/to/resources/folder/" &
-               // new_line('A') // "  options:" // new_line('A') // "f fullscreen" // new_line('A') // "v vsync"
-      end if
-    else
-      error stop "invalid option" // new_line('A') // "usage: ./tst -[options] /path/to/resources/folder/" &
-               // new_line('A') // "  options:" // new_line('A') // "f fullscreen" // new_line('A') // "v vsync"
-    end if
-    call get_command_argument(2, resarg)
-    resarg = trim(adjustl(resarg))
-    if (len_trim(resarg) == 0) error stop "invalid resource path"
-  else
-    error stop "wtf?" // new_line('A') // "usage: ./tst -[options] /path/to/resources/folder/" &
-               // new_line('A') // "  options:" // new_line('A') // "f fullscreen" // new_line('A') // "v vsync"
-  end if
-
   ! initialize the rnd generator
   call random_init(.false., .false.)
 
@@ -87,19 +53,13 @@ program tst_primitives
     stop
   end if
 
-  if (fullscreen) then
-    rc = SDL_WINDOW_FULLSCREEN
-  else
-    rc = SDL_WINDOW_SHOWN
-  end if
-
   ! create the SDL window
   window = sdl_create_window('tst_primitives' // c_null_char, &
     SDL_WINDOWPOS_UNDEFINED,                                  &
     SDL_WINDOWPOS_UNDEFINED,                                  &
     SCREEN_WIDTH,                                             &
     SCREEN_HEIGHT,                                            &
-    rc)
+    SDL_WINDOW_SHOWN)
 
   if (.not. c_associated(window)) then
     write (stderr, *) 'SDL Error: ', sdl_get_error()
@@ -107,15 +67,10 @@ program tst_primitives
   end if
 
   ! create the renderer
-  if (vsync) then
-    renderer = sdl_create_renderer(window, -1, ior(ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_PRESENTVSYNC), &
-                                   SDL_RENDERER_TARGETTEXTURE))
-  else
-    renderer = sdl_create_renderer(window, -1, ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_TARGETTEXTURE))
-  end if
+  renderer = sdl_create_renderer(window, -1, ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_TARGETTEXTURE))
 
   image => null()
-  image => sdl_load_bmp(trim(resarg) // 'texture.bmp' // c_null_char)
+  image => sdl_load_bmp('res/texture.bmp' // c_null_char)
   if (.not. associated(image)) then
     error stop "cannot load texture, check the resources folder path"
   end if
@@ -383,18 +338,18 @@ program tst_primitives
 
     subroutine func58()
       ! character_rgba
-      schar = "B"
+      schar = char(101)
       xi2 = SCREEN_WIDTH/2_i2
       yi2 = SCREEN_HEIGHT/2_i2
-      rc = character_rgba(renderer, xi2, yi2, schar, uint8(255), uint8(0), uint8(0), uint8(255))
+      rc = character_rgba(renderer, xi2, yi2, nts(schar), uint8(255), uint8(0), uint8(0), uint8(255))
     end subroutine func58
 
     subroutine func57()
       ! character_color
-      schar = "A"
+      schar = char(100)
       xi2 = SCREEN_WIDTH/2_i2
       yi2 = SCREEN_HEIGHT/2_i2
-      rc = character_color(renderer, xi2, yi2, schar, green)
+      rc = character_color(renderer, xi2, yi2, nts(schar), green)
     end subroutine func57
 
     subroutine func56()
