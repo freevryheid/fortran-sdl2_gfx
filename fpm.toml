@@ -1,0 +1,12 @@
+name = "fortran-sdl2_gfx"
+version = "0.1.0"
+license = "MIT"
+author = "Andre Smit"
+maintainer = "freevryheid@gmail.com"
+copyright = "Copyright 2022, Andre Smit"
+[build]
+link = ["SDL2", "SDL2_gfx"]
+[dependencies]
+fortran-sdl2.git = "https://github.com/interkosmos/fortran-sdl2.git"
+[install]
+library = false

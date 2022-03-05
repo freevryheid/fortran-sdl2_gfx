@@ -1,7 +1,7 @@
 ! Andre Smit - Feb 2021, MIT
 ! WARNING - this produces strobe-like and flashing lights.
 
-program tst_primitives
+program main
 
   use, intrinsic                 :: iso_c_binding,    only : c_associated, c_null_char, c_ptr
   use, intrinsic                 :: iso_fortran_env,  only : stdout => output_unit, stderr => error_unit, &
@@ -70,7 +70,7 @@ program tst_primitives
   renderer = sdl_create_renderer(window, -1, ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_TARGETTEXTURE))
 
   image => null()
-  image => sdl_load_bmp('res/texture.bmp' // c_null_char)
+  image => sdl_load_bmp('data/texture.bmp' // c_null_char)
   if (.not. associated(image)) then
     error stop "cannot load texture, check the resources folder path"
   end if
@@ -1453,4 +1453,4 @@ program tst_primitives
       rc = rectangle_color(renderer, 0_i2, 0_i2, int2(SCREEN_WIDTH), int2(SCREEN_HEIGHT), white)
     end subroutine clear_screen
 
-end program tst_primitives
+end program main
