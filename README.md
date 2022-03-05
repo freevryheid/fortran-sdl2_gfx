@@ -7,12 +7,18 @@ fpm build
 
 fpm run
 
+Add the following to your fpm.toml file:
 
+```
+[build]
+link = ["SDL2", "SDL2_gfx"]
+[dependencies]
+fortran-sdl2.git = "https://github.com/interkosmos/fortran-sdl2.git"
+fortran-sdl2_gfx.git = "https://github.com/freevryheid/fortran-sdl2_gfx.git"
+```
 
 ## example
 
-See example in the tst folder, that applies each of the gfx primitive functions:
+The app applies each of the gfx primitive functions:
 
 <img src="data/example.png" alt="sdl2_gfx example" />
-
-
