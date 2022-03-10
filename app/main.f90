@@ -7,7 +7,7 @@ program main
   use, intrinsic                 :: iso_fortran_env,  only : stdout => output_unit, stderr => error_unit, &
                                     r4 => real32, i2 => int16, i4 => int32
   use                            :: sdl2
-  use                            :: sdl2_gfx
+  ! use                            :: primitives  ! sdl2_gfx
 
   implicit none
 
