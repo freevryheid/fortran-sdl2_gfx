@@ -27,16 +27,16 @@
 
 module primitives
 
-use, intrinsic                                  :: iso_c_binding
-use                                             :: c_util
-use                                             :: sdl2_surface
+use, intrinsic                                :: iso_c_binding
+use                                           :: c_util
+use                                           :: sdl2_surface
 
 implicit none
 
 ! Versioning
-integer(kind=c_int), parameter              :: SDL2_GFXPRIMITIVES_MAJOR = 1
-integer(kind=c_int), parameter              :: SDL2_GFXPRIMITIVES_MINOR = 0
-integer(kind=c_int), parameter              :: SDL2_GFXPRIMITIVES_MICRO = 4
+integer(kind=c_int), parameter                :: SDL2_GFXPRIMITIVES_MAJOR = 1
+integer(kind=c_int), parameter                :: SDL2_GFXPRIMITIVES_MINOR = 0
+integer(kind=c_int), parameter                :: SDL2_GFXPRIMITIVES_MICRO = 4
 
 ! @Note: all color routines expect the color to be in format 0xRRGGBBAA
 
