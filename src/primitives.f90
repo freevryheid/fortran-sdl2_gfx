@@ -152,7 +152,7 @@ function gfx_box_color(renderer, x1, y1, x2, y2, color)
   integer(kind=c_int)                         :: gfx_box_color
 end function gfx_box_color
 
-! SDL2_GFXPRIMITIVES_SCOPE int boxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2,	Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+! SDL2_GFXPRIMITIVES_SCOPE int boxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 function gfx_box_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
   bind(c, name='boxRGBA')
   import                                      :: c_ptr, c_short, c_uint8_t, c_int
@@ -172,7 +172,7 @@ function gfx_rounded_box_color(renderer, x1, y1, x2, y2, rad, color)
   integer(kind=c_int)                         :: gfx_rounded_box_color
 end function gfx_rounded_box_color
 
-! SDL2_GFXPRIMITIVES_SCOPE int roundedBoxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2,i	Sint16 y2, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+! SDL2_GFXPRIMITIVES_SCOPE int roundedBoxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2,i Sint16 y2, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 function gfx_rounded_box_rgba(renderer, x1, y1, x2, y2, rad, r, g, b, a)
   bind(c, name='roundedBoxRGBA')
   import                                      :: c_ptr, c_short, c_uint8_t, c_int
@@ -192,7 +192,7 @@ function gfx_line_color(renderer, x1, y1, x2, y2, color)
   integer(kind=c_int)                         :: gfx_line_color
 end function gfx_line_color
 
-! SDL2_GFXPRIMITIVES_SCOPE int lineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1,	Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+! SDL2_GFXPRIMITIVES_SCOPE int lineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 function gfx_line_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
   bind(c, name='lineRGBA')
   import                                      :: c_ptr, c_short, c_uint8_t, c_int
@@ -233,7 +233,7 @@ function gfx_thick_line_color(renderer, x1, y1, x2, y2, width, color)
   integer(kind=c_int)                         :: gfx_thick_line_color
 end function gfx_thick_line_color
 
-! SDL2_GFXPRIMITIVES_SCOPE int thickLineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2,	Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+! SDL2_GFXPRIMITIVES_SCOPE int thickLineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 function gfx_thick_line_rgba(renderer, x1, y1, x2, y2, width, r, g, b, a)
   bind(c, name='thickLineRGBA')
   import                                      :: c_ptr, c_short, c_uint8_t, c_int
@@ -273,7 +273,7 @@ function gfx_arc_color(renderer, x, y, rad, from, to, color)
   integer(kind=c_int)                         :: gfx_arc_color
 end function gfx_arc_color
 
-! SDL2_GFXPRIMITIVES_SCOPE int arcRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end,	Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+! SDL2_GFXPRIMITIVES_SCOPE int arcRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 function gfx_arc_rgba(renderer, x, y, rad, from, to, r, g, b, a)
   bind(c, name='arcRGBA')
   import                                      :: c_ptr, c_short, c_uint8_t, c_int
@@ -373,7 +373,7 @@ function gfx_filled_ellipse_color(renderer, x, y, rx, ry, color)
   integer(kind=c_int)                         :: gfx_filled_ellipse_color
 end function gfx_filled_ellipse_color
 
-! SDL2_GFXPRIMITIVES_SCOPE int filledEllipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y,	Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+! SDL2_GFXPRIMITIVES_SCOPE int filledEllipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 function gfx_filled_ellipse_rgba(renderer, x, y, rx, ry, r, g, b, a)
   bind(c, name='filledEllipseRGBA')
   import                                      :: c_ptr, c_short, c_uint8_t, c_int
@@ -393,7 +393,7 @@ function gfx_pie_color(renderer, x, y, rad, from, to, color)
   integer(kind=c_int)                         :: gfx_pie_color
 end function gfx_pie_color
 
-! SDL2_GFXPRIMITIVES_SCOPE int pieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad,	Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+! SDL2_GFXPRIMITIVES_SCOPE int pieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 function gfx_pie_rgba(renderer, x, y, rad, from, to, r, g, b, a)
   bind(c, name='pieRGBA')
   import                                      :: c_ptr, c_short, c_uint8_t, c_int
@@ -453,7 +453,7 @@ function gfx_aatrigon_color(renderer, x1, y1, x2, y2, x3, y3, color)
   integer(kind=c_int)                         :: gfx_aatrigon_color
 end function gfx_aatrigon_color
 
-! SDL2_GFXPRIMITIVES_SCOPE int aatrigonRGBA(SDL_Renderer * renderer,  Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3,	Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+! SDL2_GFXPRIMITIVES_SCOPE int aatrigonRGBA(SDL_Renderer * renderer,  Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 function gfx_aatrigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a)
   bind(c, name='aatrigonRGBA')
   import                                      :: c_ptr, c_short, c_uint8_t, c_int
@@ -494,7 +494,7 @@ function gfx_polygon_color(renderer, vx, vy, n, color)
   integer(kind=c_int)                         :: gfx_polygon_color
 end function gfx_polygon_color
 
-! SDL2_GFXPRIMITIVES_SCOPE int polygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy,	int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+! SDL2_GFXPRIMITIVES_SCOPE int polygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 function gfx_polygon_rgba(renderer, vx, vy, n, r, g, b, a)
   bind(c, name='polygonRGBA')
   import                                      :: c_ptr, c_short, c_uint8_t, c_int
@@ -516,7 +516,7 @@ function gfx_aapolygon_color(renderer, vx, vy, n, color)
   integer(kind=c_int)                         :: gfx_aapolygon_color
 end function gfx_aapolygon_color
 
-! SDL2_GFXPRIMITIVES_SCOPE int aapolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy,	int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+! SDL2_GFXPRIMITIVES_SCOPE int aapolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 function gfx_aapolygon_rgba(renderer, vx, vy, n, r, g, b, a)
   bind(c, name='aapolygonRGBA')
   import                                      :: c_ptr, c_short, c_uint8_t, c_int
