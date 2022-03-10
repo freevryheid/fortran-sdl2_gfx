@@ -94,8 +94,8 @@ module primitives
   public                                          :: textured_polygon
   public                                          :: bezier_color
   public                                          :: bezier_rgba
-  public                                          :: gfx_primitives_set_font
-  public                                          :: gfx_primitives_set_font_rotation
+  public                                          :: set_font
+  public                                          :: set_font_rotation
   public                                          :: character_color
   public                                          :: character_rgba
   public                                          :: string_color
@@ -114,7 +114,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: pixel_color
+      integer(kind=c_int)                         :: gfx_pixel_color
     end function gfx_pixel_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int pixelRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -124,7 +124,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: pixel_rgba
+      integer(kind=c_int)                         :: gfx_pixel_rgba
     end function gfx_pixel_rgba
 
     ! Horizontal line
@@ -136,7 +136,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, x2, y
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: hline_color
+      integer(kind=c_int)                         :: gfx_hline_color
     end function gfx_hline_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int hlineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 x2, Sint16 y, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -146,7 +146,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, x2, y
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: hline_rgba
+      integer(kind=c_int)                         :: gfx_hline_rgba
     end function gfx_hline_rgba
 
     ! Vertical line
@@ -157,7 +157,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y1, y2
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: vline_color
+      integer(kind=c_int)                         :: gfx_vline_color
     end function gfx_vline_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int vlineRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y1, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -166,7 +166,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y1, y2
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: vline_rgba
+      integer(kind=c_int)                         :: gfx_vline_rgba
     end function gfx_vline_rgba
 
     ! Rectangle
@@ -177,7 +177,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: rectangle_color
+      integer(kind=c_int)                         :: gfx_rectangle_color
     end function gfx_rectangle_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int rectangleRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -186,7 +186,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: rectangle_rgba
+      integer(kind=c_int)                         :: gfx_rectangle_rgba
     end function gfx_rectangle_rgba
 
     ! Rounded-Corner Rectangle
@@ -197,7 +197,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, rad
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: rounded_rectangle_color
+      integer(kind=c_int)                         :: gfx_rounded_rectangle_color
     end function gfx_rounded_rectangle_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int roundedRectangleRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -206,7 +206,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, rad
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: rounded_rectangle_rgba
+      integer(kind=c_int)                         :: gfx_rounded_rectangle_rgba
     end function gfx_rounded_rectangle_rgba
 
     ! Filled rectangle (Box)
@@ -217,7 +217,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: box_color
+      integer(kind=c_int)                         :: gfx_box_color
     end function gfx_box_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int boxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2,	Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -226,7 +226,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: box_rgba
+      integer(kind=c_int)                         :: gfx_box_rgba
     end function gfx_box_rgba
 
     ! Rounded-Corner Filled rectangle (Box)
@@ -237,7 +237,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, rad
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: rounded_box_color
+      integer(kind=c_int)                         :: gfx_rounded_box_color
     end function gfx_rounded_box_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int roundedBoxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2,i	Sint16 y2, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -246,7 +246,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, rad
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: rounded_box_rgba
+      integer(kind=c_int)                         :: gfx_rounded_box_rgba
     end function gfx_rounded_box_rgba
 
     ! Line
@@ -257,7 +257,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: line_color
+      integer(kind=c_int)                         :: gfx_line_color
     end function gfx_line_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int lineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1,	Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -266,7 +266,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: line_rgba
+      integer(kind=c_int)                         :: gfx_line_rgba
     end function gfx_line_rgba
 
     ! AA Line
@@ -277,7 +277,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: aaline_color
+      integer(kind=c_int)                         :: gfx_aaline_color
     end function gfx_aaline_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int aalineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -286,7 +286,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: aaline_rgba
+      integer(kind=c_int)                         :: gfx_aaline_rgba
     end function gfx_aaline_rgba
 
     ! Thick Line
@@ -298,7 +298,7 @@ module primitives
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
       integer(kind=c_uint8_t),  intent(in), value :: width
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: thick_line_color
+      integer(kind=c_int)                         :: gfx_thick_line_color
     end function gfx_thick_line_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int thickLineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2,	Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -307,7 +307,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
       integer(kind=c_uint8_t),  intent(in), value :: width, r, g, b, a
-      integer(kind=c_int)                         :: thick_line_rgba
+      integer(kind=c_int)                         :: gfx_thick_line_rgba
     end function gfx_thick_line_rgba
 
     ! Circle
@@ -318,7 +318,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: circle_color
+      integer(kind=c_int)                         :: gfx_circle_color
     end function gfx_circle_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int circleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -327,7 +327,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: circle_rgba
+      integer(kind=c_int)                         :: gfx_circle_rgba
     end function gfx_circle_rgba
 
     ! Arc
@@ -338,7 +338,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: arc_color
+      integer(kind=c_int)                         :: gfx_arc_color
     end function gfx_arc_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int arcRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end,	Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -347,7 +347,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: arc_rgba
+      integer(kind=c_int)                         :: gfx_arc_rgba
     end function gfx_arc_rgba
 
     ! AA Circle
@@ -358,7 +358,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: aacircle_color
+      integer(kind=c_int)                         :: gfx_aacircle_color
     end function gfx_aacircle_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int aacircleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -367,7 +367,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: aacircle_rgba
+      integer(kind=c_int)                         :: gfx_aacircle_rgba
     end function gfx_aacircle_rgba
 
     ! Filled Circle
@@ -378,7 +378,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: filled_circle_color
+      integer(kind=c_int)                         :: gfx_filled_circle_color
     end function gfx_filled_circle_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int filledCircleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -387,7 +387,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: filled_circle_rgba
+      integer(kind=c_int)                         :: gfx_filled_circle_rgba
     end function gfx_filled_circle_rgba
 
     ! Ellipse
@@ -398,7 +398,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rx, ry
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: ellipse_color
+      integer(kind=c_int)                         :: gfx_ellipse_color
     end function gfx_ellipse_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int ellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -407,7 +407,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rx, ry
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: ellipse_rgba
+      integer(kind=c_int)                         :: gfx_ellipse_rgba
     end function gfx_ellipse_rgba
 
     ! AA Ellipse
@@ -418,7 +418,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rx, ry
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: aaellipse_color
+      integer(kind=c_int)                         :: gfx_aaellipse_color
     end function gfx_aaellipse_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int aaellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -427,7 +427,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rx, ry
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: aaellipse_rgba
+      integer(kind=c_int)                         :: gfx_aaellipse_rgba
     end function gfx_aaellipse_rgba
 
     ! Filled Ellipse
@@ -438,7 +438,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rx, ry
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: filled_ellipse_color
+      integer(kind=c_int)                         :: gfx_filled_ellipse_color
     end function gfx_filled_ellipse_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int filledEllipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y,	Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -447,7 +447,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rx, ry
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: filled_ellipse_rgba
+      integer(kind=c_int)                         :: gfx_filled_ellipse_rgba
     end function gfx_filled_ellipse_rgba
 
     ! Pie
@@ -458,7 +458,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: pie_color
+      integer(kind=c_int)                         :: gfx_pie_color
     end function gfx_pie_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int pieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad,	Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -467,7 +467,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: pie_rgba
+      integer(kind=c_int)                         :: gfx_pie_rgba
     end function gfx_pie_rgba
 
     ! Filled Pie
@@ -478,7 +478,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: filled_pie_color
+      integer(kind=c_int)                         :: gfx_filled_pie_color
     end function gfx_filled_pie_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int filledPieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -487,7 +487,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: filled_pie_rgba
+      integer(kind=c_int)                         :: gfx_filled_pie_rgba
     end function gfx_filled_pie_rgba
 
     ! Trigon
@@ -498,7 +498,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: trigon_color
+      integer(kind=c_int)                         :: gfx_trigon_color
     end function gfx_trigon_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int trigonRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -507,7 +507,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: trigon_rgba
+      integer(kind=c_int)                         :: gfx_trigon_rgba
     end function gfx_trigon_rgba
 
     ! AA-Trigon
@@ -518,7 +518,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: aatrigon_color
+      integer(kind=c_int)                         :: gfx_aatrigon_color
     end function gfx_aatrigon_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int aatrigonRGBA(SDL_Renderer * renderer,  Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3,	Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -527,7 +527,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: aatrigon_rgba
+      integer(kind=c_int)                         :: gfx_aatrigon_rgba
     end function gfx_aatrigon_rgba
 
     ! Filled Trigon
@@ -538,7 +538,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: filled_trigon_color
+      integer(kind=c_int)                         :: gfx_filled_trigon_color
     end function gfx_filled_trigon_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int filledTrigonRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -547,7 +547,7 @@ module primitives
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: filled_trigon_rgba
+      integer(kind=c_int)                         :: gfx_filled_trigon_rgba
     end function gfx_filled_trigon_rgba
 
     ! Polygon
@@ -559,7 +559,7 @@ module primitives
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: polygon_color
+      integer(kind=c_int)                         :: gfx_polygon_color
     end function gfx_polygon_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int polygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy,	int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -569,7 +569,7 @@ module primitives
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: polygon_rgba
+      integer(kind=c_int)                         :: gfx_polygon_rgba
     end function gfx_polygon_rgba
 
     ! AA-Polygon
@@ -581,7 +581,7 @@ module primitives
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: aapolygon_color
+      integer(kind=c_int)                         :: gfx_aapolygon_color
     end function gfx_aapolygon_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int aapolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy,	int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -591,7 +591,7 @@ module primitives
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: aapolygon_rgba
+      integer(kind=c_int)                         :: gfx_aapolygon_rgba
     end function gfx_aapolygon_rgba
 
     ! Filled Polygon
@@ -603,7 +603,7 @@ module primitives
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: filled_polygon_color
+      integer(kind=c_int)                         :: gfx_filled_polygon_color
     end function gfx_filled_polygon_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -613,7 +613,7 @@ module primitives
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: filled_polygon_rgba
+      integer(kind=c_int)                         :: gfx_filled_polygon_rgba
     end function gfx_filled_polygon_rgba
 
     ! Textured Polygon
@@ -625,7 +625,7 @@ module primitives
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n, texture_dx, texture_dy
       type(sdl_surface),        intent(in) :: texture
-      integer(kind=c_int)                         :: textured_polygon
+      integer(kind=c_int)                         :: gfx_textured_polygon
     end function gfx_textured_polygon
 
     ! Bezier
@@ -637,7 +637,7 @@ module primitives
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n, s
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: bezier_color
+      integer(kind=c_int)                         :: gfx_bezier_color
     end function gfx_bezier_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int bezierRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, int s, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -647,7 +647,7 @@ module primitives
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n, s
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: bezier_rgba
+      integer(kind=c_int)                         :: gfx_bezier_rgba
     end function gfx_bezier_rgba
 
     ! Characters/Strings
@@ -672,7 +672,7 @@ module primitives
       integer(kind=c_short),    intent(in), value :: x, y
       character(kind=c_char),   intent(in)        :: c
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: character_color
+      integer(kind=c_int)                         :: gfx_character_color
     end function gfx_character_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int characterRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, char c, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -682,7 +682,7 @@ module primitives
       integer(kind=c_short),    intent(in), value :: x, y
       character(kind=c_char),   intent(in)        :: c
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: character_rgba
+      integer(kind=c_int)                         :: gfx_character_rgba
     end function gfx_character_rgba
 
     ! SDL2_GFXPRIMITIVES_SCOPE int stringColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint32 color);
@@ -692,7 +692,7 @@ module primitives
       integer(kind=c_short),    intent(in), value :: x, y
       character(kind=c_char),   intent(in)        :: s
       integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: string_color
+      integer(kind=c_int)                         :: gfx_string_color
     end function gfx_string_color
 
     ! SDL2_GFXPRIMITIVES_SCOPE int stringRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -702,7 +702,7 @@ module primitives
       integer(kind=c_short),    intent(in), value :: x, y
       character(kind=c_char),   intent(in)        :: s
       integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: string_rgba
+      integer(kind=c_int)                         :: gfx_string_rgba
     end function gfx_string_rgba
 
   end interface
@@ -1463,7 +1463,6 @@ module primitives
     function bezier_color(renderer, vx, vy, n, s, color)
       type(c_ptr), intent(in)       :: renderer
       integer,     intent(in)       :: vx(*), vy(*), n, s, color
-      type(sdl_surface), intent(in) :: texture
       integer                       :: bezier_color
       bezier_color =            int(gfx_bezier_color(renderer,                &
                                 int(vx,         kind=c_short),                &
@@ -1475,8 +1474,7 @@ module primitives
 
     function bezier_rgba(renderer, vx, vy, n, s, r, g, b, a)
       type(c_ptr), intent(in)       :: renderer
-      integer,     intent(in)       :: vx(*), vy(*), n, s, color
-      type(sdl_surface), intent(in) :: texture
+      integer,     intent(in)       :: vx(*), vy(*), n, s, r, g, b, a
       integer                       :: bezier_rgba
       bezier_rgba =             int(gfx_bezier_rgba(renderer,                 &
                                 int(vx,         kind=c_short),                &
@@ -1492,7 +1490,7 @@ module primitives
     ! Characters/Strings
 
     subroutine set_font(fontdata, cw, ch)
-      type(c_ptr),       intent(in) :: fontdatai
+      type(c_ptr),       intent(in) :: fontdata
       integer,           intent(in) :: cw, ch
       call gfx_primitives_set_font(fontdata,                                  &
                                 int(cw,         kind=c_uint32_t),             &
@@ -1500,50 +1498,64 @@ module primitives
     end subroutine set_font
 
     subroutine set_font_rotation(rotation)
-
-      integer(kind=c_uint32_t), intent(in), value :: rotation
+      integer,           intent(in) :: rotation
+      call gfx_primitives_set_font_rotation(                                  &
+                                int(rotation,   kind=c_uint32_t))
     end subroutine set_font_rotation
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int characterColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, char c, Uint32 color);
-    function gfx_character_color(renderer, x, y, c, color) bind(c, name='characterColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int, c_char
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y
-      character(kind=c_char),   intent(in)        :: c
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: character_color
-    end function gfx_character_color
+    ! FIXME - pass null terminated string...
+    function character_color(renderer, x, y, c, color)
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y color
+      character(kind=c_char)        :: c
+      integer                       :: character_color
+      character_color =         int(gfx_character_color(renderer,             &
+                                int(x,         kind=c_short),                 &
+                                int(y,         kind=c_short),                 &
+                                c,                                            &
+                                int(color,      kind=c_uint32_t)))
+    end function character_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int characterRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, char c, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_character_rgba(renderer, x, y, c, r, g, b, a) bind(c, name='characterRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int, c_char
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y
-      character(kind=c_char),   intent(in)        :: c
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: character_rgba
-    end function gfx_character_rgba
+    function character_rgba(renderer, x, y, c, r, g, b, a)
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, r, g, b, a
+      character(kind=c_char)        :: c
+      integer                       :: character_rgba
+      character_rgba =          int(gfx_character_rgba(renderer,              &
+                                int(x,         kind=c_short),                 &
+                                int(y,         kind=c_short),                 &
+                                c,                                            &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
+    end function character_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int stringColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint32 color);
-    function gfx_string_color(renderer, x, y, s, color) bind(c, name='stringColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int, c_char
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y
-      character(kind=c_char),   intent(in)        :: s
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: string_color
-    end function gfx_string_color
+    function string_color(renderer, x, y, s, color)
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, color
+      character(kind=c_char)        :: s
+      integer                       :: string_color
+      string_color =            int(gfx_string_color(renderer,                &
+                                int(x,         kind=c_short),                 &
+                                int(y,         kind=c_short),                 &
+                                s,                                            &
+                                int(color,      kind=c_uint32_t)))
+    end function string_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int stringRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, const char *s, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_string_rgba(renderer, x, y, s, r, g, b, a) bind(c, name='stringRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int, c_char
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y
-      character(kind=c_char),   intent(in)        :: s
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: string_rgba
-    end function gfx_string_rgba
-
-
+    function string_rgba(renderer, x, y, s, r, g, b, a)
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, r, g, b, a
+      character(kind=c_char)        :: s
+      integer                       :: string_rgba
+      string_rgba =             int(gfx_string_rgba(renderer,                 &
+                                int(x,         kind=c_short),                 &
+                                int(y,         kind=c_short),                 &
+                                s,                                            &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
+    end function string_rgba
 
 end module primitives
