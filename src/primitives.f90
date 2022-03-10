@@ -1045,7 +1045,7 @@ module primitives
 
     function arc_rgba(renderer, x, y, rad, from, to, r, g, b, a)
       type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, r, g, b, a
+      integer,     intent(in) :: x, y, rad, from, to, r, g, b, a
       integer                 :: arc_rgba
       arc_rgba =                int(gfx_arc_rgba(renderer,               &
                                 int(x,     kind=c_short),                &
@@ -1088,228 +1088,334 @@ module primitives
 
     ! Filled Circle
 
-    function gfx_filled_circle_color(renderer, x, y, rad, color) bind(c, name='filledCircleColor')
+    function filled_circle_color(renderer, x, y, rad, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, color
+      integer                 :: filled_circle_color
+      filled_circle_color =     int(gfx_filled_circle_color(renderer,    &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function filled_circle_color
 
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: filled_circle_color
-    end function gfx_filled_circle_color
+    function filled_circle_rgba(renderer, x, y, rad, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, r, g, b, a
+      integer                 :: filled_circle_rgba
+      filled_circle_rgba =      int(gfx_filled_circle_rgba(renderer,     &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function filled_circle_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int filledCircleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_filled_circle_rgba(renderer, x, y, rad, r, g, b, a) bind(c, name='filledCircleRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: filled_circle_rgba
-    end function gfx_filled_circle_rgba
+    ! Ellipse
 
-! 	/* Ellipse */
+    function ellipse_color(renderer, x, y, rx, ry, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rx, ty, color
+      integer                 :: ellipse_color
+      ellipse_color =           int(gfx_ellipse_color(renderer,          &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rx,    kind=c_short),                &
+                                int(ry,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function ellipse_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int ellipseColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color);
-    function gfx_ellipse_color(renderer, x, y, rx, ry, color) bind(c, name='ellipseColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rx, ry
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: ellipse_color
-    end function gfx_ellipse_color
+    function ellipse_rgba(renderer, x, y, rx, ry, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, r, g, b, a
+      integer                 :: ellipse_rgba
+      ellipse_rgba =            int(gfx_ellipse_rgba(renderer,           &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rx,    kind=c_short),                &
+                                int(ry,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function ellipse_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int ellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_ellipse_rgba(renderer, x, y, rx, ry, r, g, b, a) bind(c, name='ellipseRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rx, ry
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: ellipse_rgba
-    end function gfx_ellipse_rgba
+    ! AA Ellipse
 
-! 	/* AA Ellipse */
+    function aaellipse_color(renderer, x, y, rx, ry, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rx, ty, color
+      integer                 :: aaellipse_color
+      aaellipse_color =         int(gfx_aaellipse_color(renderer,        &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rx,    kind=c_short),                &
+                                int(ry,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function aaellipse_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int aaellipseColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32 color);
-    function gfx_aaellipse_color(renderer, x, y, rx, ry, color) bind(c, name='aaellipseColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rx, ry
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: aaellipse_color
-    end function gfx_aaellipse_color
+    function aaellipse_rgba(renderer, x, y, rx, ry, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, r, g, b, a
+      integer                 :: aaellipse_rgba
+      aaellipse_rgba =          int(gfx_aaellipse_rgba(renderer,         &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rx,    kind=c_short),                &
+                                int(ry,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function aaellipse_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int aaellipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_aaellipse_rgba(renderer, x, y, rx, ry, r, g, b, a) bind(c, name='aaellipseRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rx, ry
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: aaellipse_rgba
-    end function gfx_aaellipse_rgba
+    ! Filled Ellipse
 
-! 	/* Filled Ellipse */
+    function filled_ellipse_color(renderer, x, y, rx, ry, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rx, ty, color
+      integer                 :: filled_ellipse_color
+      filled_ellipse_color =    int(gfx_filled_ellipse_color(renderer,   &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rx,    kind=c_short),                &
+                                int(ry,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function filled_ellipse_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int filledEllipseColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint32lor);
-    function gfx_filled_ellipse_color(renderer, x, y, rx, ry, color) bind(c, name='filledEllipseColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rx, ry
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: filled_ellipse_color
-    end function gfx_filled_ellipse_color
+    function filled_ellipse_rgba(renderer, x, y, rx, ry, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, r, g, b, a
+      integer                 :: filled_ellipse_rgba
+      filled_ellipse_rgba =     int(gfx_filled_ellipse_rgba(renderer,    &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rx,    kind=c_short),                &
+                                int(ry,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function filled_ellipse_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int filledEllipseRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y,	Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_filled_ellipse_rgba(renderer, x, y, rx, ry, r, g, b, a) bind(c, name='filledEllipseRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rx, ry
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: filled_ellipse_rgba
-    end function gfx_filled_ellipse_rgba
+    ! Pie
 
-! 	/* Pie */
+    function pie_color(renderer, x, y, rad, from, to, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, from, to, color
+      integer                 :: pie_color
+      pie_color =               int(gfx_pie_color(renderer,              &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(from,  kind=c_short),                &
+                                int(to,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function pie_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int pieColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint32 color);
-    function gfx_pie_color(renderer, x, y, rad, from, to, color) bind(c, name='pieColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: pie_color
-    end function gfx_pie_color
+    function pie_rgba(renderer, x, y, rad, from, to, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, from, to, r, g, b, a
+      integer                 :: pie_rgba
+      pie_rgba =                int(gfx_pie_rgba(renderer,               &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(from,  kind=c_short),                &
+                                int(to,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function pie_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int pieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad,	Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_pie_rgba(renderer, x, y, rad, from, to, r, g, b, a) bind(c, name='pieRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: pie_rgba
-    end function gfx_pie_rgba
+    ! Filled Pie
 
-! 	/* Filled Pie */
+    function filled_pie_color(renderer, x, y, rad, from, to, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, from, to, color
+      integer                 :: filled_pie_color
+      filled_pie_color =        int(gfx_filled_pie_color(renderer,       &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(from,  kind=c_short),                &
+                                int(to,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function filled_pie_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int filledPieColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint32 color);
-    function gfx_filled_pie_color(renderer, x, y, rad, from, to, color) bind(c, name='filledPieColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: filled_pie_color
-    end function gfx_filled_pie_color
+    function filled_pie_rgba(renderer, x, y, rad, from, to, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, from, to, r, g, b, a
+      integer                 :: filled_pie_rgba
+      filled_pie_rgba =         int(gfx_filled_pie_rgba(renderer,        &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(from,  kind=c_short),                &
+                                int(to,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function filled_pie_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int filledPieRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_filled_pie_rgba(renderer, x, y, rad, from, to, r, g, b, a) bind(c, name='filledPieRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: filled_pie_rgba
-    end function gfx_filled_pie_rgba
+    ! Trigon
 
-! 	/* Trigon */
+    function trigon_color(renderer, x1, y1, x2, y2, x3, y3, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, color
+      integer                 :: trigon_color
+      trigon_color =            int(gfx_trigon_color(renderer,           &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(x3,    kind=c_short),                &
+                                int(y3,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function trigon_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int trigonColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint32 color);
-    function gfx_trigon_color(renderer, x1, y1, x2, y2, x3, y3, color) bind(c, name='trigonColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: trigon_color
-    end function gfx_trigon_color
+    function trigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, , r, g, b, a
+      integer                 :: trigon_rgba
+      trigon_rgba =             int(gfx_trigon_rgba(renderer,            &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(x3,    kind=c_short),                &
+                                int(y3,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function trigon_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int trigonRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_trigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a) bind(c, name='trigonRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: trigon_rgba
-    end function gfx_trigon_rgba
+    ! AA-Trigon
 
-! 	/* AA-Trigon */
+    function aatrigon_color(renderer, x1, y1, x2, y2, x3, y3, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, color
+      integer                 :: aatrigon_color
+      aatrigon_color =          int(gfx_aatrigon_color(renderer,         &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(x3,    kind=c_short),                &
+                                int(y3,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function aatrigon_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int aatrigonColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint32 color);
-    function gfx_aatrigon_color(renderer, x1, y1, x2, y2, x3, y3, color) bind(c, name='aatrigonColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: aatrigon_color
-    end function gfx_aatrigon_color
+    function aatrigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, , r, g, b, a
+      integer                 :: aatrigon_rgba
+      aatrigon_rgba =           int(gfx_aatrigon_rgba(renderer,          &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(x3,    kind=c_short),                &
+                                int(y3,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function aatrigon_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int aatrigonRGBA(SDL_Renderer * renderer,  Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3,	Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_aatrigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a) bind(c, name='aatrigonRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: aatrigon_rgba
-    end function gfx_aatrigon_rgba
+    ! Filled Trigon
 
-! 	/* Filled Trigon */
+    function filled_trigon_color(renderer, x1, y1, x2, y2, x3, y3, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, color
+      integer                 :: filled_trigon_color
+      filled_trigon_color =     int(gfx_filled_trigon_color(renderer,    &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(x3,    kind=c_short),                &
+                                int(y3,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function filled_trigon_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int filledTrigonColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint32 color);
-    function gfx_filled_trigon_color(renderer, x1, y1, x2, y2, x3, y3, color) bind(c, name='filledTrigonColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: filled_trigon_color
-    end function gfx_filled_trigon_color
+    function filled_trigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, , r, g, b, a
+      integer                 :: filled_trigon_rgba
+      filled_trigon_rgba =      int(gfx_filled_trigon_rgba(renderer,     &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(x3,    kind=c_short),                &
+                                int(y3,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function filled_trigon_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int filledTrigonRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_filled_trigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a) bind(c, name='filledTrigonRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, x3, y3
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: filled_trigon_rgba
-    end function gfx_filled_trigon_rgba
+    ! Polygon
 
-! 	/* Polygon */
+    function polygon_color(renderer, vx, vy, n, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: vx(*), vy(*), n, color
+      integer                 :: polygon_color
+      polygon_color =           int(gfx_polygon_color(renderer,          &
+                                int(vx,    kind=c_short),                &
+                                int(vy,    kind=c_short),                &
+                                int(n,     kind=c_int),                  &
+                                int(color, kind=c_uint32_t)))
+    end function polygon_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int polygonColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint32 color);
-    function gfx_polygon_color(renderer, vx, vy, n, color) bind(c, name='polygonColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
-      integer(kind=c_int),      intent(in), value :: n
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: polygon_color
-    end function gfx_polygon_color
+    function polygon_rgba(renderer, vx, vy, n, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: vx(*), vy(*), n, r, g, b, a
+      integer                 :: polygon_rgba
+      polygon_rgba =            int(gfx_polygon_rgba(renderer,           &
+                                int(vx,    kind=c_short),                &
+                                int(vy,    kind=c_short),                &
+                                int(n,     kind=c_int),                  &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function polygon_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int polygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy,	int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_polygon_rgba(renderer, vx, vy, n, r, g, b, a) bind(c, name='polygonRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
-      integer(kind=c_int),      intent(in), value :: n
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: polygon_rgba
-    end function gfx_polygon_rgba
+    ! AA-Polygon
 
-! 	/* AA-Polygon */
+    function aapolygon_color(renderer, vx, vy, n, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: vx(*), vy(*), n, color
+      integer                 :: aapolygon_color
+      aapolygon_color =         int(gfx_aapolygon_color(renderer,        &
+                                int(vx,    kind=c_short),                &
+                                int(vy,    kind=c_short),                &
+                                int(n,     kind=c_int),                  &
+                                int(color, kind=c_uint32_t)))
+    end function aapolygon_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int aapolygonColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint32 color);
-    function gfx_aapolygon_color(renderer, vx, vy, n, color) bind(c, name='aapolygonColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
-      integer(kind=c_int),      intent(in), value :: n
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: aapolygon_color
-    end function gfx_aapolygon_color
+    function aapolygon_rgba(renderer, vx, vy, n, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: vx(*), vy(*), n, r, g, b, a
+      integer                 :: aapolygon_rgba
+      aapolygon_rgba =          int(gfx_aapolygon_rgba(renderer,         &
+                                int(vx,    kind=c_short),                &
+                                int(vy,    kind=c_short),                &
+                                int(n,     kind=c_int),                  &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function aapolygon_rgba
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int aapolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy,	int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_aapolygon_rgba(renderer, vx, vy, n, r, g, b, a) bind(c, name='aapolygonRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
-      integer(kind=c_int),      intent(in), value :: n
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: aapolygon_rgba
-    end function gfx_aapolygon_rgba
-
-! 	/* Filled Polygon */
+    ! 	/* Filled Polygon */
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int filledPolygonColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint32 color);
     function gfx_filled_polygon_color(renderer, vx, vy, n, color) bind(c, name='filledPolygonColor')

@@ -6,7 +6,7 @@ module sdl2_gfx
 
   private
 
-  !  primitives subs/funcs
+  !  primitives
   public :: pixel_color
   public :: pixel_rgba
   public :: hline_color
