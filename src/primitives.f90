@@ -716,750 +716,758 @@ module primitives
       type(c_ptr), intent(in) :: renderer
       integer,     intent(in) :: x, y, color
       integer                 :: pixel_color
-      pixel_color =             int(gfx_pixel_color(renderer},           &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      pixel_color =             int(gfx_pixel_color(renderer},                &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function pixel_color
 
     function pixel_rgba(renderer, x, y, r, g, b, a)
       !! Draw pixel with blending enabled if a<255.
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, r, g, b, a
-      integer                 :: pixel_rgba
-      pixel_rgba =              int(gfx_pixel_rgba(renderer,             &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, r, g, b, a
+      integer                       :: pixel_rgba
+      pixel_rgba =              int(gfx_pixel_rgba(renderer,                  &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function pixel_rgba
 
     ! Horizontal line
 
     function hline_color(renderer, x1, x2, y, color)
       !! Draw horizontal line with blending.
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, x2, y, color
-      integer                 :: hline_color
-      hline_color =             int(gfx_hline_color(renderer,            &
-                                int(x1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, x2, y, color
+      integer                       :: hline_color
+      hline_color =             int(gfx_hline_color(renderer,                 &
+                                int(x1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function hline_color
 
     function hline_rgba(renderer, x1, x2, y, r, g, b, a)
       !! Draw horizontal line with blending.
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, x2, y, r, g, b, a
-      integer                 :: hline_rgba
-      hline_rgba =              int(gfx_hline_rgba(renderer,             &
-                                int(x1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, x2, y, r, g, b, a
+      integer                       :: hline_rgba
+      hline_rgba =              int(gfx_hline_rgba(renderer,                  &
+                                int(x1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function hline_rgba
 
     ! Vertical line
 
     function vline_color(renderer, x, y1, y2, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y1, y2, color
-      integer                 :: vline_color
-      vline_color =             int(gfx_vline_color(renderer,            &
-                                int(x,     kind=c_short),                &
-                                int(x1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y1, y2, color
+      integer                       :: vline_color
+      vline_color =             int(gfx_vline_color(renderer,                 &
+                                int(x,          kind=c_short),                &
+                                int(x1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function vline_color
 
     function vline_rgba(renderer, x, y1, y2, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y1, y2, r, g, b, a
-      integer                 :: vline_rgba
-      hline_rgba =              int(gfx_vline_rgba(renderer,             &
-                                int(x,     kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y1, y2, r, g, b, a
+      integer                       :: vline_rgba
+      hline_rgba =              int(gfx_vline_rgba(renderer,                  &
+                                int(x,          kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function vline_rgba
 
     ! Rectangle
 
     function rectangle_color(renderer, x1, y1, x2, y2, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, color
-      integer                 :: rectangle_color
-      rectangle_color =         int(gfx_rectangle_color(renderer,        &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, color
+      integer                       :: rectangle_color
+      rectangle_color =         int(gfx_rectangle_color(renderer,             &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function rectangle_color
 
     function rectangle_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, r, g, b, a
-      integer                 :: rectangle_rgba
-      rectangle_rgba =          int(gfx_rectangle_rgba(renderer,         &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, r, g, b, a
+      integer                       :: rectangle_rgba
+      rectangle_rgba =          int(gfx_rectangle_rgba(renderer,              &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function rectangle_rgba
 
     ! Rounded-Corner Rectangle
 
     function rounded_rectangle_color(renderer, x1, y1, x2, y2, rad, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, rad, color
-      integer                 :: rounded_rectangle_color
-      rounded_rectangle_color = int(gfx_rectangle_color(renderer,        &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, rad, color
+      integer                       :: rounded_rectangle_color
+      rounded_rectangle_color = int(gfx_rectangle_color(renderer,             &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function rounded_rectangle_color
 
     function rounded_rectangle_rgba(renderer, x1, y1, x2, y2, rad, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, rad, r, g, b, a
-      integer                 :: rounded_rectangle_rgba
-      rounded_rectangle_rgba =  int(gfx_rounded_rectangle_rgba(renderer, &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, rad, r, g, b, a
+      integer                       :: rounded_rectangle_rgba
+      rounded_rectangle_rgba =  int(gfx_rounded_rectangle_rgba(renderer,      &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function rounded_rectangle_rgba
 
     ! Filled rectangle (Box)
 
     function box_color(renderer, x1, y1, x2, y2, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, color
-      integer                 :: box_color
-      box_color =               int(gfx_box_color(renderer,              &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, color
+      integer                       :: box_color
+      box_color =               int(gfx_box_color(renderer,                   &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function box_color
 
     function box_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, r, g, b, a
-      integer                 :: box_rgba
-      box_rgba=                 int(gfx_box_rgba(renderer,               &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, r, g, b, a
+      integer                       :: box_rgba
+      box_rgba=                 int(gfx_box_rgba(renderer,                    &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function box_rgba
 
     ! Rounded-Corner Filled rectangle (Box)
 
     function rounded_box_color(renderer, x1, y1, x2, y2, rad, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, rad, color
-      integer                 :: rounded_box_color
-      rounded_box_color =       int(gfx_rounded_box_color(renderer,      &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, rad, color
+      integer                       :: rounded_box_color
+      rounded_box_color =       int(gfx_rounded_box_color(renderer,           &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function rounded_box_color
 
     function rounded_box_rgba(renderer, x1, y1, x2, y2, rad, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, rad, r, g, b, a
-      integer                 :: rounded_box_rgba
-      rounded_box_rgba =        int(gfx_rounded_box_rgba(renderer,       &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, rad, r, g, b, a
+      integer                       :: rounded_box_rgba
+      rounded_box_rgba =        int(gfx_rounded_box_rgba(renderer,            &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function rounded_box_rgba
 
     !  Line
 
     function line_color(renderer, x1, y1, x2, y2, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, color
-      integer                 :: line_color
-      line_color =              int(gfx_line_color(renderer,             &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, color
+      integer                       :: line_color
+      line_color =              int(gfx_line_color(renderer,                  &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function line_color
 
     function line_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, r, g, b, a
-      integer                 :: line_rgba
-      line_rgba =               int(gfx_line_rgba(renderer,              &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, r, g, b, a
+      integer                       :: line_rgba
+      line_rgba =               int(gfx_line_rgba(renderer,                   &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function line_rgba
 
     ! AA Line
 
     function aaline_color(renderer, x1, y1, x2, y2, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, color
-      integer                 :: aaline_color
-      aaline_color =            int(gfx_aaline_color(renderer,           &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, color
+      integer                       :: aaline_color
+      aaline_color =            int(gfx_aaline_color(renderer,                &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function aaline_color
 
     function aaline_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, r, g, b, a
-      integer                 :: aaline_rgba
-      aaline_rgba =             int(gfx_aaline_rgba(renderer,            &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, r, g, b, a
+      integer                       :: aaline_rgba
+      aaline_rgba =             int(gfx_aaline_rgba(renderer,                 &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function aaline_rgba
 
     ! Thick Line
 
     function thick_line_color(renderer, x1, y1, x2, y2, width, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, width, color
-      integer                 :: thick_line_color
-      thick_line_color =        int(gfx_thick_line_color(renderer,       &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(width, kind=c_uint8_t),              &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, width, color
+      integer                       :: thick_line_color
+      thick_line_color =        int(gfx_thick_line_color(renderer,            &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(width,      kind=c_uint8_t),              &
+                                int(color,      kind=c_uint32_t)))
     end function thick_line_color
 
     function thick_line_rgba(renderer, x1, y1, x2, y2, width, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, width, r, g, b, a
-      integer                 :: thick_line_rgba
-      thick_line_rgba =         int(gfx_thick_line_rgba(renderer,        &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(width, kind=c_uint8_t),              &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, width, r, g, b, a
+      integer                       :: thick_line_rgba
+      thick_line_rgba =         int(gfx_thick_line_rgba(renderer,             &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(width,      kind=c_uint8_t),              &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function thick_line_rgba
 
     ! Circle
 
     function circle_color(renderer, x, y, rad, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, color
-      integer                 :: circle_color
-      circle_color =            int(gfx_circle_color(renderer,           &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, color
+      integer                       :: circle_color
+      circle_color =            int(gfx_circle_color(renderer,                &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function circle_color
 
     function circle_rgba(renderer, x, y, rad, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, r, g, b, a
-      integer                 :: circle_rgba
-      circle_rgba =             int(gfx_circle_rgba(renderer,            &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, r, g, b, a
+      integer                       :: circle_rgba
+      circle_rgba =             int(gfx_circle_rgba(renderer,                 &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function circle_rgba
 
     ! Arc
 
     function arc_color(renderer, x, y, rad, from, to, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, from, to, color
-      integer                 :: arc_color
-      arc_color =               int(gfx_arc_color(renderer,              &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(from,  kind=c_short),                &
-                                int(to,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, from, to, color
+      integer                       :: arc_color
+      arc_color =               int(gfx_arc_color(renderer,                   &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(from,       kind=c_short),                &
+                                int(to,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function arc_color
 
     function arc_rgba(renderer, x, y, rad, from, to, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, from, to, r, g, b, a
-      integer                 :: arc_rgba
-      arc_rgba =                int(gfx_arc_rgba(renderer,               &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(from,  kind=c_short),                &
-                                int(to,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, from, to, r, g, b, a
+      integer                       :: arc_rgba
+      arc_rgba =                int(gfx_arc_rgba(renderer,                    &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(from,       kind=c_short),                &
+                                int(to,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function arc_rgba
 
     ! AA Circle
 
     function aacircle_color(renderer, x, y, rad, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, color
-      integer                 :: aacircle_color
-      aacircle_color =          int(gfx_aacircle_color(renderer,         &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, color
+      integer                       :: aacircle_color
+      aacircle_color =          int(gfx_aacircle_color(renderer,              &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function aacircle_color
 
     function aacircle_rgba(renderer, x, y, rad, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, r, g, b, a
-      integer                 :: aacircle_rgba
-      aacircle_rgba =           int(gfx_aacircle_rgba(renderer,          &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, r, g, b, a
+      integer                       :: aacircle_rgba
+      aacircle_rgba =           int(gfx_aacircle_rgba(renderer,               &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function aacircle_rgba
 
     ! Filled Circle
 
     function filled_circle_color(renderer, x, y, rad, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, color
-      integer                 :: filled_circle_color
-      filled_circle_color =     int(gfx_filled_circle_color(renderer,    &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, color
+      integer                       :: filled_circle_color
+      filled_circle_color =     int(gfx_filled_circle_color(renderer,         &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function filled_circle_color
 
     function filled_circle_rgba(renderer, x, y, rad, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, r, g, b, a
-      integer                 :: filled_circle_rgba
-      filled_circle_rgba =      int(gfx_filled_circle_rgba(renderer,     &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, r, g, b, a
+      integer                       :: filled_circle_rgba
+      filled_circle_rgba =      int(gfx_filled_circle_rgba(renderer,          &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function filled_circle_rgba
 
     ! Ellipse
 
     function ellipse_color(renderer, x, y, rx, ry, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rx, ty, color
-      integer                 :: ellipse_color
-      ellipse_color =           int(gfx_ellipse_color(renderer,          &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rx,    kind=c_short),                &
-                                int(ry,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rx, ry, color
+      integer                       :: ellipse_color
+      ellipse_color =           int(gfx_ellipse_color(renderer,               &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rx,         kind=c_short),                &
+                                int(ry,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function ellipse_color
 
     function ellipse_rgba(renderer, x, y, rx, ry, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, r, g, b, a
-      integer                 :: ellipse_rgba
-      ellipse_rgba =            int(gfx_ellipse_rgba(renderer,           &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rx,    kind=c_short),                &
-                                int(ry,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rx, ry, r, g, b, a
+      integer                       :: ellipse_rgba
+      ellipse_rgba =            int(gfx_ellipse_rgba(renderer,                &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rx,         kind=c_short),                &
+                                int(ry,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function ellipse_rgba
 
     ! AA Ellipse
 
     function aaellipse_color(renderer, x, y, rx, ry, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rx, ty, color
-      integer                 :: aaellipse_color
-      aaellipse_color =         int(gfx_aaellipse_color(renderer,        &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rx,    kind=c_short),                &
-                                int(ry,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rx, ry, color
+      integer                       :: aaellipse_color
+      aaellipse_color =         int(gfx_aaellipse_color(renderer,             &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rx,         kind=c_short),                &
+                                int(ry,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function aaellipse_color
 
     function aaellipse_rgba(renderer, x, y, rx, ry, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, r, g, b, a
-      integer                 :: aaellipse_rgba
-      aaellipse_rgba =          int(gfx_aaellipse_rgba(renderer,         &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rx,    kind=c_short),                &
-                                int(ry,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rx, ry, r, g, b, a
+      integer                       :: aaellipse_rgba
+      aaellipse_rgba =          int(gfx_aaellipse_rgba(renderer,              &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rx,         kind=c_short),                &
+                                int(ry,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function aaellipse_rgba
 
     ! Filled Ellipse
 
     function filled_ellipse_color(renderer, x, y, rx, ry, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rx, ty, color
-      integer                 :: filled_ellipse_color
-      filled_ellipse_color =    int(gfx_filled_ellipse_color(renderer,   &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rx,    kind=c_short),                &
-                                int(ry,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rx, ry, color
+      integer                       :: filled_ellipse_color
+      filled_ellipse_color =    int(gfx_filled_ellipse_color(renderer,        &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rx,         kind=c_short),                &
+                                int(ry,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function filled_ellipse_color
 
     function filled_ellipse_rgba(renderer, x, y, rx, ry, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, r, g, b, a
-      integer                 :: filled_ellipse_rgba
-      filled_ellipse_rgba =     int(gfx_filled_ellipse_rgba(renderer,    &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rx,    kind=c_short),                &
-                                int(ry,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rx, ry, r, g, b, a
+      integer                       :: filled_ellipse_rgba
+      filled_ellipse_rgba =     int(gfx_filled_ellipse_rgba(renderer,         &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rx,         kind=c_short),                &
+                                int(ry,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function filled_ellipse_rgba
 
     ! Pie
 
     function pie_color(renderer, x, y, rad, from, to, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, from, to, color
-      integer                 :: pie_color
-      pie_color =               int(gfx_pie_color(renderer,              &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(from,  kind=c_short),                &
-                                int(to,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, from, to, color
+      integer                       :: pie_color
+      pie_color =               int(gfx_pie_color(renderer,                   &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(from,       kind=c_short),                &
+                                int(to,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function pie_color
 
     function pie_rgba(renderer, x, y, rad, from, to, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, from, to, r, g, b, a
-      integer                 :: pie_rgba
-      pie_rgba =                int(gfx_pie_rgba(renderer,               &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(from,  kind=c_short),                &
-                                int(to,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, from, to, r, g, b, a
+      integer                       :: pie_rgba
+      pie_rgba =                int(gfx_pie_rgba(renderer,                    &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(from,       kind=c_short),                &
+                                int(to,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function pie_rgba
 
     ! Filled Pie
 
     function filled_pie_color(renderer, x, y, rad, from, to, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, from, to, color
-      integer                 :: filled_pie_color
-      filled_pie_color =        int(gfx_filled_pie_color(renderer,       &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(from,  kind=c_short),                &
-                                int(to,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, from, to, color
+      integer                       :: filled_pie_color
+      filled_pie_color =        int(gfx_filled_pie_color(renderer,            &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(from,       kind=c_short),                &
+                                int(to,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function filled_pie_color
 
     function filled_pie_rgba(renderer, x, y, rad, from, to, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x, y, rad, from, to, r, g, b, a
-      integer                 :: filled_pie_rgba
-      filled_pie_rgba =         int(gfx_filled_pie_rgba(renderer,        &
-                                int(x,     kind=c_short),                &
-                                int(y,     kind=c_short),                &
-                                int(rad,   kind=c_short),                &
-                                int(from,  kind=c_short),                &
-                                int(to,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x, y, rad, from, to, r, g, b, a
+      integer                       :: filled_pie_rgba
+      filled_pie_rgba =         int(gfx_filled_pie_rgba(renderer,             &
+                                int(x,          kind=c_short),                &
+                                int(y,          kind=c_short),                &
+                                int(rad,        kind=c_short),                &
+                                int(from,       kind=c_short),                &
+                                int(to,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function filled_pie_rgba
 
     ! Trigon
 
     function trigon_color(renderer, x1, y1, x2, y2, x3, y3, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, color
-      integer                 :: trigon_color
-      trigon_color =            int(gfx_trigon_color(renderer,           &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(x3,    kind=c_short),                &
-                                int(y3,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, x3, y3, color
+      integer                       :: trigon_color
+      trigon_color =            int(gfx_trigon_color(renderer,                &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(x3,         kind=c_short),                &
+                                int(y3,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function trigon_color
 
     function trigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, , r, g, b, a
-      integer                 :: trigon_rgba
-      trigon_rgba =             int(gfx_trigon_rgba(renderer,            &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(x3,    kind=c_short),                &
-                                int(y3,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, x3, y3, , r, g, b, a
+      integer                       :: trigon_rgba
+      trigon_rgba =             int(gfx_trigon_rgba(renderer,                 &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(x3,         kind=c_short),                &
+                                int(y3,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function trigon_rgba
 
     ! AA-Trigon
 
     function aatrigon_color(renderer, x1, y1, x2, y2, x3, y3, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, color
-      integer                 :: aatrigon_color
-      aatrigon_color =          int(gfx_aatrigon_color(renderer,         &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(x3,    kind=c_short),                &
-                                int(y3,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, x3, y3, color
+      integer                       :: aatrigon_color
+      aatrigon_color =          int(gfx_aatrigon_color(renderer,              &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(x3,         kind=c_short),                &
+                                int(y3,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function aatrigon_color
 
     function aatrigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, , r, g, b, a
-      integer                 :: aatrigon_rgba
-      aatrigon_rgba =           int(gfx_aatrigon_rgba(renderer,          &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(x3,    kind=c_short),                &
-                                int(y3,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, x3, y3, , r, g, b, a
+      integer                       :: aatrigon_rgba
+      aatrigon_rgba =           int(gfx_aatrigon_rgba(renderer,               &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(x3,         kind=c_short),                &
+                                int(y3,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function aatrigon_rgba
 
     ! Filled Trigon
 
     function filled_trigon_color(renderer, x1, y1, x2, y2, x3, y3, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, color
-      integer                 :: filled_trigon_color
-      filled_trigon_color =     int(gfx_filled_trigon_color(renderer,    &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(x3,    kind=c_short),                &
-                                int(y3,    kind=c_short),                &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, x3, y3, color
+      integer                       :: filled_trigon_color
+      filled_trigon_color =     int(gfx_filled_trigon_color(renderer,         &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(x3,         kind=c_short),                &
+                                int(y3,         kind=c_short),                &
+                                int(color,      kind=c_uint32_t)))
     end function filled_trigon_color
 
     function filled_trigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: x1, y1, x2, y2, x3, y3, , r, g, b, a
-      integer                 :: filled_trigon_rgba
-      filled_trigon_rgba =      int(gfx_filled_trigon_rgba(renderer,     &
-                                int(x1,    kind=c_short),                &
-                                int(y1,    kind=c_short),                &
-                                int(x2,    kind=c_short),                &
-                                int(y2,    kind=c_short),                &
-                                int(x3,    kind=c_short),                &
-                                int(y3,    kind=c_short),                &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: x1, y1, x2, y2, x3, y3, , r, g, b, a
+      integer                       :: filled_trigon_rgba
+      filled_trigon_rgba =      int(gfx_filled_trigon_rgba(renderer,          &
+                                int(x1,         kind=c_short),                &
+                                int(y1,         kind=c_short),                &
+                                int(x2,         kind=c_short),                &
+                                int(y2,         kind=c_short),                &
+                                int(x3,         kind=c_short),                &
+                                int(y3,         kind=c_short),                &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function filled_trigon_rgba
 
     ! Polygon
 
     function polygon_color(renderer, vx, vy, n, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: vx(*), vy(*), n, color
-      integer                 :: polygon_color
-      polygon_color =           int(gfx_polygon_color(renderer,          &
-                                int(vx,    kind=c_short),                &
-                                int(vy,    kind=c_short),                &
-                                int(n,     kind=c_int),                  &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: vx(*), vy(*), n, color
+      integer                       :: polygon_color
+      polygon_color =           int(gfx_polygon_color(renderer,               &
+                                int(vx,         kind=c_short),                &
+                                int(vy,         kind=c_short),                &
+                                int(n,          kind=c_int),                  &
+                                int(color,      kind=c_uint32_t)))
     end function polygon_color
 
     function polygon_rgba(renderer, vx, vy, n, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: vx(*), vy(*), n, r, g, b, a
-      integer                 :: polygon_rgba
-      polygon_rgba =            int(gfx_polygon_rgba(renderer,           &
-                                int(vx,    kind=c_short),                &
-                                int(vy,    kind=c_short),                &
-                                int(n,     kind=c_int),                  &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: vx(*), vy(*), n, r, g, b, a
+      integer                       :: polygon_rgba
+      polygon_rgba =            int(gfx_polygon_rgba(renderer,                &
+                                int(vx,         kind=c_short),                &
+                                int(vy,         kind=c_short),                &
+                                int(n,          kind=c_int),                  &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function polygon_rgba
 
     ! AA-Polygon
 
     function aapolygon_color(renderer, vx, vy, n, color)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: vx(*), vy(*), n, color
-      integer                 :: aapolygon_color
-      aapolygon_color =         int(gfx_aapolygon_color(renderer,        &
-                                int(vx,    kind=c_short),                &
-                                int(vy,    kind=c_short),                &
-                                int(n,     kind=c_int),                  &
-                                int(color, kind=c_uint32_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: vx(*), vy(*), n, color
+      integer                       :: aapolygon_color
+      aapolygon_color =         int(gfx_aapolygon_color(renderer,             &
+                                int(vx,         kind=c_short),                &
+                                int(vy,         kind=c_short),                &
+                                int(n,          kind=c_int),                  &
+                                int(color,      kind=c_uint32_t)))
     end function aapolygon_color
 
     function aapolygon_rgba(renderer, vx, vy, n, r, g, b, a)
-      type(c_ptr), intent(in) :: renderer
-      integer,     intent(in) :: vx(*), vy(*), n, r, g, b, a
-      integer                 :: aapolygon_rgba
-      aapolygon_rgba =          int(gfx_aapolygon_rgba(renderer,         &
-                                int(vx,    kind=c_short),                &
-                                int(vy,    kind=c_short),                &
-                                int(n,     kind=c_int),                  &
-                                int(r,     kind=c_uint8_t),              &
-                                int(g,     kind=c_uint8_t),              &
-                                int(b,     kind=c_uint8_t),              &
-                                int(a,     kind=c_uint8_t)))
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: vx(*), vy(*), n, r, g, b, a
+      integer                       :: aapolygon_rgba
+      aapolygon_rgba =          int(gfx_aapolygon_rgba(renderer,              &
+                                int(vx,         kind=c_short),                &
+                                int(vy,         kind=c_short),                &
+                                int(n,          kind=c_int),                  &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
     end function aapolygon_rgba
 
     ! 	/* Filled Polygon */
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int filledPolygonColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint32 color);
-    function gfx_filled_polygon_color(renderer, vx, vy, n, color) bind(c, name='filledPolygonColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
-      integer(kind=c_int),      intent(in), value :: n
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: filled_polygon_color
-    end function gfx_filled_polygon_color
+    function filled_polygon_color(renderer, vx, vy, n, color)
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: vx(*), vy(*), n, color
+      integer                       :: filled_polygon_color
+      filled_polygon_color =    int(gfx_filled_polygon_color(renderer,        &
+                                int(vx,         kind=c_short),                &
+                                int(vy,         kind=c_short),                &
+                                int(n,          kind=c_int),                  &
+                                int(color,      kind=c_uint32_t)))
+    end function filled_polygon_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int filledPolygonRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_filled_polygon_rgba(renderer, vx, vy, n, r, g, b, a) bind(c, name='filledPolygonRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
-      integer(kind=c_int),      intent(in), value :: n
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: filled_polygon_rgba
-    end function gfx_filled_polygon_rgba
+    function filled_polygon_rgba(renderer, vx, vy, n, r, g, b, a)
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: vx(*), vy(*), n, r, g, b, a
+      integer                       :: filled_polygon_rgba
+      filled_polygon_rgba =     int(gfx_filled_polygon_rgba(renderer,         &
+                                int(vx,         kind=c_short),                &
+                                int(vy,         kind=c_short),                &
+                                int(n,          kind=c_int),                  &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
+    end function filled_polygon_rgba
 
-! 	/* Textured Polygon */
+    ! Textured Polygon
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int texturedPolygon(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, SDL_Surface * texture,int texture_dx,int texture_dy);
-    function gfx_textured_polygon(renderer, vx, vy, n, texture, texture_dx, texture_dy) bind(c, name='texturedPolygon')
-      import                                      :: c_ptr, c_short, sdl_surface, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
-      integer(kind=c_int),      intent(in), value :: n, texture_dx, texture_dy
-      type(sdl_surface),        intent(in) :: texture
-      integer(kind=c_int)                         :: textured_polygon
-    end function gfx_textured_polygon
+    function textured_polygon(renderer, vx, vy, n, texture, texture_dx, texture_dy)
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: vx(*), vy(*), n, texture_dx, texture_dy
+      type(sdl_surface), intent(in) :: texture
+      integer                       :: textured_polygon
+      textured_polygon =        int(gfx_textured_polygon(renderer,            &
+                                int(vx,         kind=c_short),                &
+                                int(vy,         kind=c_short),                &
+                                int(n,          kind=c_int),                  &
+                                texture,                                      &
+                                int(texture_dx, kind=c_int),                  &
+                                int(texture_dy, kind=c_int)))
+    end function textured_polygon
 
-! 	/* Bezier */
+    ! Bezier
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int bezierColor(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, int s, Uint32 color);
-    function gfx_bezier_color(renderer, vx, vy, n, s, color) bind(c, name='bezierColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
+    function bezier_color(renderer, vx, vy, n, s, color) bind(c, name='bezierColor')
+
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
       integer(kind=c_int),      intent(in), value :: n, s
       integer(kind=c_uint32_t), intent(in), value :: color
       integer(kind=c_int)                         :: bezier_color
-    end function gfx_bezier_color
+    end function bezier_color
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int bezierRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, int s, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
     function gfx_bezier_rgba(renderer, vx, vy, n, s, r, g, b, a) bind(c, name='bezierRGBA')

@@ -1,6 +1,8 @@
 # fortran-sdl2_gfx
 Fortran bindings for SDL2_gfx (https://www.ferzkopp.net/Software/SDL2_gfx/Docs/html/index.html) to be used in conjunction with: https://github.com/interkosmos/fortran-sdl2
 
+WIP - busy refactoring the library
+
 ## fpm build
 
 fpm build
