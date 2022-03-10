@@ -653,17 +653,17 @@ module primitives
     ! Characters/Strings
 
     ! SDL2_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFont(const void *fontdata, Uint32 cw, Uint32 ch);
-    subroutine gfx_gfx_primitives_set_font(fontdata, cw, ch) bind(c, name='gfxPrimitivesSetFont')
+    subroutine gfx_primitives_set_font(fontdata, cw, ch) bind(c, name='gfxPrimitivesSetFont')
       import                                      :: c_ptr, c_uint32_t
       type(c_ptr),              intent(in)        :: fontdata
       integer(kind=c_uint32_t), intent(in), value :: cw, ch
-    end subroutine gfx_gfx_primitives_set_font
+    end subroutine gfx_primitives_set_font
 
     ! SDL2_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFontRotation(Uint32 rotation);
-    subroutine gfx_gfx_primitives_set_font_rotation(rotation) bind(c, name='gfxPrimitivesSetFontRotation')
+    subroutine gfx_primitives_set_font_rotation(rotation) bind(c, name='gfxPrimitivesSetFontRotation')
       import                                      :: c_uint32_t
       integer(kind=c_uint32_t), intent(in), value :: rotation
-    end subroutine gfx_gfx_primitives_set_font_rotation
+    end subroutine gfx_primitives_set_font_rotation
 
     ! SDL2_GFXPRIMITIVES_SCOPE int characterColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, char c, Uint32 color);
     function gfx_character_color(renderer, x, y, c, color) bind(c, name='characterColor')
@@ -1460,39 +1460,49 @@ module primitives
 
     ! Bezier
 
-    function bezier_color(renderer, vx, vy, n, s, color) bind(c, name='bezierColor')
-
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
-      integer(kind=c_int),      intent(in), value :: n, s
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: bezier_color
+    function bezier_color(renderer, vx, vy, n, s, color)
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: vx(*), vy(*), n, s, color
+      type(sdl_surface), intent(in) :: texture
+      integer                       :: bezier_color
+      bezier_color =            int(gfx_bezier_color(renderer,                &
+                                int(vx,         kind=c_short),                &
+                                int(vy,         kind=c_short),                &
+                                int(n,          kind=c_int),                  &
+                                int(s,          kind=c_int),                  &
+                                int(color,      kind=c_uint32_t)))
     end function bezier_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int bezierRGBA(SDL_Renderer * renderer, const Sint16 * vx, const Sint16 * vy, int n, int s, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_bezier_rgba(renderer, vx, vy, n, s, r, g, b, a) bind(c, name='bezierRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in)        :: vx(*), vy(*)
-      integer(kind=c_int),      intent(in), value :: n, s
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: bezier_rgba
-    end function gfx_bezier_rgba
+    function bezier_rgba(renderer, vx, vy, n, s, r, g, b, a)
+      type(c_ptr), intent(in)       :: renderer
+      integer,     intent(in)       :: vx(*), vy(*), n, s, color
+      type(sdl_surface), intent(in) :: texture
+      integer                       :: bezier_rgba
+      bezier_rgba =             int(gfx_bezier_rgba(renderer,                 &
+                                int(vx,         kind=c_short),                &
+                                int(vy,         kind=c_short),                &
+                                int(n,          kind=c_int),                  &
+                                int(s,          kind=c_int),                  &
+                                int(r,          kind=c_uint8_t),              &
+                                int(g,          kind=c_uint8_t),              &
+                                int(b,          kind=c_uint8_t),              &
+                                int(a,          kind=c_uint8_t)))
+    end function bezier_rgba
 
-! 	/* Characters/Strings */
+    ! Characters/Strings
 
-! 	SDL2_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFont(const void *fontdata, Uint32 cw, Uint32 ch);
-    subroutine gfx_gfx_primitives_set_font(fontdata, cw, ch) bind(c, name='gfxPrimitivesSetFont')
-      import                                      :: c_ptr, c_uint32_t
-      type(c_ptr),              intent(in)        :: fontdata
-      integer(kind=c_uint32_t), intent(in), value :: cw, ch
-    end subroutine gfx_gfx_primitives_set_font
+    subroutine set_font(fontdata, cw, ch)
+      type(c_ptr),       intent(in) :: fontdatai
+      integer,           intent(in) :: cw, ch
+      call gfx_primitives_set_font(fontdata,                                  &
+                                int(cw,         kind=c_uint32_t),             &
+                                int(ch,         kind=c_uint32_t))
+    end subroutine set_font
 
-! 	SDL2_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFontRotation(Uint32 rotation);
-    subroutine gfx_gfx_primitives_set_font_rotation(rotation) bind(c, name='gfxPrimitivesSetFontRotation')
-      import                                      :: c_uint32_t
+    subroutine set_font_rotation(rotation)
+
       integer(kind=c_uint32_t), intent(in), value :: rotation
-    end subroutine gfx_gfx_primitives_set_font_rotation
+    end subroutine set_font_rotation
 
 ! 	SDL2_GFXPRIMITIVES_SCOPE int characterColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, char c, Uint32 color);
     function gfx_character_color(renderer, x, y, c, color) bind(c, name='characterColor')
