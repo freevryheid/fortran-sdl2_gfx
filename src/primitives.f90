@@ -716,10 +716,10 @@ module primitives
       type(c_ptr), intent(in) :: renderer
       integer,     intent(in) :: x, y, color
       integer                 :: pixel_color
-      pixel_color = int(gfx_pixel_color(renderer}, &
-                    int(x,     kind=c_short),      &
-                    int(y,     kind=c_short),      &
-                    int(color, kind=c_uint32_t)))
+      pixel_color =             int(gfx_pixel_color(renderer},           &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
     end function pixel_color
 
     function pixel_rgba(renderer, x, y, r, g, b, a)
@@ -727,13 +727,13 @@ module primitives
       type(c_ptr), intent(in) :: renderer
       integer,     intent(in) :: x, y, r, g, b, a
       integer                 :: pixel_rgba
-      pixel_rgba = int(gfx_pixel_rgba(renderer,   &
-                   int(x, kind=c_short),          &
-                   int(y, kind=c_short),          &
-                   int(r, kind=c_uint8_t),        &
-                   int(g, kind=c_uint8_t),        &
-                   int(b, kind=c_uint8_t),        &
-                   int(a, kind=c_uint8_t)))
+      pixel_rgba =              int(gfx_pixel_rgba(renderer,             &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
     end function pixel_rgba
 
     ! Horizontal line
@@ -743,11 +743,11 @@ module primitives
       type(c_ptr), intent(in) :: renderer
       integer,     intent(in) :: x1, x2, y, color
       integer                 :: hline_color
-      hline_color = int(gfx_hline_color(renderer, &
-                    int(x1,    kind=c_short),     &
-                    int(x2,    kind=c_short),     &
-                    int(y,     kind=c_short),     &
-                    int(color, kind=c_uint32_t)))
+      hline_color =             int(gfx_hline_color(renderer,            &
+                                int(x1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
     end function hline_color
 
     function hline_rgba(renderer, x1, x2, y, r, g, b, a)
@@ -755,14 +755,14 @@ module primitives
       type(c_ptr), intent(in) :: renderer
       integer,     intent(in) :: x1, x2, y, r, g, b, a
       integer                 :: hline_rgba
-      hline_rgba = int(gfx_hline_rgba(renderer, &
-                   int(x1, kind=c_short),       &
-                   int(x2, kind=c_short),       &
-                   int(y,  kind=c_short),       &
-                   int(r,  kind=c_uint8_t),     &
-                   int(g,  kind=c_uint8_t),     &
-                   int(b,  kind=c_uint8_t),     &
-                   int(a,  kind=c_uint8_t)))
+      hline_rgba =              int(gfx_hline_rgba(renderer,             &
+                                int(x1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
     end function hline_rgba
 
     ! Vertical line
@@ -771,25 +771,25 @@ module primitives
       type(c_ptr), intent(in) :: renderer
       integer,     intent(in) :: x, y1, y2, color
       integer                 :: vline_color
-      vline_color = int(gfx_vline_color(renderer, &
-                    int(x,     kind=c_short),     &
-                    int(x1,    kind=c_short),     &
-                    int(x2,    kind=c_short),     &
-                    int(color, kind=c_uint32_t)))
+      vline_color =             int(gfx_vline_color(renderer,            &
+                                int(x,     kind=c_short),                &
+                                int(x1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
     end function vline_color
 
     function vline_rgba(renderer, x, y1, y2, r, g, b, a)
       type(c_ptr), intent(in) :: renderer
       integer,     intent(in) :: x, y1, y2, r, g, b, a
       integer                 :: vline_rgba
-      hline_rgba = int(gfx_hline_rgba(renderer, &
-                   int(x,  kind=c_short),       &
-                   int(y1, kind=c_short),       &
-                   int(y2, kind=c_short),       &
-                   int(r,  kind=c_uint8_t),     &
-                   int(g,  kind=c_uint8_t),     &
-                   int(b,  kind=c_uint8_t),     &
-                   int(a,  kind=c_uint8_t)))
+      hline_rgba =              int(gfx_vline_rgba(renderer,             &
+                                int(x,     kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
     end function vline_rgba
 
     ! Rectangle
@@ -798,209 +798,298 @@ module primitives
       type(c_ptr), intent(in) :: renderer
       integer,     intent(in) :: x1, y1, x2, y2, color
       integer                 :: rectangle_color
-      rectangle_color = int(gfx_vline_color(renderer, &
-                        int(x1,    kind=c_short),     &
-                        int(y1,    kind=c_short),     &
-                        int(x2,    kind=c_short),     &
-                        int(y2,    kind=c_short),     &
-                        int(color, kind=c_uint32_t)))
+      rectangle_color =         int(gfx_rectangle_color(renderer,        &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
     end function rectangle_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int rectangleRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_rectangle_rgba(renderer, x1, y1, x2, y2, r, g, b, a) bind(c, name='rectangleRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: rectangle_rgba
-    end function gfx_rectangle_rgba
+    function rectangle_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, r, g, b, a
+      integer                 :: rectangle_rgba
+      rectangle_rgba =          int(gfx_rectangle_rgba(renderer,         &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function rectangle_rgba
 
-! 	/* Rounded-Corner Rectangle */
+    ! Rounded-Corner Rectangle
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int roundedRectangleColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 rad, Uint32 color);
-    function gfx_rounded_rectangle_color(renderer, x1, y1, x2, y2, rad, color) bind(c, name='roundedRectangleColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, rad
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: rounded_rectangle_color
-    end function gfx_rounded_rectangle_color
+    function rounded_rectangle_color(renderer, x1, y1, x2, y2, rad, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, rad, color
+      integer                 :: rounded_rectangle_color
+      rounded_rectangle_color = int(gfx_rectangle_color(renderer,        &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function rounded_rectangle_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int roundedRectangleRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_rounded_rectangle_rgba(renderer, x1, y1, x2, y2, rad, r, g, b, a) bind(c, name='roundedRectangleRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, rad
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: rounded_rectangle_rgba
-    end function gfx_rounded_rectangle_rgba
+    function rounded_rectangle_rgba(renderer, x1, y1, x2, y2, rad, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, rad, r, g, b, a
+      integer                 :: rounded_rectangle_rgba
+      rounded_rectangle_rgba =  int(gfx_rounded_rectangle_rgba(renderer, &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function rounded_rectangle_rgba
 
-! 	/* Filled rectangle (Box) */
+    ! Filled rectangle (Box)
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int boxColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color);
-    function gfx_box_color(renderer, x1, y1, x2, y2, color) bind(c, name='boxColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: box_color
-    end function gfx_box_color
+    function box_color(renderer, x1, y1, x2, y2, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, color
+      integer                 :: box_color
+      box_color =               int(gfx_box_color(renderer,              &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function box_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int boxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2,	Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_box_rgba(renderer, x1, y1, x2, y2, r, g, b, a) bind(c, name='boxRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: box_rgba
-    end function gfx_box_rgba
+    function box_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, r, g, b, a
+      integer                 :: box_rgba
+      box_rgba=                 int(gfx_box_rgba(renderer,               &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function box_rgba
 
-! 	/* Rounded-Corner Filled rectangle (Box) */
+    ! Rounded-Corner Filled rectangle (Box)
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int roundedBoxColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 rad, Uint32 color);
-    function gfx_rounded_box_color(renderer, x1, y1, x2, y2, rad, color) bind(c, name='roundedBoxColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, rad
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: rounded_box_color
-    end function gfx_rounded_box_color
+    function rounded_box_color(renderer, x1, y1, x2, y2, rad, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, rad, color
+      integer                 :: rounded_box_color
+      rounded_box_color =       int(gfx_rounded_box_color(renderer,      &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function rounded_box_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int roundedBoxRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2,i	Sint16 y2, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_rounded_box_rgba(renderer, x1, y1, x2, y2, rad, r, g, b, a) bind(c, name='roundedBoxRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2, rad
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: rounded_box_rgba
-    end function gfx_rounded_box_rgba
+    function rounded_box_rgba(renderer, x1, y1, x2, y2, rad, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, rad, r, g, b, a
+      integer                 :: rounded_box_rgba
+      rounded_box_rgba =        int(gfx_rounded_box_rgba(renderer,       &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function rounded_box_rgba
 
-! 	/* Line */
+    !  Line
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int lineColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color);
-    function gfx_line_color(renderer, x1, y1, x2, y2, color) bind(c, name='lineColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: line_color
-    end function gfx_line_color
+    function line_color(renderer, x1, y1, x2, y2, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, color
+      integer                 :: line_color
+      line_color =              int(gfx_line_color(renderer,             &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function line_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int lineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1,	Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_line_rgba(renderer, x1, y1, x2, y2, r, g, b, a) bind(c, name='lineRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: line_rgba
-    end function gfx_line_rgba
+    function line_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, r, g, b, a
+      integer                 :: line_rgba
+      line_rgba =               int(gfx_line_rgba(renderer,              &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function line_rgba
 
-! 	/* AA Line */
+    ! AA Line
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int aalineColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint32 color);
-    function gfx_aaline_color(renderer, x1, y1, x2, y2, color) bind(c, name='aalineColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: aaline_color
-    end function gfx_aaline_color
+    function aaline_color(renderer, x1, y1, x2, y2, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, color
+      integer                 :: aaline_color
+      aaline_color =            int(gfx_aaline_color(renderer,           &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function aaline_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int aalineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_aaline_rgba(renderer, x1, y1, x2, y2, r, g, b, a) bind(c, name='aalineRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: aaline_rgba
-    end function gfx_aaline_rgba
+    function aaline_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, r, g, b, a
+      integer                 :: aaline_rgba
+      aaline_rgba =             int(gfx_aaline_rgba(renderer,            &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function aaline_rgba
 
-! 	/* Thick Line */
+    ! Thick Line
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int thickLineColor(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 width, Uint32 color);
-    function gfx_thick_line_color(renderer, x1, y1, x2, y2, width, color) bind(c, name='thickLineColor')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
-      integer(kind=c_uint8_t),  intent(in), value :: width
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: thick_line_color
-    end function gfx_thick_line_color
+    function thick_line_color(renderer, x1, y1, x2, y2, width, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, width, color
+      integer                 :: thick_line_color
+      thick_line_color =        int(gfx_thick_line_color(renderer,       &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(width, kind=c_uint8_t),              &
+                                int(color, kind=c_uint32_t)))
+    end function thick_line_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int thickLineRGBA(SDL_Renderer * renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2,	Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_thick_line_rgba(renderer, x1, y1, x2, y2, width, r, g, b, a) bind(c, name='thickLineRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x1, y1, x2, y2
-      integer(kind=c_uint8_t),  intent(in), value :: width, r, g, b, a
-      integer(kind=c_int)                         :: thick_line_rgba
-    end function gfx_thick_line_rgba
+    function thick_line_rgba(renderer, x1, y1, x2, y2, width, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x1, y1, x2, y2, width, r, g, b, a
+      integer                 :: thick_line_rgba
+      thick_line_rgba =         int(gfx_thick_line_rgba(renderer,        &
+                                int(x1,    kind=c_short),                &
+                                int(y1,    kind=c_short),                &
+                                int(x2,    kind=c_short),                &
+                                int(y2,    kind=c_short),                &
+                                int(width, kind=c_uint8_t),              &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function thick_line_rgba
 
-! 	/* Circle */
+    ! Circle
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int circleColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint32 color);
-    function gfx_circle_color(renderer, x, y, rad, color) bind(c, name='circleColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: circle_color
-    end function gfx_circle_color
+    function circle_color(renderer, x, y, rad, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, color
+      integer                 :: circle_color
+      circle_color =            int(gfx_circle_color(renderer,           &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function circle_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int circleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_circle_rgba(renderer, x, y, rad, r, g, b, a) bind(c, name='circleRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: circle_rgba
-    end function gfx_circle_rgba
+    function circle_rgba(renderer, x, y, rad, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, r, g, b, a
+      integer                 :: circle_rgba
+      circle_rgba =             int(gfx_circle_rgba(renderer,            &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function circle_rgba
 
-! 	/* Arc */
+    ! Arc
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int arcColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint32 color);
-    function gfx_arc_color(renderer, x, y, rad, from, to, color) bind(c, name='arcColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: arc_color
-    end function gfx_arc_color
+    function arc_color(renderer, x, y, rad, from, to, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, from, to, color
+      integer                 :: arc_color
+      arc_color =               int(gfx_arc_color(renderer,              &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(from,  kind=c_short),                &
+                                int(to,    kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function arc_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int arcRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end,	Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_arc_rgba(renderer, x, y, rad, from, to, r, g, b, a) bind(c, name='arcRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad, from, to
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: arc_rgba
-    end function gfx_arc_rgba
+    function arc_rgba(renderer, x, y, rad, from, to, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, r, g, b, a
+      integer                 :: arc_rgba
+      arc_rgba =                int(gfx_arc_rgba(renderer,               &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(from,  kind=c_short),                &
+                                int(to,    kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function arc_rgba
 
-! 	/* AA Circle */
+    ! AA Circle
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int aacircleColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint32 color);
-    function gfx_aacircle_color(renderer, x, y, rad, color) bind(c, name='aacircleColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad
-      integer(kind=c_uint32_t), intent(in), value :: color
-      integer(kind=c_int)                         :: aacircle_color
-    end function gfx_aacircle_color
+    function aacircle_color(renderer, x, y, rad, color)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, color
+      integer                 :: aacircle_color
+      aacircle_color =          int(gfx_aacircle_color(renderer,         &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(color, kind=c_uint32_t)))
+    end function aacircle_color
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int aacircleRGBA(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-    function gfx_aacircle_rgba(renderer, x, y, rad, r, g, b, a) bind(c, name='aacircleRGBA')
-      import                                      :: c_ptr, c_short, c_uint8_t, c_int
-      type(c_ptr),              intent(in), value :: renderer
-      integer(kind=c_short),    intent(in), value :: x, y, rad
-      integer(kind=c_uint8_t),  intent(in), value :: r, g, b, a
-      integer(kind=c_int)                         :: aacircle_rgba
-    end function gfx_aacircle_rgba
+    function aacircle_rgba(renderer, x, y, rad, r, g, b, a)
+      type(c_ptr), intent(in) :: renderer
+      integer,     intent(in) :: x, y, rad, r, g, b, a
+      integer                 :: aacircle_rgba
+      aacircle_rgba =           int(gfx_aacircle_rgba(renderer,          &
+                                int(x,     kind=c_short),                &
+                                int(y,     kind=c_short),                &
+                                int(rad,   kind=c_short),                &
+                                int(r,     kind=c_uint8_t),              &
+                                int(g,     kind=c_uint8_t),              &
+                                int(b,     kind=c_uint8_t),              &
+                                int(a,     kind=c_uint8_t)))
+    end function aacircle_rgba
 
-! 	/* Filled Circle */
+    ! Filled Circle
 
-! 	SDL2_GFXPRIMITIVES_SCOPE int filledCircleColor(SDL_Renderer * renderer, Sint16 x, Sint16 y, Sint16 r, Uint32 color);
     function gfx_filled_circle_color(renderer, x, y, rad, color) bind(c, name='filledCircleColor')
-      import                                      :: c_ptr, c_short, c_uint32_t, c_int
+
       type(c_ptr),              intent(in), value :: renderer
       integer(kind=c_short),    intent(in), value :: x, y, rad
       integer(kind=c_uint32_t), intent(in), value :: color
