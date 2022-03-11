@@ -99,7 +99,7 @@ program main
           call func01()
         case (2)
           clear = .true.
-          functitle = "gfx_string_rgba"
+          functitle = "string_rgba"
           call func02()
         case (3)
           clear = .false.
@@ -107,7 +107,7 @@ program main
           call func03()
         case (4)
           clear = .false.
-          functitle = "gfx_pixel_rgba"
+          functitle = "pixel_rgba"
           call func04()
         case (5)
           clear = .true.
@@ -115,7 +115,7 @@ program main
           call func05()
         case (6)
           clear = .false.
-          functitle = "gfx_hline_rgba"
+          functitle = "hline_rgba"
           call func06()
         case (7)
           clear = .true.
@@ -123,7 +123,7 @@ program main
           call func07()
         case (8)
           clear = .false.
-          functitle = "gfx_vline_rgba"
+          functitle = "vline_rgba"
           call func08()
         case (9)
           clear = .true.
@@ -131,7 +131,7 @@ program main
           call func09()
         case (10)
           clear = .false.
-          functitle = "gfx_rectangle_rgba"
+          functitle = "rectangle_rgba"
           call func10()
         case (11)
           clear = .true.
@@ -139,7 +139,7 @@ program main
           call func11()
         case (12)
           clear = .false.
-          functitle = "gfx_rounded_rectangle_rgba"
+          functitle = "rounded_rectangle_rgba"
           call func12()
         case (13)
           clear = .true.
@@ -147,7 +147,7 @@ program main
           call func13()
         case (14)
           clear = .false.
-          functitle = "gfx_box_rgba"
+          functitle = "box_rgba"
           call func14()
         case (15)
           clear = .true.
@@ -155,7 +155,7 @@ program main
           call func15()
         case (16)
           clear = .false.
-          functitle = "gfx_rounded_box_rgba"
+          functitle = "rounded_box_rgba"
           call func16()
         case (17)
           clear = .true.
@@ -163,7 +163,7 @@ program main
           call func17()
         case (18)
           clear = .false.
-          functitle = "gfx_line_rgba"
+          functitle = "line_rgba"
           call func18()
         case (19)
           clear = .true.
@@ -171,7 +171,7 @@ program main
           call func19()
         case (20)
           clear = .false.
-          functitle = "gfx_aaline_rgba"
+          functitle = "aaline_rgba"
           call func20()
         case (21)
           clear = .true.
@@ -179,7 +179,7 @@ program main
           call func21()
         case (22)
           clear = .false.
-          functitle = "gfx_thick_line_rgba"
+          functitle = "thick_line_rgba"
           call func22()
         case (23)
           clear = .true.
@@ -187,7 +187,7 @@ program main
           call func23()
         case (24)
           clear = .false.
-          functitle = "gfx_circle_rgba"
+          functitle = "circle_rgba"
           call func24()
         case (25)
           clear = .true.
@@ -195,7 +195,7 @@ program main
           call func25()
         case (26)
           clear = .false.
-          functitle = "gfx_aacircle_rgba"
+          functitle = "aacircle_rgba"
           call func26()
         case (27)
           clear = .true.
@@ -203,7 +203,7 @@ program main
           call func27()
         case (28)
           clear = .false.
-          functitle = "gfx_arc_rgba"
+          functitle = "arc_rgba"
           call func28()
         case (29)
           clear = .true.
@@ -211,7 +211,7 @@ program main
           call func29()
         case (30)
           clear = .false.
-          functitle = "gfx_filled_circle_rgba"
+          functitle = "filled_circle_rgba"
           call func30()
         case (31)
           clear = .true.
@@ -219,7 +219,7 @@ program main
           call func31()
         case (32)
           clear = .false.
-          functitle = "gfx_ellipse_rgba"
+          functitle = "ellipse_rgba"
           call func32()
         case (33)
           clear = .true.
@@ -227,7 +227,7 @@ program main
           call func33()
         case (34)
           clear = .false.
-          functitle = "gfx_aaellipse_rgba"
+          functitle = "aaellipse_rgba"
           call func34()
         case (35)
           clear = .true.
@@ -235,7 +235,7 @@ program main
           call func35()
         case (36)
           clear = .false.
-          functitle = "gfx_filled_ellipse_rgba"
+          functitle = "filled_ellipse_rgba"
           call func36()
         case (37)
           clear = .true.
@@ -243,7 +243,7 @@ program main
           call func37()
         case (38)
           clear = .false.
-          functitle = "gfx_pie_rgba"
+          functitle = "pie_rgba"
           call func38()
         case (39)
           clear = .true.
@@ -251,7 +251,7 @@ program main
           call func39()
         case (40)
           clear = .false.
-          functitle = "gfx_filled_pie_rgba"
+          functitle = "filled_pie_rgba"
           call func40()
         case (41)
           clear = .true.
@@ -259,7 +259,7 @@ program main
           call func41()
         case (42)
           clear = .false.
-          functitle = "gfx_trigon_rgba"
+          functitle = "trigon_rgba"
           call func42()
         case (43)
           clear = .true.
@@ -267,7 +267,7 @@ program main
           call func43()
         case (44)
           clear = .false.
-          functitle = "gfx_aatrigon_rgba"
+          functitle = "aatrigon_rgba"
           call func44()
         case (45)
           clear = .true.
@@ -275,7 +275,7 @@ program main
           call func45()
         case (46)
           clear = .false.
-          functitle = "gfx_filled_trigon_rgba"
+          functitle = "filled_trigon_rgba"
           call func46()
         case (47)
           clear = .true.
@@ -283,7 +283,7 @@ program main
           call func47()
         case (48)
           clear = .false.
-          functitle = "gfx_polygon_rgba (n=3)"
+          functitle = "polygon_rgba (n=3)"
           call func48()
         case (49)
           clear = .true.
@@ -291,7 +291,7 @@ program main
           call func49()
         case (50)
           clear = .false.
-          functitle = "gfx_aapolygon_rgba (n=3)"
+          functitle = "aapolygon_rgba (n=3)"
           call func50()
         case (51)
           clear = .true.
@@ -299,7 +299,7 @@ program main
           call func51()
         case (52)
           clear = .false.
-          functitle = "gfx_filled_polygon_rgba (n=3)"
+          functitle = "filled_polygon_rgba (n=3)"
           call func52()
         case (53)
           clear = .true.
@@ -311,7 +311,7 @@ program main
           call func54()
         case (55)
           clear = .false.
-          functitle = "gfx_bezier_rgba (s=3)"
+          functitle = "bezier_rgba (s=3)"
           call func55()
         case (56)
           clear = .false.
@@ -323,7 +323,7 @@ program main
           call func57()
         case (58)
           clear = .false.
-          functitle = "gfx_character_rgba"
+          functitle = "character_rgba"
           call func58()
         case default
           error stop "here be dragons"
