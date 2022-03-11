@@ -29,7 +29,6 @@ module framerate
 
 use, intrinsic                         :: iso_c_binding
 use                                    :: c_util
-! use                                    :: sdl2_surface
 
 implicit none
 
