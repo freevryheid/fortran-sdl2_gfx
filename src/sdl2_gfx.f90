@@ -1,5 +1,9 @@
 module sdl2_gfx
 
+use, intrinsic                      :: iso_c_binding, only : sdl => c_ptr,                   &
+                                                             sdl_associated => c_associated, &
+                                                             c_char
+use                                 :: sdl2
 use                                 :: primitives
 use                                 :: framerate
 
@@ -119,6 +123,7 @@ end interface string
 
 private
 
+public                              :: sdl   ! just so that we don't have to use iso_c_binding again
 public                              :: pixel
 public                              :: hline
 public                              :: vline
@@ -155,14 +160,24 @@ public                              :: setframerate
 public                              :: getframerate
 public                              :: getframecount
 public                              :: frameratedelay
+public                              :: c_str
 
 contains
+
+
+function c_str(fstr)
+
+  character(len=*), intent(in) :: fstr
+  character(kind=c_char, len=:), allocatable :: c_str
+  c_str = trim(fstr) // c_null_char
+
+end function c_str
 
 ! Pixels
 
 function pixel_color(renderer, x, y, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, color
   integer                           :: pixel_color
 
@@ -175,7 +190,7 @@ end function pixel_color
 
 function pixel_rgba(renderer, x, y, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, r, g, b, a
   integer                           :: pixel_rgba
 
@@ -193,7 +208,7 @@ end function pixel_rgba
 
 function hline_color(renderer, x1, x2, y, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, x2, y, color
   integer                           :: hline_color
 
@@ -207,7 +222,7 @@ end function hline_color
 
 function hline_rgba(renderer, x1, x2, y, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, x2, y, r, g, b, a
   integer                           :: hline_rgba
 
@@ -226,7 +241,7 @@ end function hline_rgba
 
 function vline_color(renderer, x, y1, y2, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y1, y2, color
   integer                           :: vline_color
 
@@ -240,7 +255,7 @@ end function vline_color
 
 function vline_rgba(renderer, x, y1, y2, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y1, y2, r, g, b, a
   integer                           :: vline_rgba
 
@@ -259,7 +274,7 @@ end function vline_rgba
 
 function rectangle_color(renderer, x1, y1, x2, y2, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, color
   integer                           :: rectangle_color
 
@@ -274,7 +289,7 @@ end function rectangle_color
 
 function rectangle_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, r, g, b, a
   integer                           :: rectangle_rgba
 
@@ -294,7 +309,7 @@ end function rectangle_rgba
 
 function rounded_rectangle_color(renderer, x1, y1, x2, y2, rad, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, rad, color
   integer                           :: rounded_rectangle_color
 
@@ -310,7 +325,7 @@ end function rounded_rectangle_color
 
 function rounded_rectangle_rgba(renderer, x1, y1, x2, y2, rad, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, rad, r, g, b, a
   integer                           :: rounded_rectangle_rgba
 
@@ -331,7 +346,7 @@ end function rounded_rectangle_rgba
 
 function box_color(renderer, x1, y1, x2, y2, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, color
   integer                           :: box_color
 
@@ -346,7 +361,7 @@ end function box_color
 
 function box_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, r, g, b, a
   integer                           :: box_rgba
 
@@ -366,7 +381,7 @@ end function box_rgba
 
 function rounded_box_color(renderer, x1, y1, x2, y2, rad, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, rad, color
   integer                           :: rounded_box_color
 
@@ -382,7 +397,7 @@ end function rounded_box_color
 
 function rounded_box_rgba(renderer, x1, y1, x2, y2, rad, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, rad, r, g, b, a
   integer                           :: rounded_box_rgba
 
@@ -403,7 +418,7 @@ end function rounded_box_rgba
 
 function line_color(renderer, x1, y1, x2, y2, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, color
   integer                           :: line_color
 
@@ -418,7 +433,7 @@ end function line_color
 
 function line_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, r, g, b, a
   integer                           :: line_rgba
 
@@ -438,7 +453,7 @@ end function line_rgba
 
 function aaline_color(renderer, x1, y1, x2, y2, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, color
   integer                           :: aaline_color
 
@@ -453,7 +468,7 @@ end function aaline_color
 
 function aaline_rgba(renderer, x1, y1, x2, y2, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, r, g, b, a
   integer                           :: aaline_rgba
 
@@ -473,7 +488,7 @@ end function aaline_rgba
 
 function thick_line_color(renderer, x1, y1, x2, y2, width, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, width, color
   integer                           :: thick_line_color
 
@@ -489,7 +504,7 @@ end function thick_line_color
 
 function thick_line_rgba(renderer, x1, y1, x2, y2, width, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, width, r, g, b, a
   integer                           :: thick_line_rgba
 
@@ -510,7 +525,7 @@ end function thick_line_rgba
 
 function circle_color(renderer, x, y, rad, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, color
   integer                           :: circle_color
 
@@ -524,7 +539,7 @@ end function circle_color
 
 function circle_rgba(renderer, x, y, rad, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, r, g, b, a
   integer                           :: circle_rgba
 
@@ -543,7 +558,7 @@ end function circle_rgba
 
 function arc_color(renderer, x, y, rad, from, to, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, from, to, color
   integer                           :: arc_color
 
@@ -559,7 +574,7 @@ end function arc_color
 
 function arc_rgba(renderer, x, y, rad, from, to, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, from, to, r, g, b, a
   integer                           :: arc_rgba
 
@@ -580,7 +595,7 @@ end function arc_rgba
 
 function aacircle_color(renderer, x, y, rad, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, color
   integer                           :: aacircle_color
 
@@ -594,7 +609,7 @@ end function aacircle_color
 
 function aacircle_rgba(renderer, x, y, rad, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, r, g, b, a
   integer                           :: aacircle_rgba
 
@@ -613,7 +628,7 @@ end function aacircle_rgba
 
 function filled_circle_color(renderer, x, y, rad, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, color
   integer                           :: filled_circle_color
 
@@ -627,7 +642,7 @@ end function filled_circle_color
 
 function filled_circle_rgba(renderer, x, y, rad, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, r, g, b, a
   integer                           :: filled_circle_rgba
 
@@ -646,7 +661,7 @@ end function filled_circle_rgba
 
 function ellipse_color(renderer, x, y, rx, ry, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rx, ry, color
   integer                           :: ellipse_color
 
@@ -661,7 +676,7 @@ end function ellipse_color
 
 function ellipse_rgba(renderer, x, y, rx, ry, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rx, ry, r, g, b, a
   integer                           :: ellipse_rgba
 
@@ -681,7 +696,7 @@ end function ellipse_rgba
 
 function aaellipse_color(renderer, x, y, rx, ry, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rx, ry, color
   integer                           :: aaellipse_color
 
@@ -696,7 +711,7 @@ end function aaellipse_color
 
 function aaellipse_rgba(renderer, x, y, rx, ry, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rx, ry, r, g, b, a
   integer                           :: aaellipse_rgba
 
@@ -716,7 +731,7 @@ end function aaellipse_rgba
 
 function filled_ellipse_color(renderer, x, y, rx, ry, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rx, ry, color
   integer                           :: filled_ellipse_color
 
@@ -731,7 +746,7 @@ end function filled_ellipse_color
 
 function filled_ellipse_rgba(renderer, x, y, rx, ry, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rx, ry, r, g, b, a
   integer                           :: filled_ellipse_rgba
 
@@ -751,7 +766,7 @@ end function filled_ellipse_rgba
 
 function pie_color(renderer, x, y, rad, from, to, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, from, to, color
   integer                           :: pie_color
 
@@ -767,7 +782,7 @@ end function pie_color
 
 function pie_rgba(renderer, x, y, rad, from, to, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, from, to, r, g, b, a
   integer                           :: pie_rgba
 
@@ -788,7 +803,7 @@ end function pie_rgba
 
 function filled_pie_color(renderer, x, y, rad, from, to, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, from, to, color
   integer                           :: filled_pie_color
 
@@ -804,7 +819,7 @@ end function filled_pie_color
 
 function filled_pie_rgba(renderer, x, y, rad, from, to, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, rad, from, to, r, g, b, a
   integer                           :: filled_pie_rgba
 
@@ -825,7 +840,7 @@ end function filled_pie_rgba
 
 function trigon_color(renderer, x1, y1, x2, y2, x3, y3, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, x3, y3, color
   integer                           :: trigon_color
 
@@ -842,7 +857,7 @@ end function trigon_color
 
 function trigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, x3, y3, r, g, b, a
   integer                           :: trigon_rgba
 
@@ -864,7 +879,7 @@ end function trigon_rgba
 
 function aatrigon_color(renderer, x1, y1, x2, y2, x3, y3, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, x3, y3, color
   integer                           :: aatrigon_color
 
@@ -881,7 +896,7 @@ end function aatrigon_color
 
 function aatrigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, x3, y3, r, g, b, a
   integer                           :: aatrigon_rgba
 
@@ -903,7 +918,7 @@ end function aatrigon_rgba
 
 function filled_trigon_color(renderer, x1, y1, x2, y2, x3, y3, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, x3, y3, color
   integer                           :: filled_trigon_color
 
@@ -920,7 +935,7 @@ end function filled_trigon_color
 
 function filled_trigon_rgba(renderer, x1, y1, x2, y2, x3, y3, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x1, y1, x2, y2, x3, y3, r, g, b, a
   integer                           :: filled_trigon_rgba
 
@@ -942,7 +957,7 @@ end function filled_trigon_rgba
 
 function polygon_color(renderer, vx, vy, n, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer, allocatable, intent(in)  :: vx(:), vy(:)
   integer,              intent(in)  ::n, color
   integer                           :: polygon_color
@@ -957,7 +972,7 @@ end function polygon_color
 
 function polygon_rgba(renderer, vx, vy, n, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer, allocatable, intent(in)  :: vx(:), vy(:)
   integer,              intent(in)  :: n, r, g, b, a
   integer                           :: polygon_rgba
@@ -977,7 +992,7 @@ end function polygon_rgba
 
 function aapolygon_color(renderer, vx, vy, n, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer, allocatable, intent(in)  :: vx(:), vy(:)
   integer,              intent(in)  :: n, color
   integer                           :: aapolygon_color
@@ -992,7 +1007,7 @@ end function aapolygon_color
 
 function aapolygon_rgba(renderer, vx, vy, n, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer, allocatable, intent(in)  :: vx(:), vy(:)
   integer,              intent(in)  :: n, r, g, b, a
   integer                           :: aapolygon_rgba
@@ -1012,7 +1027,7 @@ end function aapolygon_rgba
 
 function filled_polygon_color(renderer, vx, vy, n, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer, allocatable, intent(in)  :: vx(:), vy(:)
   integer,              intent(in)  :: n, color
   integer                           :: filled_polygon_color
@@ -1027,7 +1042,7 @@ end function filled_polygon_color
 
 function filled_polygon_rgba(renderer, vx, vy, n, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer, allocatable, intent(in)  :: vx(:), vy(:)
   integer,              intent(in)  :: n, r, g, b, a
   integer                           :: filled_polygon_rgba
@@ -1047,7 +1062,7 @@ end function filled_polygon_rgba
 
 function textured_polygon(renderer, vx, vy, n, texture, texture_dx, texture_dy)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer, allocatable, intent(in)  :: vx(:), vy(:)
   integer,              intent(in)  :: n, texture_dx, texture_dy
   type(sdl_surface),    intent(in)  :: texture
@@ -1067,7 +1082,7 @@ end function textured_polygon
 
 function bezier_color(renderer, vx, vy, n, s, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer, allocatable, intent(in)  :: vx(:), vy(:)
   integer,              intent(in)  :: n, s, color
   integer                           :: bezier_color
@@ -1083,7 +1098,7 @@ end function bezier_color
 
 function bezier_rgba(renderer, vx, vy, n, s, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer, allocatable, intent(in)  :: vx(:), vy(:)
   integer,              intent(in)  :: n, s, r, g, b, a
   integer                           :: bezier_rgba
@@ -1104,7 +1119,7 @@ end function bezier_rgba
 
 subroutine set_font(fontdata, cw, ch)
 
-  type(c_ptr),          intent(in)  :: fontdata
+  type(sdl),          intent(in)  :: fontdata
   integer,              intent(in)  :: cw, ch
 
   call gfx_primitives_set_font(fontdata,                                   &
@@ -1125,9 +1140,9 @@ end subroutine set_font_rotation
 ! FIXME - pass null terminated string...
 function character_color(renderer, x, y, c, color)
 
-  type(c_ptr),          intent(in)  :: renderer
-  integer,              intent(in)  :: x, y, color
-  character(kind=c_char)            :: c
+  type(sdl),          intent(in)  :: renderer
+  integer,              intent(in) :: x, y, color
+  character(len=1), allocatable  :: c
   integer                           :: character_color
 
   character_color =         int(gfx_character_color(renderer,              &
@@ -1140,9 +1155,9 @@ end function character_color
 
 function character_rgba(renderer, x, y, c, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, r, g, b, a
-  character(kind=c_char)            :: c
+  character(len=1), allocatable :: c
   integer                           :: character_rgba
 
   character_rgba =          int(gfx_character_rgba(renderer,               &
@@ -1158,30 +1173,30 @@ end function character_rgba
 
 function string_color(renderer, x, y, s, color)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, color
-  character(kind=c_char)            :: s
+  character(len=*) :: s
   integer                           :: string_color
 
   string_color =            int(gfx_string_color(renderer,                 &
                             int(x,          kind=c_short),                 &
                             int(y,          kind=c_short),                 &
-                            s,                                             &
+                            c_str(s),                                      &
                             int(color,      kind=c_uint32_t)))
 
 end function string_color
 
 function string_rgba(renderer, x, y, s, r, g, b, a)
 
-  type(c_ptr),          intent(in)  :: renderer
+  type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, r, g, b, a
-  character(kind=c_char)            :: s
+  character(len=*) :: s
   integer                           :: string_rgba
 
   string_rgba =             int(gfx_string_rgba(renderer,                  &
                             int(x,          kind=c_short),                 &
                             int(y,          kind=c_short),                 &
-                            s,                                             &
+                            c_str(s),                                      &
                             int(r,          kind=c_uint8_t),               &
                             int(g,          kind=c_uint8_t),               &
                             int(b,          kind=c_uint8_t),               &

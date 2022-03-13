@@ -31,21 +31,28 @@ use, intrinsic                         :: iso_c_binding
 use                                    :: c_util
 
 implicit none
+private
 
-integer(  kind=c_int), parameter       :: FPS_UPPER_LIMIT = 200
+integer(  kind=c_int), parameter, public :: FPS_UPPER_LIMIT = 200
   !! Highest possible rate supported by framerate controller in Hz (1/s).
-integer(  kind=c_int), parameter       :: FPS_LOWER_LIMIT = 1
+integer(  kind=c_int), parameter, public :: FPS_LOWER_LIMIT = 1
   !! Lowest possible rate supported by framerate controller in Hz (1/s).
-integer(  kind=c_int), parameter       :: FPS_DEFAULT = 30
+integer(  kind=c_int), parameter, public :: FPS_DEFAULT = 30
   !! Default rate of framerate controller in Hz (1/s).
 
-type, bind(c)                          :: fpsmanager
+type, public, bind(c)                  :: fpsmanager
   integer(kind=c_uint32_t)             :: framecount
   real(   kind=c_float)                :: rateticks
   integer(kind=c_uint32_t)             :: baseticks
   integer(kind=c_uint32_t)             :: lastticks
   integer(kind=c_uint32_t)             :: rate
 end type fpsmanager
+
+public :: sdl_initframerate
+public :: sdl_setframerate
+public :: sdl_getframecount
+public :: sdl_getframerate
+public :: sdl_frameratedelay
 
 interface
 

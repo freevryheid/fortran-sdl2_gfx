@@ -27,16 +27,77 @@
 
 module primitives
 
-use, intrinsic                                :: iso_c_binding
+use, intrinsic                                :: iso_c_binding, only : c_ptr
 use                                           :: c_util
 use                                           :: sdl2_surface
 
 implicit none
+private
 
 ! Versioning
-integer(kind=c_int), parameter                :: SDL2_GFXPRIMITIVES_MAJOR = 1
-integer(kind=c_int), parameter                :: SDL2_GFXPRIMITIVES_MINOR = 0
-integer(kind=c_int), parameter                :: SDL2_GFXPRIMITIVES_MICRO = 4
+integer(kind=c_int), parameter, public        :: SDL2_GFXPRIMITIVES_MAJOR = 1
+integer(kind=c_int), parameter, public        :: SDL2_GFXPRIMITIVES_MINOR = 0
+integer(kind=c_int), parameter, public        :: SDL2_GFXPRIMITIVES_MICRO = 4
+
+public                                        :: gfx_aacircle_color
+public                                        :: gfx_aacircle_rgba
+public                                        :: gfx_aaellipse_color
+public                                        :: gfx_aaellipse_rgba
+public                                        :: gfx_aaline_color
+public                                        :: gfx_aaline_rgba
+public                                        :: gfx_aapolygon_color
+public                                        :: gfx_aapolygon_rgba
+public                                        :: gfx_aatrigon_color
+public                                        :: gfx_aatrigon_rgba
+public                                        :: gfx_arc_color
+public                                        :: gfx_arc_rgba
+public                                        :: gfx_bezier_color
+public                                        :: gfx_bezier_rgba
+public                                        :: gfx_box_color
+public                                        :: gfx_box_rgba
+public                                        :: gfx_character_color
+public                                        :: gfx_character_rgba
+public                                        :: gfx_circle_color
+public                                        :: gfx_circle_rgba
+public                                        :: gfx_ellipse_color
+public                                        :: gfx_ellipse_rgba
+public                                        :: gfx_filled_circle_color
+public                                        :: gfx_filled_circle_rgba
+public                                        :: gfx_filled_ellipse_color
+public                                        :: gfx_filled_ellipse_rgba
+public                                        :: gfx_filled_pie_color
+public                                        :: gfx_filled_pie_rgba
+public                                        :: gfx_filled_polygon_color
+public                                        :: gfx_filled_polygon_rgba
+public                                        :: gfx_filled_trigon_color
+public                                        :: gfx_filled_trigon_rgba
+public                                        :: gfx_hline_color
+public                                        :: gfx_hline_rgba
+public                                        :: gfx_line_color
+public                                        :: gfx_line_rgba
+public                                        :: gfx_pie_color
+public                                        :: gfx_pie_rgba
+public                                        :: gfx_pixel_color
+public                                        :: gfx_pixel_rgba
+public                                        :: gfx_polygon_color
+public                                        :: gfx_polygon_rgba
+public                                        :: gfx_primitives_set_font
+public                                        :: gfx_primitives_set_font_rotation
+public                                        :: gfx_rectangle_color
+public                                        :: gfx_rectangle_rgba
+public                                        :: gfx_rounded_box_color
+public                                        :: gfx_rounded_box_rgba
+public                                        :: gfx_rounded_rectangle_color
+public                                        :: gfx_rounded_rectangle_rgba
+public                                        :: gfx_string_color
+public                                        :: gfx_string_rgba
+public                                        :: gfx_textured_polygon
+public                                        :: gfx_thick_line_color
+public                                        :: gfx_thick_line_rgba
+public                                        :: gfx_trigon_color
+public                                        :: gfx_trigon_rgba
+public                                        :: gfx_vline_color
+public                                        :: gfx_vline_rgba
 
 ! @Note: all color routines expect the color to be in format 0xRRGGBBAA
 
