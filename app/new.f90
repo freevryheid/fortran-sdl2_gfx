@@ -328,7 +328,7 @@ program new
       rc = string(renderer, xi2, FONT_SIZE, title, white)
       xi2 = (SCREEN_WIDTH - string_length(functitle))/2
       yi2 = SCREEN_HEIGHT - 2*FONT_SIZE
-      rc = string(renderer, xi2, yi2, c_str(functitle), white)
+      rc = string(renderer, xi2, yi2, functitle, white)
     end subroutine switchboard
 
     subroutine func58()
@@ -336,7 +336,7 @@ program new
       schar = char(101)
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      rc = chars(renderer, xi2, yi2, schar, uint8(255), uint8(0), uint8(0), uint8(255))
+      rc = chars(renderer, xi2, yi2, schar, 255, 0, 0, 255)
     end subroutine func58
 
     subroutine func57()
@@ -344,7 +344,7 @@ program new
       schar = char(100)
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      rc = chars(renderer, xi2, yi2, nts(schar), green)
+      rc = chars(renderer, xi2, yi2, schar, green)
     end subroutine func57
 
     subroutine func56()
@@ -359,17 +359,17 @@ program new
 
     subroutine func55()
       ! gfx_bezier_rgba
-      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN+1)
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN+1)
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN+1)
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN+1)
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN+1)
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN+1)
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -379,32 +379,26 @@ program new
       vy(2) = y3i2
       n = 3
       s = 3
-      ri2 = rand_int(0, 256)
-      gi2 = rand_int(0, 256)
-      bi2 = rand_int(0, 256)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
       rc = bezier(renderer, vx(0), vy(0), n, s, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func55
 
     subroutine func54()
       ! bezier_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
       vx(2) = x3i2
@@ -413,29 +407,23 @@ program new
       vy(2) = y3i2
       n = 3
       s = 3
-      rc = gfx_bezier_color(renderer, vx(0), vy(0), n, s, red)
+      rc = bezier(renderer, vx(0), vy(0), n, s, red)
     end subroutine func54
 
     subroutine func53()
       ! textured_polygon
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
       vx(2) = x3i2
@@ -443,29 +431,23 @@ program new
       vy(1) = y2i2
       vy(2) = y3i2
       n = 3
-      rc = gfx_textured_polygon(renderer, vx(0), vy(0), n, image, 0, 0)
+      rc = textured_polygon(renderer, vx(0), vy(0), n, image, 0, 0)
     end subroutine func53
 
     subroutine func52()
       ! gfx_filled_polygon_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
       vx(2) = x3i2
@@ -473,36 +455,26 @@ program new
       vy(1) = y2i2
       vy(2) = y3i2
       n = 3
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_filled_polygon_rgba(renderer, vx(0), vy(0), n, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = gfx_filled_polygon_rgba(renderer, vx(0), vy(0), n, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func52
 
     subroutine func51()
       ! filled_polygon_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
       vx(2) = x3i2
@@ -510,29 +482,23 @@ program new
       vy(1) = y2i2
       vy(2) = y3i2
       n = 3
-      rc = gfx_filled_polygon_color(renderer, vx(0), vy(0), n, cyan)
+      rc = filled_polygon(renderer, vx(0), vy(0), n, cyan)
     end subroutine func51
 
     subroutine func50()
       ! gfx_aapolygon_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
       vx(2) = x3i2
@@ -540,36 +506,26 @@ program new
       vy(1) = y2i2
       vy(2) = y3i2
       n = 3
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_aapolygon_rgba(renderer, vx(0), vy(0), n, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = aapolygon(renderer, vx(0), vy(0), n, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func50
 
     subroutine func49()
       ! aapolygon_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
       vx(2) = x3i2
@@ -582,24 +538,18 @@ program new
 
     subroutine func48()
       ! gfx_polygon_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
       vx(2) = x3i2
@@ -607,36 +557,26 @@ program new
       vy(1) = y2i2
       vy(2) = y3i2
       n = 3
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_polygon_rgba(renderer, vx(0), vy(0), n, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = polygon(renderer, vx(0), vy(0), n, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func48
 
     subroutine func47()
       ! polygon_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
       vx(2) = x3i2
@@ -644,275 +584,196 @@ program new
       vy(1) = y2i2
       vy(2) = y3i2
       n = 3
-      rc = gfx_polygon_color(renderer, vx(0), vy(0), n, yellow)
+      rc = polygon(renderer, vx(0), vy(0), n, yellow)
     end subroutine func47
 
     subroutine func46()
       ! gfx_filled_trigon_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_filled_trigon_rgba(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = filled_trigon(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func46
 
     subroutine func45()
       ! filled_trigon_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
-      rc = gfx_filled_trigon_color(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, blue)
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
+      rc = filled_trigon(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, blue)
     end subroutine func45
 
     subroutine func44()
       ! gfx_aatrigon_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_aatrigon_rgba(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = aatrigon(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func44
 
     subroutine func43()
       ! aatrigon_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
-      rc = gfx_aatrigon_color(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, green)
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
+      rc = aatrigon(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, green)
     end subroutine func43
 
     subroutine func42()
       ! gfx_trigon_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_trigon_rgba(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = trigon(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func42
 
     subroutine func41()
       ! trigon_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x2i2 = int2(MARGIN) + x2i2
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y2i2 = int2(MARGIN) + y2i2
-      call random_number(x)
-      x3i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x3i2 = int2(MARGIN) + x3i2
-      call random_number(y)
-      y3i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y3i2 = int2(MARGIN) + y3i2
-      rc = gfx_trigon_color(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, red)
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = MARGIN + x2i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = MARGIN + y2i2
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = MARGIN + x3i2
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = MARGIN + y3i2
+      rc = trigon(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, red)
     end subroutine func41
 
     subroutine func40()
       ! gfx_filled_pie_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(from)
-      call random_number(to)
-      fromi2 = int2(floor(from*361_r4))
-      toi2 = int2(floor(to*361_r4))
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_filled_pie_rgba(renderer, xi2, yi2, radi2, fromi2, toi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(0, 360)
+      toi2 = rand_int(0, 360)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = filled_pie(renderer, xi2, yi2, radi2, fromi2, toi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func40
 
     subroutine func39()
       ! filled_pie_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(from)
-      call random_number(to)
-      fromi2 = int2(floor(from*361_r4))
-      toi2 = int2(floor(to*361_r4))
-      rc = gfx_filled_pie_color(renderer, xi2, yi2, radi2, fromi2, toi2, cyan)
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(1, 360)
+      toi2 = rand_int(1, 360)
+      rc = filled_pie(renderer, xi2, yi2, radi2, fromi2, toi2, cyan)
     end subroutine func39
 
     subroutine func38()
       ! gfx_pie_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(from)
-      call random_number(to)
-      fromi2 = int2(floor(from*361_r4))
-      toi2 = int2(floor(to*361_r4))
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_pie_rgba(renderer, xi2, yi2, radi2, fromi2, toi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(1, 360)
+      toi2 = rand_int(1, 360)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = pie(renderer, xi2, yi2, radi2, fromi2, toi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func38
 
     subroutine func37()
       ! pie_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(from)
-      call random_number(to)
-      fromi2 = int2(floor(from*361_r4))
-      toi2 = int2(floor(to*361_r4))
-      rc = gfx_pie_color(renderer, xi2, yi2, radi2, fromi2, toi2, magenta)
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(1, 360)
+      toi2 = rand_int(1, 360)
+      rc = pie(renderer, xi2, yi2, radi2, fromi2, toi2, magenta)
     end subroutine func37
 
     subroutine func36()
       ! gfx_filled_ellipse_rgba
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH/2-MARGIN+1), r4)))
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_filled_ellipse_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = filled_ellipse(renderer, x1i2, y1i2, x2i2, y2i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func36
 
     subroutine func35()
       ! filled_ellipse_color
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH/2-MARGIN+1), r4)))
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      rc = gfx_filled_ellipse_color(renderer, x1i2, y1i2, x2i2, y2i2, yellow)
+      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      rc = filled_ellipse(renderer, x1i2, y1i2, x2i2, y2i2, yellow)
     end subroutine func35
 
     subroutine func34()
       ! gfx_aaellipse_rgba
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH/2-MARGIN+1), r4)))
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
+      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
       rc = gfx_aaellipse_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), &
                                   uint8(SDL_ALPHA_OPAQUE))
     end subroutine func34
@@ -921,54 +782,40 @@ program new
       ! aaellipse_color
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH/2-MARGIN+1), r4)))
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      rc = gfx_aaellipse_color(renderer, x1i2, y1i2, x2i2, y2i2, blue)
+      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      rc = aaellipse(renderer, x1i2, y1i2, x2i2, y2i2, blue)
     end subroutine func33
 
     subroutine func32()
       ! gfx_ellipse_rgba
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH/2-MARGIN+1), r4)))
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_ellipse_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = ellipse(renderer, x1i2, y1i2, x2i2, y2i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func32
 
     subroutine func31()
       ! ellipse_color
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      call random_number(x)
-      x2i2 = int2(floor(x*real((SCREEN_WIDTH/2-MARGIN+1), r4)))
-      call random_number(y)
-      y2i2 = int2(floor(y*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      rc = gfx_ellipse_color(renderer, x1i2, y1i2, x2i2, y2i2, green)
+      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      rc = ellipse(renderer, x1i2, y1i2, x2i2, y2i2, green)
     end subroutine func31
 
     subroutine func30()
       ! gfx_filled_circle_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
       rc = gfx_filled_circle_rgba(renderer, xi2, yi2, radi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
     end subroutine func30
 
@@ -976,421 +823,336 @@ program new
       ! filled_circle_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      rc = gfx_filled_circle_color(renderer, xi2, yi2, radi2, red)
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      rc = filled_circle(renderer, xi2, yi2, radi2, red)
     end subroutine func29
 
     subroutine func28()
       ! gfx_arc_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(from)
-      call random_number(to)
-      fromi2 = int2(floor(from*361_r4))
-      toi2 = int2(floor(to*361_r4))
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_arc_rgba(renderer, xi2, yi2, radi2, fromi2, toi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(1, 360)
+      toi2 = rand_int(1, 360)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = arc(renderer, xi2, yi2, radi2, fromi2, toi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func28
 
     subroutine func27()
       ! arc_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(from)
-      call random_number(to)
-      fromi2 = int2(floor(from*361_r4))
-      toi2 = int2(floor(to*361_r4))
-      rc = gfx_arc_color(renderer, xi2, yi2, radi2, fromi2, toi2, cyan)
+      radi2 = rand_int2(1, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int2(1, 360)
+      toi2 = rand_int2(1, 360)
+      rc = arc(renderer, xi2, yi2, radi2, fromi2, toi2, cyan)
     end subroutine func27
 
     subroutine func26()
       ! gfx_aacircle_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_aacircle_rgba(renderer, xi2, yi2, radi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+      radi2 = rand_int2(1, SCREEN_HEIGHT/2-MARGIN)
+      ri2 = rand_int2(0, 255)
+      gi2 = rand_int2(0, 255)
+      bi2 = rand_int2(0, 255)
+      rc = aacircle(renderer, xi2, yi2, radi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func26
 
     subroutine func25()
       ! aacircle_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      rc = gfx_aacircle_color(renderer, xi2, yi2, radi2, magenta)
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      rc = aacircle(renderer, xi2, yi2, radi2, magenta)
     end subroutine func25
 
     subroutine func24()
       ! gfx_circle_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_circle_rgba(renderer, xi2, yi2, radi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = circle(renderer, xi2, yi2, radi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func24
 
     subroutine func23()
       ! circle_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      call random_number(rad)
-      radi2 = int2(floor(rad*real((SCREEN_HEIGHT/2-MARGIN+1), r4)))
-      rc = gfx_circle_color(renderer, xi2, yi2, radi2, magenta)
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      rc = circle(renderer, xi2, yi2, radi2, magenta)
     end subroutine func23
 
     subroutine func22()
       ! gfx_thick_line_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      call random_number(w)
-      wi2 = int2(floor(w*real(10, r4)))
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_thick_line_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(wi2), uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      wi2 = rand_int(1, 10)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = thick_line(renderer, x1i2, y1i2, x2i2, y2i2, wi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func22
 
     subroutine func21()
       ! thick_line_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      call random_number(w)
-      wi2 = int2(floor(w*real(10, r4)))
-      rc = gfx_thick_line_color(renderer, x1i2, y1i2, x2i2, y2i2, uint8(wi2), yellow)
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      wi2 = rand_int(1, 10)
+      rc = thick_line(renderer, x1i2, y1i2, x2i2, y2i2, wi2, yellow)
     end subroutine func21
 
     subroutine func20()
       ! gfx_aaline_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_aaline_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = aaline(renderer, x1i2, y1i2, x2i2, y2i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func20
 
     subroutine func19()
       ! aaline_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      rc = gfx_aaline_color(renderer, x1i2, y1i2, x2i2, y2i2, blue)
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      rc = aaline(renderer, x1i2, y1i2, x2i2, y2i2, blue)
     end subroutine func19
 
     subroutine func18()
       ! gfx_line_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_line_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = line(renderer, x1i2, y1i2, x2i2, y2i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func18
 
     subroutine func17()
       ! line_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      call random_number(y)
-      y1i2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      rc = gfx_line_color(renderer, x1i2, y1i2, x2i2, y2i2, green)
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(SCREEN_HEIGHT)-y1i2
+      rc = line(renderer, x1i2, y1i2, x2i2, y2i2, green)
     end subroutine func17
 
     subroutine func16()
       ! gfx_irounded_box_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      radi2 = int2(MARGIN)
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_rounded_box_rgba(renderer, x1i2, y1i2, x2i2, y2i2, radi2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      radi2 = MARGIN
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = rounded_box(renderer, x1i2, y1i2, x2i2, y2i2, radi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func16
 
     subroutine func15()
       ! rounded_box_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      radi2 = int2(MARGIN)
-      rc = gfx_rounded_box_color(renderer, x1i2, y1i2, x2i2, y2i2, radi2, red)
+      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      radi2 = MARGIN
+      rc = rounded_box(renderer, x1i2, y1i2, x2i2, y2i2, radi2, red)
     end subroutine func15
 
     subroutine func14()
       ! gfx_box_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_box_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = box(renderer, x1i2, y1i2, x2i2, y2i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func14
 
     subroutine func13()
       ! box_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      rc = gfx_box_color(renderer, x1i2, y1i2, x2i2, y2i2, cyan)
+      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      rc = box(renderer, x1i2, y1i2, x2i2, y2i2, cyan)
     end subroutine func13
 
     subroutine func12()
       ! gfx_rounded_rectangle_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      radi2 = int2(MARGIN)
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_rounded_rectangle_rgba(renderer, x1i2, y1i2, x2i2, y2i2, radi2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      radi2 = MARGIN
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = rounded_rectangle(renderer, x1i2, y1i2, x2i2, y2i2, radi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func12
 
     subroutine func11()
       ! rounded_rectangle_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      radi2 = int2(MARGIN)
-      rc = gfx_rounded_rectangle_color(renderer, x1i2, y1i2, x2i2, y2i2, radi2, magenta)
+      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      radi2 = MARGIN
+      rc = rounded_rectangle(renderer, x1i2, y1i2, x2i2, y2i2, radi2, magenta)
     end subroutine func11
 
     subroutine func10()
       ! gfx_rectangle_rgba
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_rectangle_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = rectangle(renderer, x1i2, y1i2, x2i2, y2i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func10
 
     subroutine func09()
       ! rectangle_color
-      call random_number(x)
-      x1i2 = int2(floor(x*real((SCREEN_WIDTH/2-2*MARGIN+1), r4)))
-      x1i2 = int2(MARGIN) + x1i2
-      x2i2 = int2(SCREEN_WIDTH)-x1i2
-      y1i2 = int2(floor(x*real((SCREEN_HEIGHT/2-2*MARGIN+1), r4)))
-      y1i2 = int2(MARGIN) + y1i2
-      y2i2 = int2(SCREEN_HEIGHT)-y1i2
-      rc = gfx_rectangle_color(renderer, x1i2, y1i2, x2i2, y2i2, yellow)
+      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = MARGIN + x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
+      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      y1i2 = MARGIN + y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      rc = rectangle(renderer, x1i2, y1i2, x2i2, y2i2, yellow)
     end subroutine func09
 
     subroutine func08()
       ! gfx_vline_rgba
-      y1i2 = int2(MARGIN)
-      y2i2 = int2(SCREEN_HEIGHT-MARGIN)
-      call random_number(x)
-      xi2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      xi2 = int2(MARGIN) + xi2
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_vline_rgba(renderer, xi2, y1i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+      y1i2 = MARGIN
+      y2i2 = rand_int(1, SCREEN_HEIGHT-MARGIN)
+      xi2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      xi2 = MARGIN + xi2
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = vline(renderer, xi2, y1i2, y2i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func08
 
     subroutine func07()
       ! vline_color
-      y1i2 = int2(MARGIN)
-      y2i2 = int2(SCREEN_HEIGHT-MARGIN)
-      call random_number(x)
-      xi2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      xi2 = int2(MARGIN) + xi2
-      rc = gfx_vline_color(renderer, xi2, y1i2, y2i2, blue)
+      y1i2 = MARGIN
+      y2i2 = rand_int(1, SCREEN_HEIGHT-MARGIN)
+      xi2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      xi2 = MARGIN + xi2
+      rc = vline(renderer, xi2, y1i2, y2i2, blue)
     end subroutine func07
 
     subroutine func06()
       ! gfx_hline_rgba
-      x1i2 = int2(MARGIN)
-      x2i2 = int2(SCREEN_WIDTH-MARGIN)
-      call random_number(y)
-      yi2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      yi2 = int2(MARGIN) + yi2
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_hline_rgba(renderer, x1i2, x2i2, yi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+      x1i2 = MARGIN
+      x2i2 = rand_int(1, SCREEN_WIDTH-MARGIN)
+      yi2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      yi2 = MARGIN + yi2
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = hline(renderer, x1i2, x2i2, yi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func06
 
     subroutine func05()
       ! hline_color
-      x1i2 = int2(MARGIN)
-      x2i2 = int2(SCREEN_WIDTH-MARGIN)
-      call random_number(y)
-      yi2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      yi2 = int2(MARGIN) + yi2
-      rc = gfx_hline_color(renderer, x1i2, x2i2, yi2, green)
+      x1i2 = MARGIN
+      x2i2 = rand_int(1, SCREEN_WIDTH-MARGIN)
+      yi2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      yi2 = MARGIN + yi2
+      rc = hline(renderer, x1i2, x2i2, yi2, green)
     end subroutine func05
 
     subroutine func04()
       ! gfx_pixel_rgba
-      call random_number(x)
-      xi2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      xi2 = int2(MARGIN) + xi2
-      call random_number(y)
-      yi2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      yi2 = int2(MARGIN) + yi2
-      call random_number(r)
-      ri2 = int2(floor(r*256_r4))
-      call random_number(g)
-      gi2 = int2(floor(g*256_r4))
-      call random_number(b)
-      bi2 = int2(floor(b*256_r4))
-      rc = gfx_pixel_rgba(renderer, xi2, yi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+      xi2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      xi2 = MARGIN + xi2
+      yi2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      yi2 = MARGIN + yi2
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
+      rc = pixel(renderer, xi2, yi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func04
 
     subroutine func03()
       ! pixel_color
-      call random_number(x)
-      xi2 = int2(floor(x*real((SCREEN_WIDTH-2*MARGIN+1), r4)))
-      xi2 = int2(MARGIN) + xi2
-      call random_number(y)
-      yi2 = int2(floor(y*real((SCREEN_HEIGHT-2*MARGIN+1), r4)))
-      yi2 = int2(MARGIN) + yi2
-      rc = gfx_pixel_color(renderer, xi2, yi2, red)
+      xi2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      xi2 = MARGIN + xi2
+      yi2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      yi2 = MARGIN + yi2
+      rc = pixel(renderer, xi2, yi2, red)
     end subroutine func03
 
     subroutine func02()
       ! gfx_string_rgba
-      string = "WARNING - this produces strobe-like and flashing lights"
-      xi2 = int2((SCREEN_WIDTH-string_length(string))/2)
+      str = "WARNING - this produces strobe-like and flashing lights"
+      xi2 = rand_int(1, SCREEN_WIDTH-string_length(str))/2
       yi2 = SCREEN_HEIGHT/2
-      rc = gfx_string_rgba(renderer, xi2, yi2, nts(string), uint8(255), uint8(255), uint8(0), uint8(255))
+      rc = string(renderer, xi2, yi2, str, 255, 255, 0, 255)
     end subroutine func02
 
     subroutine func01()
       ! string_color
-      string = "use arrow keys to navigate, press ESC to quit"
-      xi2 = int2((SCREEN_WIDTH-string_length(string))/2)
+      str = "use arrow keys to navigate, press ESC to quit"
+      xi2 = rand_int(1, (SCREEN_WIDTH-string_length(str))/2)
       yi2 = SCREEN_HEIGHT/2
-      rc = gfx_string_color(renderer, xi2, yi2, nts(string), yellow)
+      rc = stringr(renderer, xi2, yi2, str, yellow)
     end subroutine func01
 
     function i2s(num) result(res)
-      integer(i4), intent(in) :: num
-      character(len = 100)    :: res
-      write(res,*) num
+      integer, intent(in) :: num
+      ! character(len = 100)    :: res
+      character(len=:), allocatable :: res
+      write(res, *) num
     end function
 
     subroutine do_events()
@@ -1421,8 +1183,8 @@ program new
     end subroutine do_events
 
     function string_length(s1) result(res)
-      character(len = *), intent(in)   :: s1
-      integer(i4)                      :: res
+      character(len=*), intent(in)   :: s1
+      integer  :: res
       res = len_trim(s1)*FONT_SIZE
     end function string_length
 
@@ -1432,12 +1194,16 @@ program new
       rc = gfx_rectangle_color(renderer, 0, 0, int2(SCREEN_WIDTH), int2(SCREEN_HEIGHT), white)
     end subroutine clear_screen
 
-    function rand_int(m, n) result(j)
-      ! return a random integer between m and n
+    function rand_int(a, b) result(j)
+      ! return a random integer between m and n inclusively
       real :: u
-      integer :: m, n, j
+      integer, intent(in) :: a, b
+      integer :: p, q, j
+      p = a - 1
+      q = b + 1
       call random_number(u)
-      j = n + floor((m+1-n)*u)  ! we want to choose one from m-n+1 integers
+      j = q + floor((p-q+1)*u)    ! we want to choose one from m-n+1 integers
     end function rand_int
+
 
 end program new
