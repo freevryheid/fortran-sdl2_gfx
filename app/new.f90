@@ -3,6 +3,7 @@
 
 program new
 
+  use, intrinsic                 :: iso_fortran_env,  only : stdout => output_unit, stderr => error_unit
   use                            :: sdl2
   use                            :: sdl2_gfx
 
@@ -382,7 +383,7 @@ program new
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
-      rc = bezier(renderer, vx(0), vy(0), n, s, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
+      rc = bezier(renderer, vx, vy, n, s, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func55
 
     subroutine func54()
@@ -407,7 +408,7 @@ program new
       vy(2) = y3i2
       n = 3
       s = 3
-      rc = bezier(renderer, vx(0), vy(0), n, s, red)
+      rc = bezier(renderer, vx, vy, n, s, red)
     end subroutine func54
 
     subroutine func53()
@@ -431,7 +432,7 @@ program new
       vy(1) = y2i2
       vy(2) = y3i2
       n = 3
-      rc = textured_polygon(renderer, vx(0), vy(0), n, image, 0, 0)
+      rc = textured_polygon(renderer, vx, vy, n, image, 0, 0)
     end subroutine func53
 
     subroutine func52()
@@ -458,7 +459,7 @@ program new
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
-      rc = gfx_filled_polygon_rgba(renderer, vx(0), vy(0), n, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
+      rc = filled_polygon(renderer, vx, vy, n, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func52
 
     subroutine func51()
@@ -482,22 +483,22 @@ program new
       vy(1) = y2i2
       vy(2) = y3i2
       n = 3
-      rc = filled_polygon(renderer, vx(0), vy(0), n, cyan)
+      rc = filled_polygon(renderer, vx, vy, n, cyan)
     end subroutine func51
 
     subroutine func50()
       ! gfx_aapolygon_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -509,7 +510,7 @@ program new
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
-      rc = aapolygon(renderer, vx(0), vy(0), n, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
+      rc = aapolygon(renderer, vx, vy, n, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func50
 
     subroutine func49()
@@ -533,22 +534,22 @@ program new
       vy(1) = y2i2
       vy(2) = y3i2
       n = 3
-      rc = gfx_aapolygon_color(renderer, vx(0), vy(0), n, magenta)
+      rc = aapolygon(renderer, vx, vy, n, magenta)
     end subroutine func49
 
     subroutine func48()
       ! gfx_polygon_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -560,22 +561,22 @@ program new
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
-      rc = polygon(renderer, vx(0), vy(0), n, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
+      rc = polygon(renderer, vx, vy, n, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func48
 
     subroutine func47()
       ! polygon_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN1)
+      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN1)
+      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -584,7 +585,7 @@ program new
       vy(1) = y2i2
       vy(2) = y3i2
       n = 3
-      rc = polygon(renderer, vx(0), vy(0), n, yellow)
+      rc = polygon(renderer, vx, vy, n, yellow)
     end subroutine func47
 
     subroutine func46()
@@ -774,8 +775,7 @@ program new
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
-      rc = gfx_aaellipse_rgba(renderer, x1i2, y1i2, x2i2, y2i2, uint8(ri2), uint8(gi2), uint8(bi2), &
-                                  uint8(SDL_ALPHA_OPAQUE))
+      rc = aaellipse(renderer, x1i2, y1i2, x2i2, y2i2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func34
 
     subroutine func33()
@@ -816,7 +816,7 @@ program new
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
-      rc = gfx_filled_circle_rgba(renderer, xi2, yi2, radi2, uint8(ri2), uint8(gi2), uint8(bi2), uint8(SDL_ALPHA_OPAQUE))
+      rc = filled_circle(renderer, xi2, yi2, radi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func30
 
     subroutine func29()
@@ -844,9 +844,9 @@ program new
       ! arc_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int2(1, SCREEN_HEIGHT/2-MARGIN)
-      fromi2 = rand_int2(1, 360)
-      toi2 = rand_int2(1, 360)
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(1, 360)
+      toi2 = rand_int(1, 360)
       rc = arc(renderer, xi2, yi2, radi2, fromi2, toi2, cyan)
     end subroutine func27
 
@@ -854,10 +854,10 @@ program new
       ! gfx_aacircle_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int2(1, SCREEN_HEIGHT/2-MARGIN)
-      ri2 = rand_int2(0, 255)
-      gi2 = rand_int2(0, 255)
-      bi2 = rand_int2(0, 255)
+      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      ri2 = rand_int(0, 255)
+      gi2 = rand_int(0, 255)
+      bi2 = rand_int(0, 255)
       rc = aacircle(renderer, xi2, yi2, radi2, ri2, gi2, bi2, SDL_ALPHA_OPAQUE)
     end subroutine func26
 
@@ -958,10 +958,10 @@ program new
       ! line_color
       x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(SCREEN_WIDTH)-x1i2
+      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
       y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(SCREEN_HEIGHT)-y1i2
+      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
       rc = line(renderer, x1i2, y1i2, x2i2, y2i2, green)
     end subroutine func17
 
@@ -1145,13 +1145,13 @@ program new
       str = "use arrow keys to navigate, press ESC to quit"
       xi2 = rand_int(1, (SCREEN_WIDTH-string_length(str))/2)
       yi2 = SCREEN_HEIGHT/2
-      rc = stringr(renderer, xi2, yi2, str, yellow)
+      rc = string(renderer, xi2, yi2, str, yellow)
     end subroutine func01
 
     function i2s(num) result(res)
       integer, intent(in) :: num
       ! character(len = 100)    :: res
-      character(len=:), allocatable :: res
+      character(len=100) :: res
       write(res, *) num
     end function
 
@@ -1191,7 +1191,7 @@ program new
     subroutine clear_screen()
       rc = sdl_set_render_draw_color(renderer, uint8(0), uint8(0), uint8(0), uint8(SDL_ALPHA_OPAQUE))
       rc = sdl_render_clear(renderer)
-      rc = gfx_rectangle_color(renderer, 0, 0, int2(SCREEN_WIDTH), int2(SCREEN_HEIGHT), white)
+      rc = rectangle(renderer, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, white)
     end subroutine clear_screen
 
     function rand_int(a, b) result(j)

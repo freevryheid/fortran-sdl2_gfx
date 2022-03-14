@@ -124,6 +124,7 @@ end interface string
 private
 
 public                              :: sdl   ! just so that we don't have to use iso_c_binding again
+public                              :: sdl_associated
 public                              :: pixel
 public                              :: hline
 public                              :: vline
@@ -958,7 +959,7 @@ end function filled_trigon_rgba
 function polygon_color(renderer, vx, vy, n, color)
 
   type(sdl),          intent(in)  :: renderer
-  integer, allocatable, intent(in)  :: vx(:), vy(:)
+  integer, dimension(0:2), intent(in)  :: vx, vy
   integer,              intent(in)  ::n, color
   integer                           :: polygon_color
 
@@ -973,10 +974,10 @@ end function polygon_color
 function polygon_rgba(renderer, vx, vy, n, r, g, b, a)
 
   type(sdl),          intent(in)  :: renderer
-  integer, allocatable, intent(in)  :: vx(:), vy(:)
+
   integer,              intent(in)  :: n, r, g, b, a
   integer                           :: polygon_rgba
-
+  integer, dimension(0:2), intent(in)  :: vx, vy
   polygon_rgba =            int(gfx_polygon_rgba(renderer,                 &
                             int(vx,         kind=c_short),                 &
                             int(vy,         kind=c_short),                 &
@@ -993,7 +994,7 @@ end function polygon_rgba
 function aapolygon_color(renderer, vx, vy, n, color)
 
   type(sdl),          intent(in)  :: renderer
-  integer, allocatable, intent(in)  :: vx(:), vy(:)
+  integer, dimension(0:2), intent(in)  :: vx, vy
   integer,              intent(in)  :: n, color
   integer                           :: aapolygon_color
 
@@ -1008,7 +1009,7 @@ end function aapolygon_color
 function aapolygon_rgba(renderer, vx, vy, n, r, g, b, a)
 
   type(sdl),          intent(in)  :: renderer
-  integer, allocatable, intent(in)  :: vx(:), vy(:)
+  integer, dimension(0:2), intent(in)  :: vx, vy
   integer,              intent(in)  :: n, r, g, b, a
   integer                           :: aapolygon_rgba
 
@@ -1028,7 +1029,7 @@ end function aapolygon_rgba
 function filled_polygon_color(renderer, vx, vy, n, color)
 
   type(sdl),          intent(in)  :: renderer
-  integer, allocatable, intent(in)  :: vx(:), vy(:)
+  integer, dimension(0:2), intent(in)  :: vx, vy
   integer,              intent(in)  :: n, color
   integer                           :: filled_polygon_color
 
@@ -1043,7 +1044,7 @@ end function filled_polygon_color
 function filled_polygon_rgba(renderer, vx, vy, n, r, g, b, a)
 
   type(sdl),          intent(in)  :: renderer
-  integer, allocatable, intent(in)  :: vx(:), vy(:)
+  integer, dimension(0:2), intent(in)  :: vx, vy
   integer,              intent(in)  :: n, r, g, b, a
   integer                           :: filled_polygon_rgba
 
@@ -1063,7 +1064,7 @@ end function filled_polygon_rgba
 function textured_polygon(renderer, vx, vy, n, texture, texture_dx, texture_dy)
 
   type(sdl),          intent(in)  :: renderer
-  integer, allocatable, intent(in)  :: vx(:), vy(:)
+  integer, dimension(0:2), intent(in)  :: vx, vy
   integer,              intent(in)  :: n, texture_dx, texture_dy
   type(sdl_surface),    intent(in)  :: texture
   integer                           :: textured_polygon
@@ -1083,10 +1084,10 @@ end function textured_polygon
 function bezier_color(renderer, vx, vy, n, s, color)
 
   type(sdl),          intent(in)  :: renderer
-  integer, allocatable, intent(in)  :: vx(:), vy(:)
+
   integer,              intent(in)  :: n, s, color
   integer                           :: bezier_color
-
+  integer, dimension(0:2), intent(in)  :: vx, vy
   bezier_color =            int(gfx_bezier_color(renderer,                 &
                             int(vx,         kind=c_short),                 &
                             int(vy,         kind=c_short),                 &
@@ -1099,10 +1100,10 @@ end function bezier_color
 function bezier_rgba(renderer, vx, vy, n, s, r, g, b, a)
 
   type(sdl),          intent(in)  :: renderer
-  integer, allocatable, intent(in)  :: vx(:), vy(:)
+
   integer,              intent(in)  :: n, s, r, g, b, a
   integer                           :: bezier_rgba
-
+  integer, dimension(0:2), intent(in)  :: vx, vy
   bezier_rgba =             int(gfx_bezier_rgba(renderer,                  &
                             int(vx,         kind=c_short),                 &
                             int(vy,         kind=c_short),                 &
@@ -1142,7 +1143,7 @@ function character_color(renderer, x, y, c, color)
 
   type(sdl),          intent(in)  :: renderer
   integer,              intent(in) :: x, y, color
-  character(len=1), allocatable  :: c
+  character(len=1)  :: c
   integer                           :: character_color
 
   character_color =         int(gfx_character_color(renderer,              &
@@ -1157,7 +1158,7 @@ function character_rgba(renderer, x, y, c, r, g, b, a)
 
   type(sdl),          intent(in)  :: renderer
   integer,              intent(in)  :: x, y, r, g, b, a
-  character(len=1), allocatable :: c
+  character(len=1) :: c
   integer                           :: character_rgba
 
   character_rgba =          int(gfx_character_rgba(renderer,               &

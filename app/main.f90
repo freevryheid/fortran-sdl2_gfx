@@ -338,7 +338,7 @@ program main
 
     subroutine func58()
       ! gfx_character_rgba
-      schar = char(101)
+      schar = char(101)  ! letter e
       xi2 = SCREEN_WIDTH/2_i2
       yi2 = SCREEN_HEIGHT/2_i2
       rc = gfx_character_rgba(renderer, xi2, yi2, schar, uint8(255), uint8(0), uint8(0), uint8(255))
@@ -346,7 +346,7 @@ program main
 
     subroutine func57()
       ! character_color
-      schar = char(100)
+      schar = char(100)  ! letter d
       xi2 = SCREEN_WIDTH/2_i2
       yi2 = SCREEN_HEIGHT/2_i2
       rc = gfx_character_color(renderer, xi2, yi2, schar, green)
