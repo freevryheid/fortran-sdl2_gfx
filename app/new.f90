@@ -1105,7 +1105,7 @@ program new
     subroutine func05()
       ! hline_color
       x1i2 = MARGIN
-      x2i2 = rand_int(1, SCREEN_WIDTH-MARGIN)
+      x2i2 = rand_int(x1i2, SCREEN_WIDTH-MARGIN)
       yi2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
       yi2 = MARGIN + yi2
       rc = hline(renderer, x1i2, x2i2, yi2, green)
