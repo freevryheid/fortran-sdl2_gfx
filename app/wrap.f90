@@ -3,8 +3,9 @@
 
 program new
 
-  use, intrinsic                 :: iso_fortran_env,  only : stdout => output_unit, stderr => error_unit
-  use                            :: sdl2
+  ! use, intrinsic                 :: iso_fortran_env,  only : stdout => output_unit, stderr => error_unit
+  ! use                            :: sdl2
+  use                            :: sdl2_gfx_misc
   use                            :: sdl2_gfx
 
   implicit none

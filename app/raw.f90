@@ -1,7 +1,7 @@
 ! Andre Smit - Feb 2021, MIT
 ! WARNING - this produces strobe-like and flashing lights.
 
-program main
+program raw
 
   use, intrinsic                 :: iso_c_binding,    only : c_associated, c_null_char, c_ptr
   use, intrinsic                 :: iso_fortran_env,  only : stdout => output_unit, stderr => error_unit, &
@@ -1453,4 +1453,4 @@ program main
       rc = gfx_rectangle_color(renderer, 0_i2, 0_i2, int2(SCREEN_WIDTH), int2(SCREEN_HEIGHT), white)
     end subroutine clear_screen
 
-end program main
+end program raw
