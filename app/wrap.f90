@@ -1,7 +1,7 @@
 ! Andre Smit - Feb 2021, MIT
 ! WARNING - this produces strobe-like and flashing lights.
 
-program new
+program wrap
 
   ! use, intrinsic                 :: iso_fortran_env,  only : stdout => output_unit, stderr => error_unit
   ! use                            :: sdl2
@@ -361,17 +361,17 @@ program new
 
     subroutine func55()
       ! gfx_bezier_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -389,17 +389,17 @@ program new
 
     subroutine func54()
       ! bezier_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -414,17 +414,17 @@ program new
 
     subroutine func53()
       ! textured_polygon
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -438,17 +438,17 @@ program new
 
     subroutine func52()
       ! gfx_filled_polygon_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -465,17 +465,17 @@ program new
 
     subroutine func51()
       ! filled_polygon_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -489,17 +489,17 @@ program new
 
     subroutine func50()
       ! gfx_aapolygon_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -516,17 +516,17 @@ program new
 
     subroutine func49()
       ! aapolygon_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -540,17 +540,17 @@ program new
 
     subroutine func48()
       ! gfx_polygon_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -567,17 +567,17 @@ program new
 
     subroutine func47()
       ! polygon_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       vx(0) = x1i2
       vx(1) = x2i2
@@ -591,17 +591,17 @@ program new
 
     subroutine func46()
       ! gfx_filled_trigon_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
@@ -611,34 +611,34 @@ program new
 
     subroutine func45()
       ! filled_trigon_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       rc = filled_trigon(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, blue)
     end subroutine func45
 
     subroutine func44()
       ! gfx_aatrigon_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
@@ -648,34 +648,34 @@ program new
 
     subroutine func43()
       ! aatrigon_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       rc = aatrigon(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, green)
     end subroutine func43
 
     subroutine func42()
       ! gfx_trigon_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
@@ -685,17 +685,17 @@ program new
 
     subroutine func41()
       ! trigon_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x2i2 = MARGIN + x2i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y2i2 = MARGIN + y2i2
-      x3i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x3i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x3i2 = MARGIN + x3i2
-      y3i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      y3i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y3i2 = MARGIN + y3i2
       rc = trigon(renderer, x1i2, y1i2, x2i2, y2i2, x3i2, y3i2, red)
     end subroutine func41
@@ -704,7 +704,7 @@ program new
       ! gfx_filled_pie_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       fromi2 = rand_int(0, 360)
       toi2 = rand_int(0, 360)
       ri2 = rand_int(0, 255)
@@ -717,9 +717,9 @@ program new
       ! filled_pie_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
-      fromi2 = rand_int(1, 360)
-      toi2 = rand_int(1, 360)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(0, 360)
+      toi2 = rand_int(0, 360)
       rc = filled_pie(renderer, xi2, yi2, radi2, fromi2, toi2, cyan)
     end subroutine func39
 
@@ -727,9 +727,9 @@ program new
       ! gfx_pie_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
-      fromi2 = rand_int(1, 360)
-      toi2 = rand_int(1, 360)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(0, 360)
+      toi2 = rand_int(0, 360)
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -740,9 +740,9 @@ program new
       ! pie_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
-      fromi2 = rand_int(1, 360)
-      toi2 = rand_int(1, 360)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(0, 360)
+      toi2 = rand_int(0, 360)
       rc = pie(renderer, xi2, yi2, radi2, fromi2, toi2, magenta)
     end subroutine func37
 
@@ -750,8 +750,8 @@ program new
       ! gfx_filled_ellipse_rgba
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
-      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -762,8 +762,8 @@ program new
       ! filled_ellipse_color
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
-      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       rc = filled_ellipse(renderer, x1i2, y1i2, x2i2, y2i2, yellow)
     end subroutine func35
 
@@ -771,8 +771,8 @@ program new
       ! gfx_aaellipse_rgba
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
-      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -783,8 +783,8 @@ program new
       ! aaellipse_color
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
-      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       rc = aaellipse(renderer, x1i2, y1i2, x2i2, y2i2, blue)
     end subroutine func33
 
@@ -792,8 +792,8 @@ program new
       ! gfx_ellipse_rgba
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
-      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -804,8 +804,8 @@ program new
       ! ellipse_color
       x1i2 = SCREEN_WIDTH/2
       y1i2 = SCREEN_HEIGHT/2
-      x2i2 = rand_int(1, SCREEN_WIDTH/2-MARGIN)
-      y2i2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      x2i2 = rand_int(0, SCREEN_WIDTH/2-MARGIN)
+      y2i2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       rc = ellipse(renderer, x1i2, y1i2, x2i2, y2i2, green)
     end subroutine func31
 
@@ -813,7 +813,7 @@ program new
       ! gfx_filled_circle_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -824,7 +824,7 @@ program new
       ! filled_circle_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       rc = filled_circle(renderer, xi2, yi2, radi2, red)
     end subroutine func29
 
@@ -832,9 +832,9 @@ program new
       ! gfx_arc_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
-      fromi2 = rand_int(1, 360)
-      toi2 = rand_int(1, 360)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(0, 360)
+      toi2 = rand_int(0, 360)
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -845,9 +845,9 @@ program new
       ! arc_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
-      fromi2 = rand_int(1, 360)
-      toi2 = rand_int(1, 360)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
+      fromi2 = rand_int(0, 360)
+      toi2 = rand_int(0, 360)
       rc = arc(renderer, xi2, yi2, radi2, fromi2, toi2, cyan)
     end subroutine func27
 
@@ -855,7 +855,7 @@ program new
       ! gfx_aacircle_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -866,7 +866,7 @@ program new
       ! aacircle_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       rc = aacircle(renderer, xi2, yi2, radi2, magenta)
     end subroutine func25
 
@@ -874,7 +874,7 @@ program new
       ! gfx_circle_rgba
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -885,19 +885,19 @@ program new
       ! circle_color
       xi2 = SCREEN_WIDTH/2
       yi2 = SCREEN_HEIGHT/2
-      radi2 = rand_int(1, SCREEN_HEIGHT/2-MARGIN)
+      radi2 = rand_int(0, SCREEN_HEIGHT/2-MARGIN)
       rc = circle(renderer, xi2, yi2, radi2, magenta)
     end subroutine func23
 
     subroutine func22()
       ! gfx_thick_line_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
-      wi2 = rand_int(1, 10)
+      y2i2 =SCREEN_HEIGHT-y1i2
+      wi2 = rand_int(0, 10)
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -906,24 +906,24 @@ program new
 
     subroutine func21()
       ! thick_line_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
-      wi2 = rand_int(1, 10)
+      y2i2 = SCREEN_HEIGHT-y1i2
+      wi2 = rand_int(0, 10)
       rc = thick_line(renderer, x1i2, y1i2, x2i2, y2i2, wi2, yellow)
     end subroutine func21
 
     subroutine func20()
       ! gfx_aaline_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -932,23 +932,23 @@ program new
 
     subroutine func19()
       ! aaline_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       rc = aaline(renderer, x1i2, y1i2, x2i2, y2i2, blue)
     end subroutine func19
 
     subroutine func18()
       ! gfx_line_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -957,23 +957,23 @@ program new
 
     subroutine func17()
       ! line_color
-      x1i2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       rc = line(renderer, x1i2, y1i2, x2i2, y2i2, green)
     end subroutine func17
 
     subroutine func16()
       ! gfx_irounded_box_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH/2-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT/2-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       radi2 = MARGIN
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
@@ -983,24 +983,24 @@ program new
 
     subroutine func15()
       ! rounded_box_color
-      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH/2-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT/2-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       radi2 = MARGIN
       rc = rounded_box(renderer, x1i2, y1i2, x2i2, y2i2, radi2, red)
     end subroutine func15
 
     subroutine func14()
       ! gfx_box_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH/2-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT/2-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -1009,23 +1009,23 @@ program new
 
     subroutine func13()
       ! box_color
-      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH/2-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT/2-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       rc = box(renderer, x1i2, y1i2, x2i2, y2i2, cyan)
     end subroutine func13
 
     subroutine func12()
       ! gfx_rounded_rectangle_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH/2-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT/2-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       radi2 = MARGIN
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
@@ -1035,24 +1035,24 @@ program new
 
     subroutine func11()
       ! rounded_rectangle_color
-      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH/2-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT/2-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       radi2 = MARGIN
       rc = rounded_rectangle(renderer, x1i2, y1i2, x2i2, y2i2, radi2, magenta)
     end subroutine func11
 
     subroutine func10()
       ! gfx_rectangle_rgba
-      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH/2-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT/2-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
       bi2 = rand_int(0, 255)
@@ -1061,20 +1061,20 @@ program new
 
     subroutine func09()
       ! rectangle_color
-      x1i2 = rand_int(1, SCREEN_WIDTH/2-2*MARGIN)
+      x1i2 = rand_int(0, SCREEN_WIDTH/2-2*MARGIN)
       x1i2 = MARGIN + x1i2
-      x2i2 = rand_int(1, SCREEN_WIDTH)-x1i2
-      y1i2 = rand_int(1, SCREEN_HEIGHT/2-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-x1i2
+      y1i2 = rand_int(0, SCREEN_HEIGHT/2-2*MARGIN)
       y1i2 = MARGIN + y1i2
-      y2i2 = rand_int(1, SCREEN_HEIGHT)-y1i2
+      y2i2 = SCREEN_HEIGHT-y1i2
       rc = rectangle(renderer, x1i2, y1i2, x2i2, y2i2, yellow)
     end subroutine func09
 
     subroutine func08()
       ! gfx_vline_rgba
       y1i2 = MARGIN
-      y2i2 = rand_int(1, SCREEN_HEIGHT-MARGIN)
-      xi2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      y2i2 = SCREEN_HEIGHT-MARGIN
+      xi2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       xi2 = MARGIN + xi2
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
@@ -1085,8 +1085,8 @@ program new
     subroutine func07()
       ! vline_color
       y1i2 = MARGIN
-      y2i2 = rand_int(1, SCREEN_HEIGHT-MARGIN)
-      xi2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      y2i2 = SCREEN_HEIGHT-MARGIN
+      xi2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       xi2 = MARGIN + xi2
       rc = vline(renderer, xi2, y1i2, y2i2, blue)
     end subroutine func07
@@ -1094,8 +1094,8 @@ program new
     subroutine func06()
       ! gfx_hline_rgba
       x1i2 = MARGIN
-      x2i2 = rand_int(1, SCREEN_WIDTH-MARGIN)
-      yi2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-MARGIN
+      yi2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       yi2 = MARGIN + yi2
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
@@ -1106,17 +1106,17 @@ program new
     subroutine func05()
       ! hline_color
       x1i2 = MARGIN
-      x2i2 = rand_int(x1i2, SCREEN_WIDTH-MARGIN)
-      yi2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      x2i2 = SCREEN_WIDTH-MARGIN
+      yi2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       yi2 = MARGIN + yi2
       rc = hline(renderer, x1i2, x2i2, yi2, green)
     end subroutine func05
 
     subroutine func04()
       ! gfx_pixel_rgba
-      xi2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      xi2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       xi2 = MARGIN + xi2
-      yi2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      yi2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       yi2 = MARGIN + yi2
       ri2 = rand_int(0, 255)
       gi2 = rand_int(0, 255)
@@ -1126,9 +1126,9 @@ program new
 
     subroutine func03()
       ! pixel_color
-      xi2 = rand_int(1, SCREEN_WIDTH-2*MARGIN)
+      xi2 = rand_int(0, SCREEN_WIDTH-2*MARGIN)
       xi2 = MARGIN + xi2
-      yi2 = rand_int(1, SCREEN_HEIGHT-2*MARGIN)
+      yi2 = rand_int(0, SCREEN_HEIGHT-2*MARGIN)
       yi2 = MARGIN + yi2
       rc = pixel(renderer, xi2, yi2, red)
     end subroutine func03
@@ -1136,7 +1136,7 @@ program new
     subroutine func02()
       ! gfx_string_rgba
       str = "WARNING - this produces strobe-like and flashing lights"
-      xi2 = rand_int(1, SCREEN_WIDTH-string_length(str))/2
+      xi2 = (SCREEN_WIDTH-string_length(str))/2
       yi2 = SCREEN_HEIGHT/2
       rc = string(renderer, xi2, yi2, str, 255, 255, 0, 255)
     end subroutine func02
@@ -1144,7 +1144,7 @@ program new
     subroutine func01()
       ! string_color
       str = "use arrow keys to navigate, press ESC to quit"
-      xi2 = rand_int(1, (SCREEN_WIDTH-string_length(str))/2)
+      xi2 = (SCREEN_WIDTH-string_length(str))/2
       yi2 = SCREEN_HEIGHT/2
       rc = string(renderer, xi2, yi2, str, yellow)
     end subroutine func01
@@ -1207,4 +1207,4 @@ program new
     end function rand_int
 
 
-end program new
+end program wrap

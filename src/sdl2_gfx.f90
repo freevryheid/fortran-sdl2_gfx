@@ -945,7 +945,8 @@ end function bezier_rgba
 ! Characters/Strings
 
 subroutine set_font(fontdata, cw, ch)
-  type(sdl), intent(in) :: fontdata
+  ! type(sdl), intent(in) :: fontdata
+  character(len=*), intent(in) :: fontdata
   integer, intent(in) :: cw, ch
   call gfx_primitives_set_font(fontdata, &
   int(cw, kind=c_uint32_t), &
@@ -962,7 +963,7 @@ end subroutine set_font_rotation
 function character_color(renderer, x, y, c, color)
   type(sdl), intent(in) :: renderer
   integer, intent(in) :: x, y, color
-  character(len=1) :: c
+  character(len=1), intent(in), value :: c
   integer :: character_color
   character_color = int(gfx_character_color(renderer, &
   int(x, kind=c_short), &
@@ -974,7 +975,7 @@ end function character_color
 function character_rgba(renderer, x, y, c, r, g, b, a)
   type(sdl), intent(in) :: renderer
   integer, intent(in) :: x, y, r, g, b, a
-  character(len=1) :: c
+  character(len=1), intent(in), value :: c
   integer :: character_rgba
   character_rgba = int(gfx_character_rgba(renderer, &
   int(x, kind=c_short), &

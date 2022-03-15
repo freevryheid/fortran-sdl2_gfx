@@ -591,8 +591,9 @@ end function gfx_bezier_rgba
 
 ! SDL2_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFont(const void *fontdata, Uint32 cw, Uint32 ch);
 subroutine gfx_primitives_set_font(fontdata, cw, ch) bind(c, name='gfxPrimitivesSetFont')
-  import :: c_ptr, c_uint32_t
-  type(c_ptr), intent(in) :: fontdata
+  import :: c_ptr, c_uint32_t, c_char
+  ! type(c_ptr), intent(in) :: fontdata
+  character(kind=c_char), intent(in) :: fontdata
   integer(kind=c_uint32_t), intent(in), value :: cw, ch
 end subroutine gfx_primitives_set_font
 
@@ -607,7 +608,7 @@ function gfx_character_color(renderer, x, y, c, color) bind(c, name='characterCo
   import :: c_ptr, c_short, c_uint32_t, c_int, c_char
   type(c_ptr), intent(in), value :: renderer
   integer(kind=c_short), intent(in), value :: x, y
-  character(kind=c_char), intent(in) :: c
+  character(kind=c_char), intent(in), value :: c
   integer(kind=c_uint32_t), intent(in), value :: color
   integer(kind=c_int) :: gfx_character_color
 end function gfx_character_color
@@ -617,7 +618,7 @@ function gfx_character_rgba(renderer, x, y, c, r, g, b, a) bind(c, name='charact
   import :: c_ptr, c_short, c_uint8_t, c_int, c_char
   type(c_ptr), intent(in), value :: renderer
   integer(kind=c_short), intent(in), value :: x, y
-  character(kind=c_char), intent(in) :: c
+  character(kind=c_char), intent(in), value :: c
   integer(kind=c_uint8_t), intent(in), value :: r, g, b, a
   integer(kind=c_int) :: gfx_character_rgba
 end function gfx_character_rgba
