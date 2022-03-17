@@ -8,7 +8,7 @@ program cfont
 
   integer, parameter :: SCREEN_WIDTH = 640
   integer, parameter :: SCREEN_HEIGHT = 480
-  integer :: FONT_SIZE = 10
+  integer :: FONT_SIZE = 5
   integer, parameter :: MARGIN = 64
   integer, parameter :: red = int(z'FF0000FF')
   integer, parameter :: green = int(z'FF00FF00')
@@ -53,7 +53,7 @@ program cfont
 
   ! create the renderer
   renderer = sdl_create_renderer(window, -1, ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_TARGETTEXTURE))
-  font1 = loadfont(c_str('data/fonts/10x20i.fnt'))
+  font1 = loadfont(c_str('data/fonts/5x7.fnt'))
   call set_font(font1, 10, 20)
 
   do while (.not. done)
