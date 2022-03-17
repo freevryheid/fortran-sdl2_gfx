@@ -945,8 +945,7 @@ end function bezier_rgba
 ! Characters/Strings
 
 subroutine set_font(fontdata, cw, ch)
-  ! type(sdl), intent(in) :: fontdata
-  character(len=*), intent(in) :: fontdata
+  type(sdl), intent(in) :: fontdata
   integer, intent(in) :: cw, ch
   call gfx_primitives_set_font(fontdata, &
   int(cw, kind=c_uint32_t), &

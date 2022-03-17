@@ -591,9 +591,8 @@ end function gfx_bezier_rgba
 
 ! SDL2_GFXPRIMITIVES_SCOPE void gfxPrimitivesSetFont(const void *fontdata, Uint32 cw, Uint32 ch);
 subroutine gfx_primitives_set_font(fontdata, cw, ch) bind(c, name='gfxPrimitivesSetFont')
-  import :: c_ptr, c_uint32_t, c_char
-  ! type(c_ptr), intent(in) :: fontdata
-  character(kind=c_char), intent(in) :: fontdata
+  import :: c_ptr, c_uint32_t
+  type(c_ptr), intent(in) :: fontdata
   integer(kind=c_uint32_t), intent(in), value :: cw, ch
 end subroutine gfx_primitives_set_font
 
