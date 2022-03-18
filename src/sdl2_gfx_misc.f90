@@ -16,6 +16,13 @@ module sdl2_gfx_misc
       type(c_ptr) :: r
     end function loadfont
 
+    ! void freeFont(void *font)
+    subroutine freefont(font) bind(c, name='freeFont')
+      import :: c_ptr
+      implicit none
+      type(c_ptr) , intent(in), value :: font
+    end subroutine freefont
+
   end interface
 
   contains

@@ -54,7 +54,7 @@ program cfont
   ! create the renderer
   renderer = sdl_create_renderer(window, -1, ior(SDL_RENDERER_ACCELERATED, SDL_RENDERER_TARGETTEXTURE))
   font1 = loadfont(c_str('data/fonts/5x7.fnt'))
-  call set_font(font1, 10, 20)
+  call set_font(font1, 5, 7)
 
   do while (.not. done)
     do while (sdl_poll_event(event) > 0)
@@ -75,6 +75,7 @@ program cfont
   end do
 
   ! cleanup and quit
+  call freefont(font1)
   call sdl_free_surface(image)
   call sdl_destroy_renderer(renderer)
   call sdl_destroy_window(window)
@@ -82,12 +83,12 @@ program cfont
 
   contains
 
-  subroutine func01()
-    ! string_color
-    str = "The quick brown fox ..."
-    xi2 = (SCREEN_WIDTH-string_length(str, FONT_SIZE))/2
-    yi2 = SCREEN_HEIGHT/2
-    rc = string(renderer, xi2, yi2, str, yellow)
-  end subroutine func01
+    subroutine func01()
+      ! string_color
+      str = "The quick brown fox ..."
+      xi2 = (SCREEN_WIDTH-string_length(str, FONT_SIZE))/2
+      yi2 = SCREEN_HEIGHT/2
+      rc = string(renderer, xi2, yi2, str, yellow)
+    end subroutine func01
 
 end program cfont
