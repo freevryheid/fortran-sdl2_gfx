@@ -27,72 +27,72 @@
 
 module framerate
 
-use :: sdl2_gfx_misc
+  use :: sdl2_gfx_misc
 
-implicit none
-private
+  implicit none
+  private
 
-! TODO - perhaps drop c_int kind
-integer( kind=c_int), parameter, public :: FPS_UPPER_LIMIT = 200
-  !! Highest possible rate supported by framerate controller in Hz (1/s).
-integer( kind=c_int), parameter, public :: FPS_LOWER_LIMIT = 1
-  !! Lowest possible rate supported by framerate controller in Hz (1/s).
-integer( kind=c_int), parameter, public :: FPS_DEFAULT = 30
-  !! Default rate of framerate controller in Hz (1/s).
+  ! TODO - perhaps drop c_int kind
+  integer( kind=c_int), parameter, public :: FPS_UPPER_LIMIT = 200
+    !! Highest possible rate supported by framerate controller in Hz (1/s).
+  integer( kind=c_int), parameter, public :: FPS_LOWER_LIMIT = 1
+    !! Lowest possible rate supported by framerate controller in Hz (1/s).
+  integer( kind=c_int), parameter, public :: FPS_DEFAULT = 30
+    !! Default rate of framerate controller in Hz (1/s).
 
-type, public, bind(c) :: fpsmanager
-  integer(kind=c_uint32_t) :: framecount
-  real( kind=c_float) :: rateticks
-  integer(kind=c_uint32_t) :: baseticks
-  integer(kind=c_uint32_t) :: lastticks
-  integer(kind=c_uint32_t) :: rate
-end type fpsmanager
+  type, public, bind(c) :: fpsmanager
+    integer(kind=c_uint32_t) :: framecount
+    real(kind=c_float) :: rateticks
+    integer(kind=c_uint32_t) :: baseticks
+    integer(kind=c_uint32_t) :: lastticks
+    integer(kind=c_uint32_t) :: rate
+  end type fpsmanager
 
-public :: sdl_initframerate
-public :: sdl_setframerate
-public :: sdl_getframecount
-public :: sdl_getframerate
-public :: sdl_frameratedelay
+  public :: sdl_initframerate
+  public :: sdl_setframerate
+  public :: sdl_getframecount
+  public :: sdl_getframerate
+  public :: sdl_frameratedelay
 
-interface
+  interface
 
-! SDL2_FRAMERATE_SCOPE void SDL_initFramerate(FPSmanager * manager);
-function sdl_initframerate(manager) bind(c, name='SDL_initFramerate')
-  import :: c_int, fpsmanager
-  type(fpsmanager), intent(in) :: manager
-  integer(kind=c_int) :: sdl_initframerate
-end function sdl_initframerate
+    ! SDL2_FRAMERATE_SCOPE void SDL_initFramerate(FPSmanager * manager);
+    subroutine sdl_initframerate(manager) bind(c, name='SDL_initFramerate')
+      import :: c_int, fpsmanager
+      type(fpsmanager), intent(in) :: manager
+      ! integer(kind=c_int) :: sdl_initframerate
+    end subroutine sdl_initframerate
 
-! SDL2_FRAMERATE_SCOPE int SDL_setFramerate(FPSmanager * manager, Uint32 rate);
-function sdl_setframerate(manager, rate) bind(c, name='SDL_setFramerate')
-  import :: c_int, c_uint32_t, fpsmanager
-  type(fpsmanager), intent(in) :: manager
-  integer(kind=c_uint32_t), intent(in) :: rate
-  integer(kind=c_int) :: sdl_setframerate
-end function sdl_setframerate
+    ! SDL2_FRAMERATE_SCOPE int SDL_setFramerate(FPSmanager * manager, Uint32 rate);
+    function sdl_setframerate(manager, rate) bind(c, name='SDL_setFramerate')
+      import :: c_int, c_uint32_t, fpsmanager
+      type(fpsmanager), intent(in) :: manager
+      integer(kind=c_uint32_t), intent(in) :: rate
+      integer(kind=c_int) :: sdl_setframerate
+    end function sdl_setframerate
 
-! SDL2_FRAMERATE_SCOPE int SDL_getFramerate(FPSmanager * manager);
-function sdl_getframerate(manager) bind(c, name='SDL_getFramerate')
-  import :: c_int, fpsmanager
-  type(fpsmanager), intent(in) :: manager
-  integer(kind=c_int) :: sdl_getframerate
-end function sdl_getframerate
+    ! SDL2_FRAMERATE_SCOPE int SDL_getFramerate(FPSmanager * manager);
+    function sdl_getframerate(manager) bind(c, name='SDL_getFramerate')
+      import :: c_int, fpsmanager
+      type(fpsmanager), intent(in) :: manager
+      integer(kind=c_int) :: sdl_getframerate
+    end function sdl_getframerate
 
-! SDL2_FRAMERATE_SCOPE int SDL_getFramecount(FPSmanager * manager);
-function sdl_getframecount(manager) bind(c, name='SDL_getFramecount')
-  import :: c_int, fpsmanager
-  type(fpsmanager), intent(in) :: manager
-  integer(kind=c_int) :: sdl_getframecount
-end function sdl_getframecount
+    ! SDL2_FRAMERATE_SCOPE int SDL_getFramecount(FPSmanager * manager);
+    function sdl_getframecount(manager) bind(c, name='SDL_getFramecount')
+      import :: c_int, fpsmanager
+      type(fpsmanager), intent(in) :: manager
+      integer(kind=c_int) :: sdl_getframecount
+    end function sdl_getframecount
 
-! SDL2_FRAMERATE_SCOPE Uint32 SDL_framerateDelay(FPSmanager * manager);
-function sdl_frameratedelay(manager) bind(c, name='SDL_framerateDelay')
-  import :: c_int, fpsmanager
-  type(fpsmanager), intent(in) :: manager
-  integer(kind=c_int) :: sdl_frameratedelay
-end function sdl_frameratedelay
+    ! SDL2_FRAMERATE_SCOPE Uint32 SDL_framerateDelay(FPSmanager * manager);
+    function sdl_frameratedelay(manager) bind(c, name='SDL_framerateDelay')
+      import :: c_int, fpsmanager
+      type(fpsmanager), intent(in) :: manager
+      integer(kind=c_int) :: sdl_frameratedelay
+    end function sdl_frameratedelay
 
-end interface
+  end interface
 
 end module framerate
 
